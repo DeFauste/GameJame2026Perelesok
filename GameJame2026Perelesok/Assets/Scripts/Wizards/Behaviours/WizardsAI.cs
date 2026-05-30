@@ -1,25 +1,23 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Wizards
+namespace Wizards.Behaviours
 {
     public sealed class WizardsAI : MonoBehaviour
     {
-        [Header("Wizard Health")] 
-        [SerializeField] private int health = 3;
-
-        public void TakeDamage(int damage)
-        {
-            damage = Mathf.Abs(damage); // Убедиться, что урон положительный
-            health -= damage;
-            HealthState();
-        }
+        private WizardStateController _wizardStateController;
+        [SerializeField]
+        private WizardStage firstStageController;
         
-    
+        private void Start()
+        {
+            _wizardStateController = WizardStateController.Instance;
+            _wizardStateController.ChangeHealth += OnHealthChanged;
+        }
+
         /// <summary>
         /// Метод для проверки состояния здоровья волшебника и выполнения действий в зависимости от текущего уровня здоровья.
         /// </summary>
-        private void HealthState()
+        private void OnHealthChanged(int health)
         {
             if (health == 3) // Запускаем первую стадию
             {
@@ -37,6 +35,11 @@ namespace Wizards
             {
                 // Действия для смерти (здоровье 2)
             }
+        }
+
+        private void OnDestroy()
+        {
+            _wizardStateController.ChangeHealth -= OnHealthChanged;
         }
     }
 }
