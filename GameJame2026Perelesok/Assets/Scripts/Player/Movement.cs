@@ -1,5 +1,6 @@
-using UnityEngine;
 using System;
+using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Movement : MonoBehaviour
 {
@@ -10,19 +11,22 @@ public class Movement : MonoBehaviour
     [SerializeField] private float _hight = .5f;
     [SerializeField] private float _wight = 1f;
 
+    
     private Vector3 _zero = Vector3.zero;
     private Transform _player;
+    private float _elipseMultyplyer = 1;
 
     private void Awake()
     {
         _player = GetComponent<Transform>();
         _zero = _player.position;
+        DrawElipce(100);
     }
 
     public void Move(Vector2 move)
     {
         Vector3 velocity = new Vector3(move.x * _horizontalSpeed, move.y * _verticalSpeed, 0);
-        Vector3 new_pos = _player.position + velocity - Vector3.forward * _player.position.z;
+        Vector3 new_pos = new Vector3((_player.position + velocity).x, (_player.position + velocity).y, 0);
         float distance = elipce_formula(new_pos - _zero);
         if (distance < 1)
         {
@@ -45,18 +49,41 @@ public class Movement : MonoBehaviour
 
     public void LayerCalculation()
     {
-        _player.position += Vector3.forward * _player.position.y;
+        _player.position = new Vector3(_player.position.x, _player.position.y, _player.position.y);
     }
 
     public void ChangeZoneSize(float changeValue)
     {
-        _hight *= changeValue;
-        _wight *= changeValue;
+        _elipseMultyplyer = changeValue;
     }
 
-    // x^2/a^2 + y^2/b^2 = 1; a - length of halth diameter, b - lenth
+    // x^2/a^2 + y^2/b^2 = 1; a - length of halth diameter, b - lenth of whight half diameter
     private float elipce_formula(Vector3 pos)
     {
-        return pos.x * pos.x / (_wight * _wight) + pos.y * pos.y / (_hight * _hight);
+        return pos.x * pos.x / (_wight * _wight * _elipseMultyplyer * _elipseMultyplyer) + pos.y * pos.y / (_hight * _hight * _elipseMultyplyer * _elipseMultyplyer);
+    }
+
+    private void DrawElipce(float duration)
+    {
+        Debug.DrawLine(new Vector3(0, CalculateElipce_Y(0), _player.position.z) + _zero,
+                       new Vector3(0, CalculateElipce_Y(0) * (-1), _player.position.z) + _zero, Color.red, duration);
+        Debug.DrawLine(new Vector3(CalculateElipce_X(0), 0, _player.position.z) + _zero,
+                       new Vector3(CalculateElipce_X(0) * (-1), 0, _player.position.z) + _zero, Color.red, duration);
+    }
+
+    private float CalculateElipce_X(float y)
+    {
+        float a = (float)Math.Pow(_wight * _elipseMultyplyer, 2);
+        float y_b = (float)(Math.Pow(y, 2) / Math.Pow(_hight * _elipseMultyplyer, 2));
+        return (float)Math.Sqrt(Math.Abs(a * y_b + a));
+    }
+
+    private float CalculateElipce_Y(float x)
+    {
+        float b = (float)Math.Pow(_hight * _elipseMultyplyer, 2);
+        float x_a = (float)(Math.Pow(x, 2) / Math.Pow(_wight * _elipseMultyplyer, 2));
+        Debug.Log(b);
+        Debug.Log(x_a);
+        return (float)Math.Sqrt(Math.Abs(b * x_a - b));
     }
 }

@@ -44,8 +44,6 @@ public class PlayerController : MonoBehaviour
         _playerAnim.PlayAnimation(move);
         if (_inputTimer > 0)
             InputDeffence();
-
-        _playerMove.ChangeZoneSize(0.9995f);
     }
 
     Vector2 MovementInput()
