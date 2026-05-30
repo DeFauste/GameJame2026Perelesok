@@ -1,6 +1,7 @@
 ﻿using System;
 using Commons;
 using UnityEngine;
+using Wizards.Behaviours;
 
 namespace Wizards
 {
@@ -8,10 +9,14 @@ namespace Wizards
     {
         public int CurrentHealth { get; private set; } = 3; // Текущее значение здоровья волшебника
         
+        [SerializeField]
+        private CompressedDirection _currentDirectionCompress = CompressedDirection.Static; // Текущее направление сжатия/расширения
+        public CompressedDirection CurrentDirectionCompress => _currentDirectionCompress;
+
         public StageWizard CurrentStage { get; private set; }  = StageWizard.FirstStage; // Текущая стадия поведения волшебника
 
         // Методы для взаимодействия со стадиями волшебника
-        #region Stage
+        #region Stage Direction
         /// <summary>
         /// Делегат оповещения изменения стадии волшебника
         /// </summary>
@@ -26,6 +31,21 @@ namespace Wizards
             {
                 ActionState?.Invoke(stage);
                 CurrentStage = stage;
+            }
+        }
+        /// <summary>
+        /// Делегат оповещения изменения направления сжатия/расширения волшебника
+        /// </summary>
+        public Action<CompressedDirection> ActionCompressedDirection { get; set; } 
+        /// <summary>
+        /// Метод для изменения текущего направления сжатия/расширения волшебника
+        /// </summary>
+        public void ChangeCompressedDirection(CompressedDirection direction)
+        {
+            if (_currentDirectionCompress != direction)
+            {
+                ActionCompressedDirection?.Invoke(direction);
+                _currentDirectionCompress = direction;
             }
         }
         #endregion Stage
@@ -52,5 +72,12 @@ namespace Wizards
             return CurrentHealth;
         }
         #endregion Health
+    }
+    
+    public enum CompressedDirection
+    {
+        Static, // Статичная область
+        Compress, // Сжатие области
+        Expansion, // Расширение области
     }
 }
