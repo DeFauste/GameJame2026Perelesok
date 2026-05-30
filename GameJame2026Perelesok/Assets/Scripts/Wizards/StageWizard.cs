@@ -5,8 +5,11 @@
     /// </summary>
     public enum StageWizard
     {
+        None,
         FirstStage,
         SecondStage,
-        ThirdStage
+        ThirdStage,
+        Win,
+        Lose,
     }
 }

@@ -13,14 +13,14 @@ namespace Wizards
         private CompressedDirection _currentDirectionCompress = CompressedDirection.Static; // Текущее направление сжатия/расширения
         public CompressedDirection CurrentDirectionCompress => _currentDirectionCompress;
 
-        public StageWizard CurrentStage { get; private set; }  = StageWizard.FirstStage; // Текущая стадия поведения волшебника
+        public StageWizard CurrentStage { get; private set; }  = StageWizard.None; // Текущая стадия поведения волшебника
 
         // Методы для взаимодействия со стадиями волшебника
         #region Stage Direction
         /// <summary>
         /// Делегат оповещения изменения стадии волшебника
         /// </summary>
-        public Action<StageWizard> ActionState { get; set; } 
+        public Action<StageWizard> ActionStage { get; set; } 
         
         /// <summary>
         /// Метод для изменения текущей стадии поведения волшебника
@@ -29,7 +29,7 @@ namespace Wizards
         {
             if (CurrentStage != stage)
             {
-                ActionState?.Invoke(stage);
+                ActionStage?.Invoke(stage);
                 CurrentStage = stage;
             }
         }

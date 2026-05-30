@@ -7,6 +7,8 @@ namespace Wizards.Behaviours
 {
     public class WizardStage : MonoBehaviour
     {
+        [SerializeField]
+        protected string NameMusicStage; // Название музыки для данной стадии
         protected WizardStateController _wizardStateController;
         protected bool stageActive = false;
 
@@ -57,19 +59,6 @@ namespace Wizards.Behaviours
             spriteInitialScale = spriteToCompress.transform.localScale;
             spriteMinimalScale = spriteInitialScale * minimalDistanceForTargetPercent; // Минимальный размер
             spriteMaximalScale = spriteInitialScale; // Максимальный размер
-
-            coroutines.Add(StartCoroutine(CompressExpandHand(
-                leftHand.transform,
-                leftHandInitialPosition,
-                leftHandInitialDistance)));
-
-            coroutines.Add(StartCoroutine(CompressExpandHand(
-                rightHand.transform,
-                rightHandInitialPosition,
-                rightHandInitialDistance)));
-
-            // Запускаем корутину для спрайта
-            coroutines.Add(StartCoroutine(CompressExpandSprite()));
         }
 
 
@@ -187,6 +176,8 @@ namespace Wizards.Behaviours
                 leftHandInitialDistance)));
             coroutines.Add(StartCoroutine(CompressExpandHand(rightHand.transform, rightHandInitialPosition,
                 rightHandInitialDistance)));
+            coroutines.Add(StartCoroutine(CompressExpandSprite()));
+            MusicService.Instance.Play(NameMusicStage, loop: true);
         }
 
         public void EndStage()
@@ -196,6 +187,7 @@ namespace Wizards.Behaviours
             {
                 StopCoroutine(coroutine);
             }
+            MusicService.Instance.StopByName(NameMusicStage);
 
             coroutines.Clear();
         }

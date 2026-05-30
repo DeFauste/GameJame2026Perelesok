@@ -11,35 +11,39 @@ namespace Wizards.Behaviours
         private void Start()
         {
             _wizardStateController = WizardStateController.Instance;
-            _wizardStateController.ChangeHealth += OnHealthChanged;
+            _wizardStateController.ActionStage += OnHealthChanged;
         }
 
         /// <summary>
         /// Метод для проверки состояния здоровья волшебника и выполнения действий в зависимости от текущего уровня здоровья.
         /// </summary>
-        private void OnHealthChanged(int health)
+        private void OnHealthChanged(StageWizard stage)
         {
-            if (health == 3) // Запускаем первую стадию
+            if (stage == StageWizard.FirstStage) 
             {
-                // Действия для первой стадии (здоровье 3)
+                firstStageController.StartStage();
             }
-            else if (health == 2) // Запускаем вторую стадию
+            else if (stage == StageWizard.SecondStage)
             {
-                // Действия для второй стадии (здоровье 2)
+                // Действия для второй стадии
             }
-            else if (health == 1) // Запускаем третью стадию
+            else if (stage == StageWizard.ThirdStage)
             {
-                // Действия для третьей стадии (здоровье 1)
+                // Действия для третьей стадии
             }
-            else if (health <= 0)
+            else if (stage == StageWizard.Win)
             {
-                // Действия для смерти (здоровье 2)
+                // Действия для победы
+            }
+            else if (stage == StageWizard.Lose)
+            {
+                // Действия для смерти
             }
         }
 
         private void OnDestroy()
         {
-            _wizardStateController.ChangeHealth -= OnHealthChanged;
+            _wizardStateController.ActionStage -= OnHealthChanged;
         }
     }
 }
