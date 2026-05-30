@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
         if (_inputTimer > 0)
             ChooseDeffence();
 
+        Debug.Log(_multyplayer);
         ChangeWalkingZone(_multyplayer);
         _multyplayer -= Time.deltaTime / 10;
     }

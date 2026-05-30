@@ -86,8 +86,6 @@ public class Movement : MonoBehaviour
     {
         float b = (float)Math.Pow(_hight * _elipseMultyplyer, 2);
         float x_a = (float)(Math.Pow(x, 2) / Math.Pow(_wight * _elipseMultyplyer, 2));
-        Debug.Log(b);
-        Debug.Log(x_a);
         return (float)Math.Sqrt(Math.Abs(b * x_a - b));
     }
 }
