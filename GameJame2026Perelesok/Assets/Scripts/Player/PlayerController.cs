@@ -22,7 +22,8 @@ public class PlayerController : MonoBehaviour
     private const string _deffence_3 = "up";
     private const string _deffence_4 = "down";
 
-    [SerializeField] private float _multyplayer = 1.1f; 
+    [SerializeField] private float _multyplayer = 1.1f;
+    [SerializeField] private WalkingZoneScaler _zone;
     
     private Movement _playerMove;
     private Animation _playerAnim;
@@ -43,7 +44,10 @@ public class PlayerController : MonoBehaviour
         _playerMove.Scaler();
         _playerAnim.PlayAnimation(move);
         if (_inputTimer > 0)
-            InputDeffence();
+            ChooseDeffence();
+
+        ChangeWalkingZone(_multyplayer);
+        _multyplayer -= Time.deltaTime / 10;
     }
 
     Vector2 MovementInput()
@@ -69,25 +73,33 @@ public class PlayerController : MonoBehaviour
         return move;
     }
 
-    void InputDeffence()
+    private void ChangeWalkingZone(float zoneMultiplyer)
+    {
+        _playerMove.ChangeZoneSize(zoneMultiplyer);
+        _zone.ChangeScalesConst(new Vector3(zoneMultiplyer, _playerMove.GetScales().y * zoneMultiplyer / _playerMove.GetScales().x, 1));
+    }
+
+    private int ChooseDeffence()
     {
         float rand = Random.Range(0f, 1f);
 
         if (rand < .25f)
         {
-
+            return 1;
         }
         if (rand < .5f)
         {
-
+            return 2;
         }
         if (rand < .75f)
         {
-
+            return 3;
         }
         else
         {
-
+            return 4;
         }
     }
+
+
 }

@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Movement : MonoBehaviour
 {
@@ -20,7 +19,6 @@ public class Movement : MonoBehaviour
     {
         _player = GetComponent<Transform>();
         _zero = _player.position;
-        DrawElipce(100);
     }
 
     public void Move(Vector2 move)
@@ -38,6 +36,7 @@ public class Movement : MonoBehaviour
             _player.position += (_zero - _player.position) * _horizontalSpeed * _verticalSpeed;
             //_player.position = Vector3.Lerp(_player.position, _zero, Time.deltaTime);
         }
+        DrawElipce(.1f);
     }
 
     public void Scaler()
@@ -55,6 +54,11 @@ public class Movement : MonoBehaviour
     public void ChangeZoneSize(float changeValue)
     {
         _elipseMultyplyer = changeValue;
+    }
+
+    public Vector2 GetScales()
+    {
+        return new Vector2(_wight, _hight);
     }
 
     // x^2/a^2 + y^2/b^2 = 1; a - length of halth diameter, b - lenth of whight half diameter
