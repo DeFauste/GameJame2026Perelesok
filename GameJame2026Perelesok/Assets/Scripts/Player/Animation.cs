@@ -21,13 +21,6 @@ public class Animation : MonoBehaviour
     {
         if (inputs == Vector2.zero)
             _player.material = _idle[_state % _idle.Count];
-        else if (inputs.x != 0)
-        {
-            if (inputs.x > 0)
-                _player.material = _walk_right[_state % _walk_right.Count];
-            else
-                _player.material = _walk_left[_state % _walk_left.Count];
-        }
         else if (inputs.y != 0)
         {
             if (inputs.y > 0)
@@ -35,6 +28,14 @@ public class Animation : MonoBehaviour
             else
                 _player.material = _walk_forward[_state % _walk_forward.Count];
         }
+        else if (inputs.x != 0)
+        {
+            if (inputs.x > 0)
+                _player.material = _walk_right[_state % _walk_right.Count];
+            else
+                _player.material = _walk_left[_state % _walk_left.Count];
+        }
+
 
             if (_timeDelay >= 0.2)
         {
