@@ -176,6 +176,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8629e481ad30bf5448d0d0b0b122b1d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  _multyplayer: 1.1
+  _zone: {fileID: 0}
+  _colliderSize: {x: 1, y: 1}
+  _colliderCenter: {x: 0, y: -1}
 --- !u!114 &8590546477310373720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,7 +196,30 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 523c8595f2cec824fb24a04920e77eba, type: 2}
   - {fileID: 2100000, guid: 519c46c794615a44e8c69307ee27c9be, type: 2}
   - {fileID: 2100000, guid: 4fb13a3159ccec44290ce8df3d977084, type: 2}
-  _walk1: {fileID: 0}
-  _walk2: {fileID: 0}
-  _walk3: {fileID: 0}
-  _player: {fileID: 0}
+  _walk_right:
+  - {fileID: 2100000, guid: fa7ed0856abfe4a4f9253cf22e620f9e, type: 2}
+  - {fileID: 2100000, guid: 6109fc8f1f5f10c4eb200f50068496b5, type: 2}
+  - {fileID: 2100000, guid: d3bd181845c361f44ae1e35e88046f6e, type: 2}
+  - {fileID: 2100000, guid: f7ead71e86b2436499aa1fe412c8b32b, type: 2}
+  - {fileID: 2100000, guid: bf01225da09b8a2459a184c6d7f268c9, type: 2}
+  - {fileID: 2100000, guid: a361ce7a22bef1f4b8bbff67b82bfc26, type: 2}
+  _walk_left:
+  - {fileID: 2100000, guid: 64a9a8de400b447469d4faa8f02987a5, type: 2}
+  - {fileID: 2100000, guid: fe07c7f7a74a3fb4681a42679878aaef, type: 2}
+  - {fileID: 2100000, guid: b924f119c53120741a79714202033e17, type: 2}
+  - {fileID: 2100000, guid: 2f8f65cc4bd69a543b4e63208eadcb14, type: 2}
+  - {fileID: 2100000, guid: fd05e5c8ec3156d42b6290dc0263807a, type: 2}
+  - {fileID: 2100000, guid: 8756e3e6916003b4ca5bac65d3e38d09, type: 2}
+  _walk_forward:
+  - {fileID: 2100000, guid: 3d96a3dbd6e9a384f90479b8fcca194e, type: 2}
+  - {fileID: 2100000, guid: bca4f61ca86b2bc4cafefb63adbc6ec7, type: 2}
+  - {fileID: 2100000, guid: ec30a1c839dbf0b47b585b3ed95ffada, type: 2}
+  - {fileID: 2100000, guid: 3a6bc7da82f4bef428fb47705b0c92cf, type: 2}
+  - {fileID: 2100000, guid: 886521f4f13334940bcd6abbd7b55a0b, type: 2}
+  - {fileID: 2100000, guid: b72ce2ad3d477624e9f83b7995593ad9, type: 2}
+  _walk_backward:
+  - {fileID: 2100000, guid: c2d2ce053c176484d9825c21192096a8, type: 2}
+  - {fileID: 2100000, guid: d8718e238455a344c85cb9568dc3d1cd, type: 2}
+  - {fileID: 2100000, guid: 1220f8113d9d31248b9f1c4d6934f9f3, type: 2}
+  - {fileID: 2100000, guid: 04ef8ea0cf8defa4faca76ce31d776a6, type: 2}
+  - {fileID: 2100000, guid: 8f13fd62d6bf2af4297580287e4fbed4, type: 2}

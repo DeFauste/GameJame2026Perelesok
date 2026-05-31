@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     {
         _playerMove = GetComponent<Movement>();
         _playerAnim = GetComponentInChildren<Animation>();
+        ChangeWalkingZone(1);
     }
 
     void Update()
@@ -48,7 +49,7 @@ public class PlayerController : MonoBehaviour
         if (_inputTimer > 0)
             ChooseDeffence();
 
-        DrawCollider(.1f);
+        DrawCollider(Time.deltaTime * 2);
     }
 
     public bool CollisionDetection(Vector2 size, Vector2 center)
