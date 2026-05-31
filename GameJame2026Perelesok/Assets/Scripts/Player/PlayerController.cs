@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float _multyplayer = 1.1f;
     [SerializeField] private WalkingZoneScaler _zone;
+    [SerializeField] private Vector2 _colliderSize = Vector2.one;
+    [SerializeField] private Vector2 _colliderCenter = Vector2.down;
     
     private Movement _playerMove;
     private Animation _playerAnim;
@@ -46,12 +48,18 @@ public class PlayerController : MonoBehaviour
         if (_inputTimer > 0)
             ChooseDeffence();
 
-        Debug.Log(_multyplayer);
-        ChangeWalkingZone(_multyplayer);
-        _multyplayer -= Time.deltaTime / 10;
+        DrawCollider(.1f);
     }
 
-    Vector2 MovementInput()
+    public bool CollisionDetection(Vector2 size, Vector2 center)
+    {
+        if (Collisin_X(size.x / 2, center.x) && Collisin_Y(size.y / 2, center.y))
+            return true;
+        else
+            return false;
+    }
+
+    private Vector2 MovementInput()
     {
         Vector2 move = Vector2.zero;
         if (Input.GetKey(_left))
@@ -102,5 +110,29 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private bool Collisin_X(float halfSize, float center)
+    {
+        if (transform.position.x + _colliderSize.x + _colliderCenter.x > center - halfSize || transform.position.x - _colliderSize.x + _colliderCenter.x < center + halfSize)
+            return true;
+        else
+            return false;
+    }
 
+    private bool Collisin_Y(float halfSize, float center)
+    {
+        if (transform.position.y + _colliderSize.y + _colliderCenter.y > center - halfSize || transform.position.y - _colliderSize.y + _colliderCenter.y < center + halfSize)
+            return true;
+        else
+            return false;
+    }
+
+    private void DrawCollider(float duration)
+    {
+        Debug.DrawLine(transform.position + Vector3.right * _colliderSize.x + Vector3.up * _colliderSize.y + (Vector3)_colliderCenter,
+                       transform.position - Vector3.right * _colliderSize.x - Vector3.up * _colliderSize.y + (Vector3)_colliderCenter,
+                       Color.green, duration);
+        Debug.DrawLine(transform.position + Vector3.right * _colliderSize.x - Vector3.up * _colliderSize.y + (Vector3)_colliderCenter,
+                       transform.position - Vector3.right * _colliderSize.x + Vector3.up * _colliderSize.y + (Vector3)_colliderCenter,
+                       Color.green, duration);
+    }
 }
