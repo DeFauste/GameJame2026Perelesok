@@ -14,7 +14,9 @@ public class MusicService : MonoBehaviour
     public static MusicService Instance { get; private set; }
 
     [Tooltip("Путь внутри Resources, где лежат аудиофайлы. По умолчанию 'Musics' -> Assets/Resources/Musics")]
-    [SerializeField] private string resourcePath = "Musics";
+    [SerializeField] private string resourcePathMusics = "Musics";
+    [SerializeField] private string resourcePathSound = "Sounds";
+    [SerializeField] private string resourcePathUI = "UI";
 
     [Tooltip("Начальный размер пула AudioSource-ов")]
     [SerializeField] private int initialPoolSize = 8;
@@ -42,8 +44,10 @@ public class MusicService : MonoBehaviour
 
             poolRoot = new GameObject("[MusicService_Pool]").transform;
             poolRoot.SetParent(transform, false);
-
-            LoadAllClips();
+            clips.Clear();
+            LoadAllClips(resourcePathMusics);
+            LoadAllClips(resourcePathSound);
+            LoadAllClips(resourcePathUI);
             CreatePool(initialPoolSize);
         }
         else
@@ -56,9 +60,8 @@ public class MusicService : MonoBehaviour
     /// <summary>
     /// Загружает все AudioClip из Resources/resourcePath
     /// </summary>
-    public void LoadAllClips()
+    public void LoadAllClips(string resourcePath)
     {
-        clips.Clear();
         AudioClip[] loaded = Resources.LoadAll<AudioClip>(resourcePath);
         if (loaded == null || loaded.Length == 0)
         {
@@ -149,7 +152,7 @@ public class MusicService : MonoBehaviour
 
         if (!clips.TryGetValue(clipName, out var clip))
         {
-            Debug.LogWarning($"MusicService.Play: клип с именем '{clipName}' не найден в Resources/{resourcePath}");
+            Debug.LogWarning($"MusicService.Play: клип с именем '{clipName}' не найден в Resources/.");
             return null;
         }
 
@@ -239,7 +242,9 @@ public class MusicService : MonoBehaviour
     /// </summary>
     public void ReloadClips()
     {
-        LoadAllClips();
+        LoadAllClips(resourcePathMusics);
+        LoadAllClips(resourcePathSound);
+        LoadAllClips(resourcePathUI);
     }
     #endregion
 

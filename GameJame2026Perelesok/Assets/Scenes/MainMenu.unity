@@ -288,6 +288,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 405583377}
   m_CullTransparentMesh: 1
+--- !u!1 &453050886
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 453050888}
+  - component: {fileID: 453050887}
+  m_Layer: 0
+  m_Name: Sounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &453050887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453050886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 666bd0e9ede34ef88fbf86b770d11eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MusicService
+  resourcePathMusics: Musics
+  resourcePathSound: Sounds
+  resourcePathUI: UI
+  initialPoolSize: 8
+  maxPoolSize: 32
+  dontDestroyOnLoad: 1
+--- !u!4 &453050888
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453050886}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.92133, y: -9.26192, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &665140074
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,6 +874,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu.ButtonPressHandler
   offButton: {fileID: 21300000, guid: bce211c07c40c934492745a8c069be38, type: 3}
   onButton: {fileID: 21300000, guid: ba75ae56d0a82f242aa3ddcaf612ce8a, type: 3}
+  SoundHover: UI_hover
+  SoundClick: UI_buttonPressed
 --- !u!1 &1660937435
 GameObject:
   m_ObjectHideFlags: 0
@@ -1312,6 +1364,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu.ButtonPressHandler
   offButton: {fileID: 21300000, guid: bce211c07c40c934492745a8c069be38, type: 3}
   onButton: {fileID: 21300000, guid: ba75ae56d0a82f242aa3ddcaf612ce8a, type: 3}
+  SoundHover: UI_hover
+  SoundClick: UI_buttonPressed
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1324,3 +1378,4 @@ SceneRoots:
   - {fileID: 2024444718}
   - {fileID: 1660937436}
   - {fileID: 1679591605}
+  - {fileID: 453050888}
