@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [Header("Настройка игрока")]
+    [Header("ГЌГ Г±ГІГ°Г®Г©ГЄГ  ГЁГЈГ°Г®ГЄГ ")]
     [SerializeField] private float _horizontalSpeed = 1f;
     [SerializeField] private float _verticalSpeed = 1f;
-    [Header("Настройка поля")]
+    [Header("ГЌГ Г±ГІГ°Г®Г©ГЄГ  ГЇГ®Г«Гї")]
     [SerializeField] private float _hight = .5f;
     [SerializeField] private float _wight = 1f;
 
@@ -20,6 +20,29 @@ public class Movement : MonoBehaviour
         _player = GetComponent<Transform>();
         _zero = _player.position;
     }
+
+    // Try this insted of old
+    // public void Move(Vector2 move)
+    // {
+    //     Vector3 velocity = new Vector3(move.x * _horizontalSpeed, move.y * _verticalSpeed, 0);
+    //     Vector3 new_pos = new Vector3((_player.position + velocity).x, (_player.position + velocity).y, 0);
+    //     float distance = elipce_formula(new_pos - _zero);
+
+    //     if (elipce_formula(_player.position - _zero) == 1 && distance > 1)
+    //     {
+    //         _player.position += (_zero - _player.position) * _horizontalSpeed * _verticalSpeed;
+    //     }
+    //     else if (distance > 1)
+    //     {
+    //         _player.position = new Vector3(CalculateElipce_X(_player.position.y)/2, CalculateElipce_Y(_player.position.x)/2, _player.position.z);
+    //     }
+    //     else if (distance < 1)
+    //     {
+    //         _player.position = new_pos;
+    //         //_player.position = Vector3.Lerp(_player.position, new_pos, Time.deltaTime);
+    //     }
+    //     DrawElipce(.1f);
+    // }
 
     public void Move(Vector2 move)
     {
