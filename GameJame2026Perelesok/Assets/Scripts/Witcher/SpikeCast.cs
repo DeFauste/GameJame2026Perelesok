@@ -1,13 +1,14 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class SpikeCast : MonoBehaviour
 {
     [SerializeField] private Vector2 _colliderSize = Vector2.one;
     [SerializeField] private Vector2 _colliderCenter = Vector2.down;
-    [SerializeField] private Sprite _preCast;
-    [SerializeField] private Sprite _spike;
+    [SerializeField] private List<Sprite> _spike;
     [SerializeField] private float _castTime = 1;
     [SerializeField] private float _castDelay = 1;
 
@@ -18,16 +19,12 @@ public class SpikeCast : MonoBehaviour
     {
         _spikeRender = GetComponentInChildren<SpriteRenderer>();
         DrawCollider(_castTime + _castDelay);
-        StartCoroutine(CastCorutine());
     }
 
-    public IEnumerator CastCorutine()
+    public IEnumerator CastCorutine(float multypyer)
     {
-        _spikeRender.sprite = _preCast;
+        SpikeAnimationCicle(_castDelay * multypyer);
 
-        yield return new WaitForSeconds(_castDelay);
-
-        _spikeRender.sprite = _spike;
         for (float i = 0; i < _castTime; i += Time.deltaTime)
         {
 
@@ -39,7 +36,7 @@ public class SpikeCast : MonoBehaviour
 
         if (!_isHit)
         {
-            _spikeRender.sprite = _preCast;
+            ReverseSpikeAnimationCicle(_castDelay * multypyer);
         }
 
         yield return null;
@@ -52,6 +49,22 @@ public class SpikeCast : MonoBehaviour
             return true;
         else
             return false;
+    }
+
+    private void SpikeAnimationCicle(float time)
+    {
+        for (float i = 0; i < time; i += Time.deltaTime)
+        {
+            _spikeRender.sprite = _spike[(int)(i / time * _spike.Count)];
+        }
+    }
+
+    private void ReverseSpikeAnimationCicle(float time)
+    {
+        for (float i = time; i > 0; i -= Time.deltaTime)
+        {
+            _spikeRender.sprite = _spike[(int)(i / time * _spike.Count)];
+        }
     }
 
     private void DrawCollider(float duration)
