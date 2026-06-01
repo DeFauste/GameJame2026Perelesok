@@ -7,8 +7,7 @@ namespace Wizards.Behaviours
 {
     public class WizardStage : MonoBehaviour
     {
-        [SerializeField]
-        protected string NameMusicStage; // Название музыки для данной стадии
+        [SerializeField] protected string NameMusicStage; // Название музыки для данной стадии
         protected WizardStateController _wizardStateController;
         protected bool stageActive = false;
 
@@ -18,8 +17,15 @@ namespace Wizards.Behaviours
 
         [SerializeField] protected float delayTimeCompression = 3; // Время до начала сжатия
         [SerializeField] protected float timeFullCompression = 3; // Время до полного сжатия
-        [SerializeField] protected float percentTimeExpansion = 0.2f; // Какой процент времени от максимального будет занимать полное расширение
-        [SerializeField] protected float percentTimeExpansionDome = 0.2f; // Какой процент времени от максимального будет занимать полное расширение купола
+
+        [SerializeField]
+        protected float
+            percentTimeExpansion = 0.2f; // Какой процент времени от максимального будет занимать полное расширение
+
+        [SerializeField]
+        protected float
+            percentTimeExpansionDome =
+                0.2f; // Какой процент времени от максимального будет занимать полное расширение купола
 
         [SerializeField]
         protected float minimalDistanceForTargetPercent = 0.5f; // минимальное расстояние до сжимаемой цели
@@ -39,6 +45,9 @@ namespace Wizards.Behaviours
         private Vector3 spriteInitialScale;
         private Vector3 spriteMinimalScale;
         private Vector3 spriteMaximalScale;
+
+        // Переменная для синхронизации процессов сжатия/расширения
+        private float compressionProgress = 0f; // 0 = расширено, 1 = сжато
 
         private void Start()
         {
@@ -62,11 +71,10 @@ namespace Wizards.Behaviours
             spriteMaximalScale = spriteInitialScale; // Максимальный размер
         }
 
-
         /// <summary>
-        /// Универсальный метод для сжатия/расширения руки
+        /// Главная корутина, управляющая прогрессом сжатия/расширения
         /// </summary>
-        IEnumerator CompressExpandHand(Transform hand, Vector3 initialPosition, float initialDistance)
+        IEnumerator CompressionController()
         {
             yield return new WaitForSeconds(delayTimeCompression);
 
@@ -74,41 +82,16 @@ namespace Wizards.Behaviours
             {
                 if (_wizardStateController.CurrentDirectionCompress == CompressedDirection.Compress)
                 {
-                    // РЕЖИМ СЖАТИЯ: рука приближается к targetCompress
-                    float currentDistance = Vector3.Distance(hand.position, targetCompress.transform.position);
-                    float minimalDistance = initialDistance * minimalDistanceForTargetPercent;
-
-                    // Проверяем, достигли ли минимального расстояния
-                    if (!(currentDistance <= minimalDistance))
-                    {
-                        // Вычисляем скорость: расстояние / время сжатия
-                        float compressionSpeed = currentDistance / timeFullCompression;
-
-                        // Двигаемся к targetCompress
-                        Vector3 direction = (targetCompress.transform.position - hand.position).normalized;
-                        hand.position += direction * (compressionSpeed * Time.deltaTime);
-                    }
+                    // РЕЖИМ СЖАТИЯ: увеличиваем прогресс с 0 до 1
+                    float compressionSpeed =
+                        1f / timeFullCompression; // Прогресс в единицу за timeFullCompression секунд
+                    compressionProgress = Mathf.Min(compressionProgress + compressionSpeed * Time.deltaTime, 1f);
                 }
                 else if (_wizardStateController.CurrentDirectionCompress == CompressedDirection.Expansion)
                 {
-                    // РЕЖИМ РАСШИРЕНИЯ: рука отдаляется от targetCompress к начальной позиции
-                    float currentDistance = Vector3.Distance(hand.position, targetCompress.transform.position);
-
-                    // Проверяем, вернулась ли рука в начальное положение
-                    if (!(Vector3.Distance(hand.position, initialPosition) <= threshold))
-                    {
-                        // Вычисляем скорость: расстояние / время расширения
-                        float expansionSpeed = currentDistance / timeFullCompression;
-
-                        // Двигаемся к начальной позиции
-                        Vector3 directionToInitial = (initialPosition - hand.position).normalized;
-                        hand.position += directionToInitial *
-                                         ((expansionSpeed + expansionSpeed *(1 - percentTimeExpansion)) * Time.deltaTime);
-                    }
-                    else
-                    {
-                        hand.position = initialPosition; // Фиксируем точное положение
-                    }
+                    // РЕЖИМ РАСШИРЕНИЯ: уменьшаем прогресс с 1 до 0
+                    float expansionSpeed = 1f / (timeFullCompression * (1f + percentTimeExpansion));
+                    compressionProgress = Mathf.Max(compressionProgress - expansionSpeed * Time.deltaTime, 0f);
                 }
 
                 yield return null;
@@ -116,68 +99,47 @@ namespace Wizards.Behaviours
         }
 
         /// <summary>
-        /// Увеличивает и уменьшает размер спрайта в зависимости от CompressedDirection
+        /// Позиционирует руку на основе текущего прогресса сжатия (0 = начальная позиция, 1 = минимальное расстояние)
         /// </summary>
-        IEnumerator CompressExpandSprite()
+        private void UpdateHandPosition(Transform hand, Vector3 initialPosition, float initialDistance)
         {
-            yield return new WaitForSeconds(delayTimeCompression);
+            float minimalDistance = initialDistance * minimalDistanceForTargetPercent;
+            float targetDistance = Mathf.Lerp(initialDistance, minimalDistance, compressionProgress);
 
-            while (true)
+            Vector3 directionToTarget = (targetCompress.transform.position - initialPosition).normalized;
+            hand.position = initialPosition + directionToTarget * (initialDistance - targetDistance);
+        }
+
+        /// <summary>
+        /// Масштабирует спрайт на основе текущего прогресса сжатия (0 = максимальный размер, 1 = минимальный размер)
+        /// </summary>
+        private void UpdateSpriteScale()
+        {
+            Vector3 targetScale = Vector3.Lerp(spriteMaximalScale, spriteMinimalScale, compressionProgress);
+            spriteToCompress.transform.localScale = targetScale;
+        }
+
+        private void LateUpdate()
+        {
+            if (stageActive)
             {
-                if (_wizardStateController.CurrentDirectionCompress == CompressedDirection.Expansion)
-                {
-                    // РЕЖИМ Expansion: спрайт увеличивается
-                    Vector3 currentScale = spriteToCompress.transform.localScale;
+                // Обновляем позиции рук на основе текущего прогресса
+                UpdateHandPosition(leftHand.transform, leftHandInitialPosition, leftHandInitialDistance);
+                UpdateHandPosition(rightHand.transform, rightHandInitialPosition, rightHandInitialDistance);
 
-                    // Проверяем, достигли ли максимального размера
-                    if (!(currentScale.x >= spriteMaximalScale.x))
-                    {
-                        // Вычисляем скорость изменения размера
-                        float scaleChangeSpeed = (spriteMaximalScale.x - spriteMinimalScale.x) /
-                                                 (timeFullCompression - timeFullCompression * (1 - percentTimeExpansionDome));
-
-                        // Увеличиваем размер
-                        Vector3 newScale = currentScale + Vector3.one * (scaleChangeSpeed * Time.deltaTime);
-                        newScale = Vector3.Min(newScale, spriteMaximalScale);
-                        spriteToCompress.transform.localScale = newScale;
-                    }
-                }
-                else if (_wizardStateController.CurrentDirectionCompress == CompressedDirection.Compress)
-                {
-                    // РЕЖИМ Compress: спрайт уменьшается
-                    Vector3 currentScale = spriteToCompress.transform.localScale;
-
-                    // Проверяем, достигли ли минимального размера
-                    if (!(currentScale.x <= spriteMinimalScale.x))
-                    {
-                        // Вычисляем скорость изменения размера с учетом ускорения
-                        float scaleChangeSpeed = (spriteMaximalScale.x - spriteMinimalScale.x) / timeFullCompression;
-
-                        // Уменьшаем размер (с ускорением на percentTimeExpansion)
-                        Vector3 newScale = currentScale - Vector3.one *
-                            ((scaleChangeSpeed + scaleChangeSpeed ) * Time.deltaTime);
-                        newScale = Vector3.Max(newScale, spriteMinimalScale);
-                        spriteToCompress.transform.localScale = newScale;
-                    }
-                    else
-                    {
-                        spriteToCompress.transform.localScale = spriteMinimalScale; // Фиксируем точный размер
-                    }
-                }
-
-                yield return null;
+                // Обновляем размер спрайта
+                UpdateSpriteScale();
             }
         }
 
         public virtual void StartStage()
         {
             stageActive = true;
+            compressionProgress = 0f; // Начинаем с полного расширения
             _wizardStateController.ChangeCompressedDirection(CompressedDirection.Compress);
-            coroutines.Add(StartCoroutine(CompressExpandHand(leftHand.transform, leftHandInitialPosition,
-                leftHandInitialDistance)));
-            coroutines.Add(StartCoroutine(CompressExpandHand(rightHand.transform, rightHandInitialPosition,
-                rightHandInitialDistance)));
-            coroutines.Add(StartCoroutine(CompressExpandSprite()));
+
+            coroutines.Add(StartCoroutine(CompressionController()));
+
             MusicService.Instance.Play(NameMusicStage, loop: true);
         }
 
@@ -188,6 +150,7 @@ namespace Wizards.Behaviours
             {
                 StopCoroutine(coroutine);
             }
+
             MusicService.Instance.StopByName(NameMusicStage);
 
             coroutines.Clear();
