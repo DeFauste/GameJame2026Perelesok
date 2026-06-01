@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6832758318035733724
+--- !u!1 &785709781891071124
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,38 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2798672077755484031}
-  - component: {fileID: 8492316178836049305}
+  - component: {fileID: 6885362736881735830}
+  - component: {fileID: 6984419136261094054}
   m_Layer: 0
-  m_Name: background_battlefield
+  m_Name: knight_run1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2798672077755484031
+--- !u!4 &6885362736881735830
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6832758318035733724}
+  m_GameObject: {fileID: 785709781891071124}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 3.3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4126198048798585360}
+  m_Father: {fileID: 4466379508584436606}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &8492316178836049305
+--- !u!212 &6984419136261094054
 SpriteRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6832758318035733724}
+  m_GameObject: {fileID: 785709781891071124}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -81,17 +81,17 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 8e0ea467d2b4e644b8a806d1309059c3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e3cfbd6f1a6d34c45a1b1df39715c897, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 6.74, y: 1.95}
+  m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!1 &7228325960157920083
+--- !u!1 &3838066170625569933
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,40 +99,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4126198048798585360}
-  - component: {fileID: 805230544698206303}
+  - component: {fileID: 4466379508584436606}
+  - component: {fileID: 21037285409885616}
   m_Layer: 0
-  m_Name: WalkingZone
+  m_Name: Spice_smal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4126198048798585360
+--- !u!4 &4466379508584436606
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7228325960157920083}
+  m_GameObject: {fileID: 3838066170625569933}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2798672077755484031}
+  - {fileID: 6885362736881735830}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &805230544698206303
+--- !u!114 &21037285409885616
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7228325960157920083}
+  m_GameObject: {fileID: 3838066170625569933}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae3c20e34aabfe147b70c1368e02551d, type: 3}
+  m_Script: {fileID: 11500000, guid: 575e010edeb0f344f908c42469eb9155, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WalkingZoneScaler
+  m_EditorClassIdentifier: Assembly-CSharp::SpikeCast
+  _colliderSize: {x: 1, y: 1}
+  _colliderCenter: {x: 0, y: -1}
+  _preCast: {fileID: 21300000, guid: e3cfbd6f1a6d34c45a1b1df39715c897, type: 3}
+  _spike: {fileID: 21300000, guid: 8ae35f60386b9784b948f07c5aa799fc, type: 3}
+  _castTime: 1
+  _castDelay: 1

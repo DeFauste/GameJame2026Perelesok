@@ -9,6 +9,6 @@ public class WalkingZoneScaler : MonoBehaviour
 
     public void ChangeScalesConst(Vector3 scales)
     {
-        transform.localScale = scales * 1.6f;
+        transform.localScale = scales * 2;
     }
 }

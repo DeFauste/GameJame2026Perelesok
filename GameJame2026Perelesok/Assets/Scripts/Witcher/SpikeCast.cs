@@ -6,13 +6,42 @@ public class SpikeCast : MonoBehaviour
 {
     [SerializeField] private Vector2 _colliderSize = Vector2.one;
     [SerializeField] private Vector2 _colliderCenter = Vector2.down;
-    [SerializeField] private Texture _preCast;
-    [SerializeField] private Texture _spike;
+    [SerializeField] private Sprite _preCast;
+    [SerializeField] private Sprite _spike;
     [SerializeField] private float _castTime = 1;
+    [SerializeField] private float _castDelay = 1;
 
-    public IEnumerable Cast()
+    private SpriteRenderer _spikeRender;
+    private bool _isHit = false;
+
+    private void Awake()
     {
-        // TODO: create _preCast, wait _castTime delay, replace _preCast with _spike
+        _spikeRender = GetComponentInChildren<SpriteRenderer>();
+        DrawCollider(_castTime + _castDelay);
+        StartCoroutine(CastCorutine());
+    }
+
+    public IEnumerator CastCorutine()
+    {
+        _spikeRender.sprite = _preCast;
+
+        yield return new WaitForSeconds(_castDelay);
+
+        _spikeRender.sprite = _spike;
+        for (float i = 0; i < _castTime; i += Time.deltaTime)
+        {
+
+            if (CheckForCollision())
+                _isHit = true;
+
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+
+        if (!_isHit)
+        {
+            _spikeRender.sprite = _preCast;
+        }
+
         yield return null;
     }
 

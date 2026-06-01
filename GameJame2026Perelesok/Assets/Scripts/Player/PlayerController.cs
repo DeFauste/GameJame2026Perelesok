@@ -29,8 +29,10 @@ public class PlayerController : MonoBehaviour
     
     private Movement _playerMove;
     private Animation _playerAnim;
-
+    private bool _isGameRunning = true;
     private float _inputTimer;
+
+    public bool IsGameRunning { set { _isGameRunning = value; } }
 
     void Awake()
     {
@@ -41,15 +43,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Vector2 move = MovementInput();
-        _playerMove.Move(move);
-        _playerMove.LayerCalculation();
-        _playerMove.Scaler();
-        _playerAnim.PlayAnimation(move);
-        if (_inputTimer > 0)
-            ChooseDeffence();
-
-        DrawCollider(Time.deltaTime * 2);
+        if (_isGameRunning)
+        {
+            Tick();
+        }
     }
 
     public bool CollisionDetection(Vector2 size, Vector2 center)
@@ -58,6 +55,20 @@ public class PlayerController : MonoBehaviour
             return true;
         else
             return false;
+    }
+
+    public void Tick()
+    {
+        Vector2 move = MovementInput();
+        _playerMove.Move(move);
+        _playerMove.LayerCalculation();
+        _playerMove.Scaler();
+        _playerAnim.PlayAnimation(move);
+        if (_inputTimer > 0)
+            ChooseDeffence();
+
+        ChangeWalkingZone(1 - Time.timeSinceLevelLoad/100);
+        DrawCollider(Time.deltaTime * 2);
     }
 
     private Vector2 MovementInput()
