@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 532177d754d34a84baa9153d42208e4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu.MenuPause
-  _pauseMenu: {fileID: 0}
+  _pauseMenu: {fileID: 1241715519}
   resumeButton: {fileID: 603730605}
   menuGameButton: {fileID: 914494551}
   exitGameButton: {fileID: 570734446}
@@ -783,6 +783,11 @@ MonoBehaviour:
   animator: {fileID: 1055270023}
   dontDestroyOnLoad: 1
   crossFadeDuration: 0.12
+--- !u!1 &1241715519 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3419191215218641312, guid: 5e96473b279be6a4abdbd5af80ea7782, type: 3}
+  m_PrefabInstance: {fileID: 914494547}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1379764603
 GameObject:
   m_ObjectHideFlags: 0
