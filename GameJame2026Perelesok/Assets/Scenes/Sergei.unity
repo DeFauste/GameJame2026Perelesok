@@ -346,7 +346,7 @@ Transform:
   m_GameObject: {fileID: 865980962}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.19, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -535,6 +535,7 @@ GameObject:
   - component: {fileID: 1055270024}
   - component: {fileID: 1055270023}
   - component: {fileID: 1055270025}
+  - component: {fileID: 1055270026}
   m_Layer: 0
   m_Name: Animations
   m_TagString: Untagged
@@ -645,13 +646,28 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1055270021}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e03aced860b46b0affc0f7a51f7d4f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Wizards.Animations.AnimationController
   fadeDuration: 0.25
   _animator: {fileID: 0}
+--- !u!114 &1055270026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055270021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c52ae14d447405ca7b278bfee6ec0e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Wizards.Animations.WizardAnimationService
+  animator: {fileID: 1055270023}
+  dontDestroyOnLoad: 1
+  crossFadeDuration: 0.12
 --- !u!1 &1396000251
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,7 +774,7 @@ Transform:
   m_GameObject: {fileID: 1410030304}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -1.79, z: 0}
+  m_LocalPosition: {x: -0.19, y: -1.79, z: 0}
   m_LocalScale: {x: 0.9574, y: 0.9574, z: 0.49690726}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1027,6 +1043,50 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1841195091
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1841195093}
+  - component: {fileID: 1841195092}
+  m_Layer: 0
+  m_Name: testing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1841195092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841195091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d63d572ab2454995b6f1d36d7526fa52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.Testing.Testing
+--- !u!4 &1841195093
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841195091}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.04996, y: 0.30817, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1948103638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1133,6 +1193,7 @@ MonoBehaviour:
   percentTimeExpansionDome: 0.4
   minimalDistanceForTargetPercent: 0.7
   spriteToCompress: {fileID: 1410030306}
+  timeChangeAnimation: 5
 --- !u!114 &2034641358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1159,6 +1220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Wizards.WizardStateController
   _currentDirectionCompress: 0
+  _currentStage: 0
 --- !u!1 &2099947628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,3 +1263,4 @@ SceneRoots:
   - {fileID: 781374691}
   - {fileID: 1948103640}
   - {fileID: 343944906}
+  - {fileID: 1841195093}

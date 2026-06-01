@@ -49,7 +49,7 @@ namespace Wizards.Behaviours
         // Переменная для синхронизации процессов сжатия/расширения
         private float compressionProgress = 0f; // 0 = расширено, 1 = сжато
 
-        private void Start()
+        protected virtual void Start()
         {
             _wizardStateController = WizardStateController.Instance;
             if (targetCompress.transform == null)

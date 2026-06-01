@@ -13,7 +13,9 @@ namespace Wizards
         private CompressedDirection _currentDirectionCompress = CompressedDirection.Static; // Текущее направление сжатия/расширения
         public CompressedDirection CurrentDirectionCompress => _currentDirectionCompress;
 
-        public StageWizard CurrentStage { get; private set; }  = StageWizard.None; // Текущая стадия поведения волшебника
+        [SerializeField]
+        private StageWizard _currentStage = StageWizard.None; // Текущая стадия поведения волшебника
+        public StageWizard CurrentStage => _currentStage; // Текущая стадия поведения волшебника
 
         private void Start()
         {
@@ -35,7 +37,7 @@ namespace Wizards
             if (CurrentStage != stage)
             {
                 ActionStage?.Invoke(stage);
-                CurrentStage = stage;
+                _currentStage = stage;
             }
         }
         /// <summary>
