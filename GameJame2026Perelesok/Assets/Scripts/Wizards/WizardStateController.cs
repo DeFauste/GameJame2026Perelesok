@@ -15,6 +15,11 @@ namespace Wizards
 
         public StageWizard CurrentStage { get; private set; }  = StageWizard.None; // Текущая стадия поведения волшебника
 
+        private void Start()
+        {
+            ChangeStage(StageWizard.FirstStage);
+        }
+
         // Методы для взаимодействия со стадиями волшебника
         #region Stage Direction
         /// <summary>

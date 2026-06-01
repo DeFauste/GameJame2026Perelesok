@@ -19,6 +19,7 @@ namespace Wizards.Behaviours
         [SerializeField] protected float delayTimeCompression = 3; // Время до начала сжатия
         [SerializeField] protected float timeFullCompression = 3; // Время до полного сжатия
         [SerializeField] protected float percentTimeExpansion = 0.2f; // Какой процент времени от максимального будет занимать полное расширение
+        [SerializeField] protected float percentTimeExpansionDome = 0.2f; // Какой процент времени от максимального будет занимать полное расширение купола
 
         [SerializeField]
         protected float minimalDistanceForTargetPercent = 0.5f; // минимальное расстояние до сжимаемой цели
@@ -133,7 +134,7 @@ namespace Wizards.Behaviours
                     {
                         // Вычисляем скорость изменения размера
                         float scaleChangeSpeed = (spriteMaximalScale.x - spriteMinimalScale.x) /
-                                                 (timeFullCompression - timeFullCompression * (1 - percentTimeExpansion));
+                                                 (timeFullCompression - timeFullCompression * (1 - percentTimeExpansionDome));
 
                         // Увеличиваем размер
                         Vector3 newScale = currentScale + Vector3.one * (scaleChangeSpeed * Time.deltaTime);
@@ -168,7 +169,7 @@ namespace Wizards.Behaviours
             }
         }
 
-        public void StartStage()
+        public virtual void StartStage()
         {
             stageActive = true;
             _wizardStateController.ChangeCompressedDirection(CompressedDirection.Compress);

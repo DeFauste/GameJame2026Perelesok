@@ -31,7 +31,7 @@ namespace MainMenu
 
         private void StartGame()
         {
-            WizardStateController.Instance.ChangeStage(StageWizard.FirstStage);
+            // продолжить игру
         }
     }
 }
