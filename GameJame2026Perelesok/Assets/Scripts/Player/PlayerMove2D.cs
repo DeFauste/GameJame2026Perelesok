@@ -28,6 +28,8 @@ namespace Player
         private RaycastHit2D[] _castHits = new RaycastHit2D[8];
 
         [SerializeField] private float skinWidth = 0.02f;
+        [Tooltip("Дистанция отталкивания назад, когда движение полностью заблокировано")]
+        [SerializeField] private float pushBackDistance = 0.15f;
 
         private void Awake()
         {
@@ -85,34 +87,99 @@ namespace Player
         private void ApplyMovementWithCollisionDetection(Vector2 currentPos, Vector2 movement, Vector2 nextPosition)
         {
             float distance = movement.magnitude;
-            if (distance > 0f)
+            if (distance <= 0f)
+                return;
+
+            Vector2 dir = movement / distance;
+            int hitCount = _rb.Cast(dir, _contactFilter, _castHits, distance + skinWidth);
+
+            if (hitCount > 0)
             {
-                Vector2 dir = movement / distance;
-                int hitCount = _rb.Cast(dir, _contactFilter, _castHits, distance + skinWidth);
-
-                if (hitCount > 0)
+                // Находим ближайшее препятствие
+                float minDist = float.MaxValue;
+                for (int i = 0; i < hitCount; i++)
                 {
-                    // Находим ближайшее препятствие
-                    float minDist = float.MaxValue;
-                    for (int i = 0; i < hitCount; i++)
-                    {
-                        var hit = _castHits[i];
-                        if (hit.collider == null) continue;
-                        if (hit.distance < minDist) minDist = hit.distance;
-                    }
+                    var hit = _castHits[i];
+                    if (hit.collider == null || hit.distance < 0.001f) continue;
+                    if (hit.distance < minDist) minDist = hit.distance;
+                }
 
-                    // Вычисляем максимально возможное смещение (без пересечения)
-                    float allowed = Mathf.Max(0f, minDist - skinWidth);
-                    Vector2 allowedMove = dir * Mathf.Min(allowed, distance);
-                    if (allowedMove.sqrMagnitude > 0f)
-                    {
-                        _rb.MovePosition(currentPos + allowedMove);
-                    }
+                // Вычисляем максимально возможное смещение (без пересечения)
+                float allowed = Mathf.Max(0f, minDist - skinWidth);
+                Vector2 allowedMove = dir * Mathf.Min(allowed, distance);
+
+                if (allowedMove.sqrMagnitude > 0.001f)
+                {
+                    _rb.MovePosition(currentPos + allowedMove);
                 }
                 else
                 {
-                    // Свободный путь — двигаемся полностью
-                    _rb.MovePosition(nextPosition);
+                    // Движение полностью заблокировано — пробуем мягкое отталкивание назад
+                    TryPushBack(dir);
+                }
+            }
+            else
+            {
+                // Свободный путь — двигаемся полностью
+                _rb.MovePosition(nextPosition);
+            }
+        }
+
+        /// <summary>
+        /// Попытка оттолкнуть игрока назад от препятствия на небольшую дистанцию.
+        /// Учитывает коллайдеры и эллипс: двигает только если это безопасно.
+        /// </summary>
+        private void TryPushBack(Vector2 hitDirection)
+        {
+            if (_rb == null) return;
+
+            Vector2 pushDir = -hitDirection.normalized;
+            float desired = pushBackDistance;
+
+            // Проверяем, свободен ли путь назад
+            int hitCount = _rb.Cast(pushDir, _contactFilter, _castHits, desired + skinWidth);
+            if (hitCount == 0)
+            {
+                Vector2 target = _rb.position + pushDir * desired;
+                // Убедимся, что остаёмся внутри эллипса с отступом
+                if (IsPointInsideEllipse(target, skinWidth))
+                {
+                    _rb.MovePosition(target);
+                    return;
+                }
+            }
+            else
+            {
+                // Найдём максимально возможный отход назад
+                float minDist = float.MaxValue;
+                for (int i = 0; i < hitCount; i++)
+                {
+                    var hit = _castHits[i];
+                    if (hit.collider == null || hit.distance < 0.001f) continue;
+                    if (hit.distance < minDist) minDist = hit.distance;
+                }
+
+                float allowed = Mathf.Max(0f, minDist - skinWidth);
+                if (allowed > 0.001f)
+                {
+                    Vector2 target = _rb.position + pushDir * Mathf.Min(allowed, desired);
+                    if (IsPointInsideEllipse(target, skinWidth))
+                    {
+                        _rb.MovePosition(target);
+                        return;
+                    }
+                }
+            }
+
+            // Если оттолкнуть назад нельзя (плотно в окружении), можно немного сдвинуть по боковому вектору
+            Vector2 lateral = Vector2.Perpendicular(pushDir).normalized * (pushBackDistance * 0.5f);
+            Vector2 lateralTarget = _rb.position + lateral;
+            if (IsPointInsideEllipse(lateralTarget, skinWidth))
+            {
+                int hitLat = _rb.Cast(lateral.normalized, _contactFilter, _castHits, lateral.magnitude + skinWidth);
+                if (hitLat == 0)
+                {
+                    _rb.MovePosition(lateralTarget);
                 }
             }
         }
@@ -207,17 +274,20 @@ namespace Player
         }
 
         /// <summary>
-        /// Проверяет, находится ли точка внутри эллиптической зоны.
+        /// Проверяет, находится ли точка внутри эллиптической зоны с учётом отступа margin.
         /// Формула эллипса: (x-cx)²/a² + (y-cy)²/b² ≤ 1
+        /// margin уменьшает полуоси эллипса на указанную величину.
         /// </summary>
-        private bool IsPointInsideEllipse(Vector2 point)
+        private bool IsPointInsideEllipse(Vector2 point, float margin = 0f)
         {
             float dx = point.x - zoneCenter.x;
             float dy = point.y - zoneCenter.y;
-            float a = zoneWidth * 0.5f;
-            float b = zoneHeight * 0.5f;
+            float a = zoneWidth * 0.5f - margin;
+            float b = zoneHeight * 0.5f - margin;
 
-            if (a <= 0f || b <= 0f) return true; // Защита от деления на 0
+            // Защита от слишком малого/отрицательного радиуса
+            a = Mathf.Max(0.01f, a);
+            b = Mathf.Max(0.01f, b);
 
             float ellipseValue = (dx * dx) / (a * a) + (dy * dy) / (b * b);
             return ellipseValue <= 1f;
