@@ -93,14 +93,13 @@ namespace Wizards.Behaviours
             {
                 if (_wizardStateController.CurrentDirectionCompress == CompressedDirection.Compress)
                 {
-                    // РЕЖИМ СЖАТИЯ: увеличиваем прогресс с 0 до 1
                     float compressionSpeed =
                         1f / timeFullCompression; // Прогресс в единицу за timeFullCompression секунд
                     compressionProgress = Mathf.Min(compressionProgress + compressionSpeed * Time.deltaTime, 1f);
+
                 }
                 else if (_wizardStateController.CurrentDirectionCompress == CompressedDirection.Expansion)
                 {
-                    // РЕЖИМ РАСШИРЕНИЯ: уменьшаем прогресс с 1 до 0
                     float expansionSpeed = 1f / (timeFullCompression * (1f + percentTimeExpansion));
                     compressionProgress = Mathf.Max(compressionProgress - expansionSpeed * Time.deltaTime, 0f);
                 }
