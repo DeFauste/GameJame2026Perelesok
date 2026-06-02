@@ -70,42 +70,140 @@ namespace Player
             if (IsPointInsideEllipse(nextPosition))
             {
                 // Проверяем столкновения с коллайдерами
-                float distance = movement.magnitude;
-                if (distance > 0f)
-                {
-                    Vector2 dir = movement / distance;
-                    int hitCount = _rb.Cast(dir, _contactFilter, _castHits, distance + skinWidth);
-
-                    if (hitCount > 0)
-                    {
-                        // Находим ближайшее препятствие
-                        float minDist = float.MaxValue;
-                        for (int i = 0; i < hitCount; i++)
-                        {
-                            var hit = _castHits[i];
-                            if (hit.collider == null) continue;
-                            if (hit.distance < minDist) minDist = hit.distance;
-                        }
-
-                        // Вычисляем максимально возможное смещение (без пересечения)
-                        float allowed = Mathf.Max(0f, minDist - skinWidth);
-                        Vector2 allowedMove = dir * Mathf.Min(allowed, distance);
-                        if (allowedMove.sqrMagnitude > 0f)
-                            _rb.MovePosition(_rb.position + allowedMove);
-                    }
-                    else
-                    {
-                        // Свободный путь — двигаемся полностью
-                        _rb.MovePosition(nextPosition);
-                    }
-                }
+                ApplyMovementWithCollisionDetection(_rb.position, movement, nextPosition);
             }
             else
             {
-                // Попытка выхода за границы зоны — ограничиваем движение
-                Vector2 allowedPosition = ClampPositionToEllipse(_rb.position, nextPosition);
-                _rb.MovePosition(allowedPosition);
+                // Попытка выхода за границы зоны — применяем скольжение вдоль краёв
+                ApplyMovementWithSliding(_rb.position, movement);
             }
+        }
+
+        /// <summary>
+        /// Применяет движение с проверкой столкновений с коллайдерами.
+        /// </summary>
+        private void ApplyMovementWithCollisionDetection(Vector2 currentPos, Vector2 movement, Vector2 nextPosition)
+        {
+            float distance = movement.magnitude;
+            if (distance > 0f)
+            {
+                Vector2 dir = movement / distance;
+                int hitCount = _rb.Cast(dir, _contactFilter, _castHits, distance + skinWidth);
+
+                if (hitCount > 0)
+                {
+                    // Находим ближайшее препятствие
+                    float minDist = float.MaxValue;
+                    for (int i = 0; i < hitCount; i++)
+                    {
+                        var hit = _castHits[i];
+                        if (hit.collider == null) continue;
+                        if (hit.distance < minDist) minDist = hit.distance;
+                    }
+
+                    // Вычисляем максимально возможное смещение (без пересечения)
+                    float allowed = Mathf.Max(0f, minDist - skinWidth);
+                    Vector2 allowedMove = dir * Mathf.Min(allowed, distance);
+                    if (allowedMove.sqrMagnitude > 0f)
+                    {
+                        _rb.MovePosition(currentPos + allowedMove);
+                    }
+                }
+                else
+                {
+                    // Свободный путь — двигаемся полностью
+                    _rb.MovePosition(nextPosition);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Применяет скольжение вдоль границы эллипса.
+        /// Разложает движение на компоненты X и Y, позволяя скольжение по краю.
+        /// </summary>
+        private void ApplyMovementWithSliding(Vector2 currentPos, Vector2 movement)
+        {
+            Vector2 resultMove = Vector2.zero;
+
+            // Пытаемся двигаться полностью
+            Vector2 fullMove = currentPos + movement;
+            if (IsPointInsideEllipse(fullMove))
+            {
+                ApplyMovementWithCollisionDetection(currentPos, movement, fullMove);
+                return;
+            }
+
+            // Если полное движение выходит за границу, пытаемся разложить его на компоненты
+            // Сначала пытаемся X компоненту
+            if (movement.x != 0f)
+            {
+                Vector2 moveX = new Vector2(movement.x, 0f);
+                Vector2 testPosX = currentPos + moveX;
+                if (IsPointInsideEllipse(testPosX))
+                {
+                    resultMove.x = moveX.x;
+                }
+                else
+                {
+                    // X выходит за границу, пытаемся скользить вдоль Y
+                    float slideX = FindMaxSlideAmount(currentPos, Vector2.right, movement.x);
+                    resultMove.x = slideX;
+                }
+            }
+
+            // Теперь пытаемся Y компоненту
+            if (movement.y != 0f)
+            {
+                Vector2 moveY = new Vector2(0f, movement.y);
+                Vector2 testPosY = currentPos + resultMove + moveY;
+                if (IsPointInsideEllipse(testPosY))
+                {
+                    resultMove.y = moveY.y;
+                }
+                else
+                {
+                    // Y выходит за границу, пытаемся скользить вдоль X
+                    float slideY = FindMaxSlideAmount(currentPos + Vector2.right * resultMove.x, Vector2.up, movement.y);
+                    resultMove.y = slideY;
+                }
+            }
+
+            // Применяем оставшееся движение с проверкой столкновений
+            if (resultMove.sqrMagnitude > 0.0001f)
+            {
+                Vector2 newPos = currentPos + resultMove;
+                ApplyMovementWithCollisionDetection(currentPos, resultMove, newPos);
+            }
+        }
+
+        /// <summary>
+        /// Находит максимальное расстояние скольжения вдоль заданного направления,
+        /// чтобы остаться внутри эллипса.
+        /// </summary>
+        private float FindMaxSlideAmount(Vector2 startPos, Vector2 direction, float desiredAmount)
+        {
+            float low = 0f;
+            float high = desiredAmount;
+            float result = 0f;
+
+            // Бинарный поиск максимального допустимого смещения
+            for (int i = 0; i < 8; i++)
+            {
+                float mid = (low + high) * 0.5f;
+                Vector2 testPos = startPos + direction * mid;
+                
+                if (IsPointInsideEllipse(testPos))
+                {
+                    result = mid;
+                    low = mid;
+                }
+                else
+                {
+                    high = mid;
+                }
+            }
+
+            return desiredAmount > 0f ? result : -result;
         }
 
         /// <summary>
@@ -125,50 +223,6 @@ namespace Player
             return ellipseValue <= 1f;
         }
 
-        /// <summary>
-        /// Ограничивает позицию, чтобы она оставалась внутри эллипса.
-        /// Если новая позиция выходит за границы, смещение ограничивается.
-        /// </summary>
-        private Vector2 ClampPositionToEllipse(Vector2 currentPos, Vector2 desiredPos)
-        {
-            // Если текущая позиция уже вне эллипса, пытаемся вернуть её внутрь
-            if (!IsPointInsideEllipse(currentPos))
-            {
-                // Смещаемся в сторону центра
-                Vector2 toCenter = (Vector2)zoneCenter - currentPos;
-                if (toCenter.sqrMagnitude > 0.0001f)
-                {
-                    return currentPos + toCenter.normalized * (speed * Time.fixedDeltaTime);
-                }
-                return currentPos;
-            }
-
-            // Если желаемая позиция за границей, находим пересечение луча с эллипсом
-            Vector2 direction = (desiredPos - currentPos).normalized;
-            float distance = Vector2.Distance(currentPos, desiredPos);
-
-            // Бинарный поиск точки пересечения с границей эллипса
-            float low = 0f;
-            float high = distance;
-            float result = low;
-
-            for (int i = 0; i < 10; i++) // Несколько итераций для точности
-            {
-                float mid = (low + high) * 0.5f;
-                Vector2 testPos = currentPos + direction * mid;
-                if (IsPointInsideEllipse(testPos))
-                {
-                    result = mid;
-                    low = mid;
-                }
-                else
-                {
-                    high = mid;
-                }
-            }
-
-            return currentPos + direction * result;
-        }
 
         /// <summary>
         /// Изменяет размер эллиптической зоны перемещения.
