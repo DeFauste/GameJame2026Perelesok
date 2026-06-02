@@ -40,12 +40,18 @@ namespace Wizards.Behaviours
 
         private List<Coroutine> coroutines = new List<Coroutine>();
 
-        [SerializeField] protected SpriteRenderer spriteToCompress; // Спрайт для сжатия
+        [SerializeField] protected SpriteRenderer spriteDomeToCompress; // Спрайт для сжатия
 
-        private Vector3 spriteInitialScale;
-        private Vector3 spriteMinimalScale;
-        private Vector3 spriteMaximalScale;
+        private Vector3 spriteDomeInitialScale;
+        private Vector3 spriteDomeMinimalScale;
+        private Vector3 spriteDomeMaximalScale;
 
+        [SerializeField] protected SpriteRenderer spriteCycleToCompress; // Спрайт для сжатия
+        
+        private Vector3 spriteCyicleInitialScale;
+        private Vector3 spriteCyicleMinimalScale;
+        private Vector3 spriteCyicleMaximalScale;
+        
         // Переменная для синхронизации процессов сжатия/расширения
         private float compressionProgress = 0f; // 0 = расширено, 1 = сжато
 
@@ -66,9 +72,14 @@ namespace Wizards.Behaviours
                 Vector3.Distance(rightHand.transform.position, targetCompress.transform.position);
 
             // Сохраняем начальный размер спрайта
-            spriteInitialScale = spriteToCompress.transform.localScale;
-            spriteMinimalScale = spriteInitialScale * minimalDistanceForTargetPercent; // Минимальный размер
-            spriteMaximalScale = spriteInitialScale; // Максимальный размер
+            spriteDomeInitialScale = spriteDomeToCompress.transform.localScale;
+            spriteDomeMinimalScale = spriteDomeInitialScale * minimalDistanceForTargetPercent; // Минимальный размер
+            spriteDomeMaximalScale = spriteDomeInitialScale; // Максимальный размер
+            
+            // Сохраняем начальный размер спрайта
+            spriteCyicleInitialScale = spriteCycleToCompress.transform.localScale;
+            spriteCyicleMinimalScale = spriteCyicleInitialScale * minimalDistanceForTargetPercent; // Минимальный размер
+            spriteCyicleMaximalScale = spriteCyicleInitialScale; // Максимальный размер
         }
 
         /// <summary>
@@ -115,8 +126,11 @@ namespace Wizards.Behaviours
         /// </summary>
         private void UpdateSpriteScale()
         {
-            Vector3 targetScale = Vector3.Lerp(spriteMaximalScale, spriteMinimalScale, compressionProgress);
-            spriteToCompress.transform.localScale = targetScale;
+            Vector3 targetScale = Vector3.Lerp(spriteDomeMaximalScale, spriteDomeMinimalScale, compressionProgress);
+            spriteDomeToCompress.transform.localScale = targetScale;
+            
+            Vector3 targetScaleCycle = Vector3.Lerp(spriteCyicleMaximalScale, spriteCyicleMinimalScale, compressionProgress);
+            spriteCycleToCompress.transform.localScale = targetScaleCycle;
         }
 
         private void LateUpdate()
