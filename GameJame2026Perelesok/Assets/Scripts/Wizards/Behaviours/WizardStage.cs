@@ -7,6 +7,8 @@ namespace Wizards.Behaviours
 {
     public class WizardStage : MonoBehaviour
     {
+        public PlayerController playerController;
+        
         [SerializeField] protected string NameMusicStage; // Название музыки для данной стадии
         protected WizardStateController _wizardStateController;
         protected bool stageActive = false;
@@ -54,7 +56,7 @@ namespace Wizards.Behaviours
         
         // Переменная для синхронизации процессов сжатия/расширения
         private float compressionProgress = 0f; // 0 = расширено, 1 = сжато
-
+        
         protected virtual void Start()
         {
             _wizardStateController = WizardStateController.Instance;
@@ -63,7 +65,7 @@ namespace Wizards.Behaviours
                 Debug.LogError("PointCompress не назначен в инспекторе!");
                 return;
             }
-
+            
             // Сохраняем начальные позиции и расстояния
             leftHandInitialPosition = leftHand.transform.position;
             rightHandInitialPosition = rightHand.transform.position;
@@ -130,6 +132,8 @@ namespace Wizards.Behaviours
             
             Vector3 targetScaleCycle = Vector3.Lerp(spriteCyicleMaximalScale, spriteCyicleMinimalScale, compressionProgress);
             spriteCycleToCompress.transform.localScale = targetScaleCycle;
+            playerController?.ChangeWalkingZone(targetScale.x); // Предполагая, что размер зоны пропорционален размеру спрайта
+            Debug.Log($"Updated sprite scale: {targetScale.x}");
         }
 
         private void LateUpdate()

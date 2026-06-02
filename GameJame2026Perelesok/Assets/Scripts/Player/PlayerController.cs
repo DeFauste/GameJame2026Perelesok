@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
         _playerMove.Scaler();
         _playerAnim.PlayAnimation(move);
 
-        ChangeWalkingZone(1 - Time.timeSinceLevelLoad / 100);
+        // ChangeWalkingZone(1 - Time.timeSinceLevelLoad / 100);
         DrawCollider(Time.deltaTime * 2);
     }
 
@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
         return move;
     }
 
-    private void ChangeWalkingZone(float zoneMultiplyer)
+    public void ChangeWalkingZone(float zoneMultiplyer)
     {
         _playerMove.ChangeZoneSize(zoneMultiplyer);
         _zone.ChangeScalesConst(new Vector3(zoneMultiplyer,

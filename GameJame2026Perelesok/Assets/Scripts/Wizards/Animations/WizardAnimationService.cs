@@ -269,6 +269,8 @@ namespace Wizards.Animations
             _fists.SetActive(false);
             _hands.SetActive(true);
             PlayMouth();
+            yield return new WaitForSeconds(timeWait);
+            WizardStateController.Instance.ChangeStage(StageWizard.FirstStage);
         }
     }
 }
