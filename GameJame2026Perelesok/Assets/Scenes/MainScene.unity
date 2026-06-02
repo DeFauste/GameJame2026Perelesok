@@ -119,6 +119,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &37574329
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4236006987340794316, guid: 239d257730120924a930d4d3b138edb8, type: 3}
+      propertyPath: m_Name
+      value: InputController
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476863260780095245, guid: 239d257730120924a930d4d3b138edb8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476863260780095245, guid: 239d257730120924a930d4d3b138edb8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.62503
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476863260780095245, guid: 239d257730120924a930d4d3b138edb8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476863260780095245, guid: 239d257730120924a930d4d3b138edb8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476863260780095245, guid: 239d257730120924a930d4d3b138edb8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476863260780095245, guid: 239d257730120924a930d4d3b138edb8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476863260780095245, guid: 239d257730120924a930d4d3b138edb8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476863260780095245, guid: 239d257730120924a930d4d3b138edb8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476863260780095245, guid: 239d257730120924a930d4d3b138edb8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476863260780095245, guid: 239d257730120924a930d4d3b138edb8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 239d257730120924a930d4d3b138edb8, type: 3}
 --- !u!1 &494258136 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3419191215218641312, guid: 5e96473b279be6a4abdbd5af80ea7782, type: 3}
@@ -921,6 +978,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae3c20e34aabfe147b70c1368e02551d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WalkingZoneScaler
+--- !u!114 &1833432472 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5905754377068640614, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
+  m_PrefabInstance: {fileID: 619082879}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8629e481ad30bf5448d0d0b0b122b1d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
 --- !u!1001 &1905682232
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -973,6 +1041,10 @@ PrefabInstance:
       propertyPath: _introStageController
       value: 
       objectReference: {fileID: 1905682238}
+    - target: {fileID: 5486295611801366254, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1833432472}
     - target: {fileID: 6494605823974619795, guid: f30083136430a6c4e99c2efb76847846, type: 3}
       propertyPath: _cameraShake
       value: 
@@ -1030,6 +1102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3253771a3b9c4d4b814673a58bcc5897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Wizards.Behaviours.Intro.WizardIntroStage
+  playerController: {fileID: 1833432472}
   NameMusicStage: 
   leftHand: {fileID: 1905682236}
   rightHand: {fileID: 1905682235}
@@ -1110,3 +1183,4 @@ SceneRoots:
   - {fileID: 619082879}
   - {fileID: 995419479}
   - {fileID: 1905682232}
+  - {fileID: 37574329}
