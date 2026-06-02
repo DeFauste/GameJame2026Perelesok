@@ -7,7 +7,7 @@ namespace Wizards.Behaviours
 {
     public sealed class WizardsAI : SingletonMonoBehaviour<WizardsAI>
     {
-        private WizardStateController _wizardStateController;
+        public WizardStateController _wizardStateController;
         public WizardIntroStage _introStageController;
         public WizardFirstStage firstStageController;
 
@@ -24,7 +24,6 @@ namespace Wizards.Behaviours
         /// </summary>
         private void OnStageChanged(StageWizard stage)
         {
-            Debug.Log($"Стадия волшебника изменилась на: {stage} в WizardsAI");
             if (stage == StageWizard.Intro)
             {
                 _introStageController.StartStage();
@@ -32,6 +31,7 @@ namespace Wizards.Behaviours
             else if (stage == StageWizard.FirstStage)
             {
                 firstStageController.StartStage();
+                _introStageController.EndStage();
             }
             else if (stage == StageWizard.SecondStage)
             {
@@ -55,6 +55,15 @@ namespace Wizards.Behaviours
         {
             if (_wizardStateController != null)
                 _wizardStateController.ActionStage -= OnStageChanged;
+        }
+
+        public void StopAllStage()
+        {
+            _wizardStateController.ChangeStage(StageWizard.None);
+            _wizardStateController.ChangeCompressedDirection(CompressedDirection.Static);
+            _introStageController.EndStage();
+            firstStageController.EndStage();
+             // Остановить другие стадии, если необходимо
         }
     }
 }

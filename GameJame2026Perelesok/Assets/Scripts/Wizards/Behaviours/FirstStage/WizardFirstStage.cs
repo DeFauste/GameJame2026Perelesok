@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using Wizards.Animations;
@@ -10,11 +11,9 @@ namespace Wizards.Behaviours
         private WizardAnimationService _wizardAnimationService;
         private Coroutine _randomAnimCoroutine;
         [SerializeField] private float timeChangeAnimation = 5f; // время через которое будет меняться анимация
-        
-        
-        protected override void Start()
+
+        private void Awake()
         {
-            base.Start();
             _wizardAnimationService = WizardAnimationService.Instance;
         }
 

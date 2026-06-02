@@ -265,6 +265,7 @@ namespace Wizards.Animations
 
         IEnumerator WaitTime(float timeWait)
         {
+            MusicService.Instance.Play("Sound_IntroFists");
             yield return new WaitForSeconds(timeWait);
             _fists.SetActive(false);
             _hands.SetActive(true);

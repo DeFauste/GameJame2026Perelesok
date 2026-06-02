@@ -57,10 +57,14 @@ namespace Wizards.Behaviours
         
         // Переменная для синхронизации процессов сжатия/расширения
         private float compressionProgress = 0f; // 0 = расширено, 1 = сжато
-        
-        protected virtual void Start()
+
+        private void Awake()
         {
             _wizardStateController = WizardStateController.Instance;
+        }
+
+        protected virtual void Start()
+        {
             if (targetCompress.transform == null)
             {
                 Debug.LogError("PointCompress не назначен в инспекторе!");
@@ -163,11 +167,13 @@ namespace Wizards.Behaviours
 
         public virtual void StartStage()
         {
+            _wizardStateController = WizardStateController.Instance;
             stageActive = true;
             compressionProgress = 0f; // Начинаем с полного расширения
-            _wizardStateController?.ChangeCompressedDirection(CompressedDirection.Compress);
+            _wizardStateController.ChangeCompressedDirection(CompressedDirection.Compress);
 
             coroutines.Add(StartCoroutine(CompressionController()));
+            Debug.Log($"Запущена стадия {_wizardStateController.CurrentStage}");
 
             MusicService.Instance.Play(NameMusicStage, loop: true);
         }
