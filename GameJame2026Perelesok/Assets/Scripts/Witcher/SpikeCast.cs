@@ -18,18 +18,21 @@ public class SpikeCast : MonoBehaviour
     private void Awake()
     {
         _spikeRender = GetComponentInChildren<SpriteRenderer>();
-        DrawCollider(_castTime + _castDelay);
     }
 
-    public IEnumerator CastCorutine(float multypyer)
+    virtual public IEnumerator CastCorutine(float multypyer)
     {
+        DrawCollider(_castTime + _castDelay);
         SpikeAnimationCicle(_castDelay * multypyer);
 
         for (float i = 0; i < _castTime; i += Time.deltaTime)
         {
 
             if (CheckForCollision())
+            {
                 _isHit = true;
+                Debug.Log("hitted");
+            }
 
             yield return new WaitForSeconds(Time.deltaTime);
         }
@@ -39,10 +42,15 @@ public class SpikeCast : MonoBehaviour
             ReverseSpikeAnimationCicle(_castDelay * multypyer);
         }
 
+        if (_isHit)
+        {
+            yield break;
+        }
+        Destroy(gameObject);
         yield return null;
     }
 
-    private bool CheckForCollision()
+    protected bool CheckForCollision()
     {
         PlayerController player = FindAnyObjectByType(typeof(PlayerController)).GetComponent<PlayerController>();
         if (player.CollisionDetection(_colliderSize, _colliderCenter + new Vector2(transform.position.x, transform.position.y)))
@@ -67,7 +75,7 @@ public class SpikeCast : MonoBehaviour
         }
     }
 
-    private void DrawCollider(float duration)
+    protected void DrawCollider(float duration)
     {
         Debug.DrawLine(transform.position + Vector3.right * _colliderSize.x + Vector3.up * _colliderSize.y + (Vector3)_colliderCenter,
                        transform.position - Vector3.right * _colliderSize.x - Vector3.up * _colliderSize.y + (Vector3)_colliderCenter,

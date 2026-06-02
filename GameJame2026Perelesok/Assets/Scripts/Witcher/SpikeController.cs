@@ -20,25 +20,33 @@ public class SpikeController : MonoBehaviour
             Debug.LogError("no laser prefab");
     }
 
-    public void RandomSpawnDamagers(int smalSpike, int bigSpike, int laser, float durationMultypyer)
+    private void Update()
     {
-        for (int i = 0; i < smalSpike; i++)
+        if (Input.GetKeyDown("h"))
         {
-            SpawnSmallSpike(GetRandomPosition(), _small_spike, durationMultypyer);
+            RandomSpawnDamagers(2, 0, 0, 1, 1, 1);
+        }
+    }
+
+    public void RandomSpawnDamagers(int smallSpike, int bigSpike, int laser, float smallSpikeDuration, float bigSpikeDuration, float laserDuration)
+    {
+        for (int i = 0; i < smallSpike; i++)
+        {
+            SpawnSpike(GetRandomPosition(), _small_spike, smallSpikeDuration);
         }
 
         for (int i = 0; i < bigSpike; i++)
         {
-            SpawnSmallSpike(GetRandomPosition(), _big_spike, durationMultypyer);
+            SpawnSpike(GetRandomPosition(), _big_spike, bigSpikeDuration);
         }
 
         for (int i = 0; i < laser; i++)
         {
-            SpawnSmallSpike(GetRandomPosition(), _laser, durationMultypyer);
+            SpawnSpike(GetRandomPosition(), _laser, laserDuration);
         }
     }
 
-    private void SpawnSmallSpike(Vector2 position, GameObject damager, float durationMultypyer)
+    private void SpawnSpike(Vector2 position, GameObject damager, float durationMultypyer)
     {
         GameObject spike = Instantiate(damager);
 

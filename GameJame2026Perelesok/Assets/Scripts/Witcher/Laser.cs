@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Laser : MonoBehaviour
+public class Laser : SpikeCast
 {
     [SerializeField] private Vector2 _colliderSize = Vector2.one;
     [SerializeField] private Vector2 _colliderCenter = Vector2.down;
@@ -12,7 +12,6 @@ public class Laser : MonoBehaviour
     [SerializeField] private float _castDelay = 1;
 
     private SpriteRenderer _spikeRender;
-    private int _state = 0;
     private bool _isHit = false;
 
     public bool IsHit {  get { return _isHit; } }
@@ -23,7 +22,7 @@ public class Laser : MonoBehaviour
         DrawCollider(_castTime + _castDelay);
     }
 
-    public IEnumerator CastCorutine(float multypyer)
+    override public IEnumerator CastCorutine(float multypyer)
     {
         for (int i = 0; i < 3; i++)
         {
@@ -48,6 +47,12 @@ public class Laser : MonoBehaviour
             }
         }
 
+        if (_isHit)
+        {
+            yield break;
+        }
+
+        Destroy(gameObject);
         yield return null;
     }
 
@@ -62,24 +67,5 @@ public class Laser : MonoBehaviour
         {
             _spikeRender.sprite = _laser[(int)((i/time) * _laser.Count)];
         }
-    }
-
-    private bool CheckForCollision()
-    {
-        PlayerController player = FindAnyObjectByType(typeof(PlayerController)).GetComponent<PlayerController>();
-        if (player.CollisionDetection(_colliderSize, _colliderCenter + new Vector2(transform.position.x, transform.position.y)))
-            return true;
-        else
-            return false;
-    }
-
-    private void DrawCollider(float duration)
-    {
-        Debug.DrawLine(transform.position + Vector3.right * _colliderSize.x + Vector3.up * _colliderSize.y + (Vector3)_colliderCenter,
-                       transform.position - Vector3.right * _colliderSize.x - Vector3.up * _colliderSize.y + (Vector3)_colliderCenter,
-                       Color.blue, duration);
-        Debug.DrawLine(transform.position + Vector3.right * _colliderSize.x - Vector3.up * _colliderSize.y + (Vector3)_colliderCenter,
-                       transform.position - Vector3.right * _colliderSize.x + Vector3.up * _colliderSize.y + (Vector3)_colliderCenter,
-                       Color.blue, duration);
     }
 }

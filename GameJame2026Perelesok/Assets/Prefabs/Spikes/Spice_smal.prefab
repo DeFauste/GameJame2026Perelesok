@@ -137,8 +137,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpikeCast
   _colliderSize: {x: 1, y: 1}
-  _colliderCenter: {x: 0, y: -1}
-  _preCast: {fileID: 21300000, guid: e3cfbd6f1a6d34c45a1b1df39715c897, type: 3}
-  _spike: {fileID: 21300000, guid: 8ae35f60386b9784b948f07c5aa799fc, type: 3}
+  _colliderCenter: {x: 0, y: -0.3}
+  _spike:
+  - {fileID: 21300000, guid: c23f04fb7b1a75c45a33861c86a128b4, type: 3}
+  - {fileID: 21300000, guid: 325cc223a0bfedf428104152deb8b456, type: 3}
+  - {fileID: 21300000, guid: 0d204acdb2b47314f8451761d88ed644, type: 3}
+  - {fileID: 21300000, guid: bd3b09a76b8ead94388145651c76163c, type: 3}
+  - {fileID: 21300000, guid: 5ee1874b629bf0342b6100a9b56018a4, type: 3}
+  - {fileID: 21300000, guid: ea4aa9c2b0c6899419682412171277b0, type: 3}
+  - {fileID: 21300000, guid: aac83462ed3dcb0478838acd88e92528, type: 3}
   _castTime: 1
   _castDelay: 1
