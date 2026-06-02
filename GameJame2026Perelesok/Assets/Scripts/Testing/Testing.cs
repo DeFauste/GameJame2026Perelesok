@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using Wizards;
+using Wizards.Animations;
 using Wizards.Behaviours;
 
 namespace DefaultNamespace.Testing
@@ -9,6 +10,11 @@ namespace DefaultNamespace.Testing
     {
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                WizardAnimationService.Instance.Intro();
+            }
+            
             if (Input.GetKeyDown(KeyCode.F1))
             {
                 WizardStateController.Instance.ChangeStage(StageWizard.FirstStage);

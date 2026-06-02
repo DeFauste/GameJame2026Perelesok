@@ -19,7 +19,7 @@ namespace Wizards
 
         private void Start()
         {
-            ChangeStage(StageWizard.FirstStage);
+            ChangeStage(StageWizard.Intro);
         }
 
         // Методы для взаимодействия со стадиями волшебника

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using CameraEffects;
 using Commons;
 using UnityEngine;
 
@@ -14,6 +16,10 @@ namespace Wizards.Animations
     /// </summary>
     public class WizardAnimationService : SingletonMonoBehaviour<WizardAnimationService>
     {
+        [SerializeField] private CameraShake _cameraShake;
+        [SerializeField] private GameObject _hands;
+        [SerializeField] private GameObject _fists;
+        [SerializeField] private float timeWaitFists = 1f;
         [SerializeField] private Animator animator;
         [SerializeField] private bool dontDestroyOnLoad = true;
 
@@ -23,6 +29,7 @@ namespace Wizards.Animations
         // Перечисление состояний анимации
         public enum AnimationState
         {
+            Intro,
             Idle,
             Blink,
             Mouth
@@ -31,9 +38,13 @@ namespace Wizards.Animations
         // Перечисление стадий
         public enum StageNumber
         {
-            First = 1,
-            Second = 2,
-            Third = 3
+            None,
+            Intro,
+            First,
+            Second,
+            Third,
+            Win,
+            Lose,
         }
 
         // Словарь: (Stage, State) -> animation name
@@ -92,6 +103,7 @@ namespace Wizards.Animations
         {
             animationMap = new Dictionary<(StageNumber, AnimationState), string>
             {
+                { (StageNumber.Intro, AnimationState.Intro), "Intro" },
                 // Стадия 1
                 { (StageNumber.First, AnimationState.Idle), "1_IdleWizardStageFirst" },
                 { (StageNumber.First, AnimationState.Blink), "1_BlinkWizardStageFirst" },
@@ -124,9 +136,13 @@ namespace Wizards.Animations
         {
             var newStage = stage switch
             {
+                StageWizard.None => StageNumber.None,
+                StageWizard.Intro => StageNumber.Intro,
                 StageWizard.FirstStage => StageNumber.First,
                 StageWizard.SecondStage => StageNumber.Second,
                 StageWizard.ThirdStage => StageNumber.Third,
+                StageWizard.Win => StageNumber.Win,
+                StageWizard.Lose => StageNumber.Lose,
                 _ => currentStage
             };
 
@@ -172,7 +188,7 @@ namespace Wizards.Animations
 
         private void PlayAnimationByCurrent()
         {
-            PlayAnimationSilentByStageState(currentStage, currentState);
+            PlayAnimationSilentByStageState(StageNumber.Intro, AnimationState.Intro);
         }
 
         /// <summary>
@@ -216,6 +232,12 @@ namespace Wizards.Animations
         {
             PlayAnimationSilentByStageState(currentStage, AnimationState.Idle);
         }
+        
+        public void Intro()
+        {
+            PlayAnimationSilentByStageState(currentStage, AnimationState.Intro);
+        }
+
 
         // Получатели состояния
         public StageNumber GetCurrentStage() => currentStage;
@@ -224,6 +246,20 @@ namespace Wizards.Animations
         public string GetAnimationName(StageNumber stage, AnimationState state)
         {
             return animationMap.TryGetValue((stage, state), out var name) ? name : null;
+        }
+
+        public void ActiveCameraShake()
+        {
+            _cameraShake?.Shake();
+            StartCoroutine(WaitTime(timeWaitFists));
+        }
+
+        IEnumerator WaitTime(float timeWait)
+        {
+            yield return new WaitForSeconds(timeWait);
+            _fists.SetActive(false);
+            _hands.SetActive(true);
+            PlayMouth();
         }
     }
 }

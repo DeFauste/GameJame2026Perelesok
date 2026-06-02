@@ -47,21 +47,24 @@ namespace Wizards.Behaviours
                 yield return wait;
 
                 if (!stageActive) break;
-
-                // Выбираем случайную анимацию: Idle / Blink / Mouth
-                int choice = UnityEngine.Random.Range(0, 3);
-                
-                switch (choice)
+                if (WizardStateController.Instance.CurrentStage != StageWizard.Intro &&
+                    WizardStateController.Instance.CurrentStage != StageWizard.None)
                 {
-                    case 0:
-                        _wizardAnimationService?.PlayIdle();
-                        break;
-                    case 1:
-                        _wizardAnimationService?.PlayBlink();
-                        break;
-                    case 2:
-                        _wizardAnimationService?.PlayMouth();
-                        break;
+                    // Выбираем случайную анимацию: Idle / Blink / Mouth
+                    int choice = UnityEngine.Random.Range(0, 3);
+                
+                    switch (choice)
+                    {
+                        case 0:
+                            _wizardAnimationService?.PlayIdle();
+                            break;
+                        case 1:
+                            _wizardAnimationService?.PlayBlink();
+                            break;
+                        case 2:
+                            _wizardAnimationService?.PlayMouth();
+                            break;
+                    }
                 }
             }
 

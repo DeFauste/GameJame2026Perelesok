@@ -6,6 +6,7 @@
     public enum StageWizard
     {
         None,
+        Intro,
         FirstStage,
         SecondStage,
         ThirdStage,
