@@ -7,7 +7,7 @@ namespace Wizards
 {
     public sealed class WizardStateController : SingletonMonoBehaviour<WizardStateController>
     {
-        public int CurrentHealth { get; private set; } = 3; // Текущее значение здоровья волшебника
+        public int CurrentHealth { get; private set; } = 1; // Текущее значение здоровья волшебника
 
         private CompressedDirection
             _currentDirectionCompress = CompressedDirection.Static; // Текущее направление сжатия/расширения
@@ -20,6 +20,11 @@ namespace Wizards
         private void Start()
         {
             ChangeStage(StageWizard.Intro);
+            SymbolSystem.OnAttackSuccess += () =>
+            {
+                Debug.Log("Нанесли дамаг волшебнику!");
+                TakeDamage(1);
+            };
         }
 
         // Методы для взаимодействия со стадиями волшебника
@@ -84,7 +89,12 @@ namespace Wizards
 
             // уведомляем, всех подписчиков, что здоровье изменилось
             ChangeHealth?.Invoke(CurrentHealth);
-
+            Debug.Log($"Волшебник получил {damage} урона. Текущее здоровье: {CurrentHealth}");
+            if(CurrentHealth <= 0)
+            {
+                Debug.Log("Волшебник погиб!");
+                ChangeStage(StageWizard.Lose);
+            }
             return CurrentHealth;
         }
 

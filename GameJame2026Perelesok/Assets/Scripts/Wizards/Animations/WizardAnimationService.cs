@@ -34,11 +34,12 @@ namespace Wizards.Animations
             Intro,
             Idle,
             Blink,
-            Mouth
+            Mouth,
+            Defeat
         }
 
         // Перечисление стадий
-        public enum StageNumber
+        public enum StageWizardNumer
         {
             None,
             Intro,
@@ -50,17 +51,17 @@ namespace Wizards.Animations
         }
 
         // Словарь: (Stage, State) -> animation name
-        private Dictionary<(StageNumber, AnimationState), string> animationMap;
+        private Dictionary<(StageWizardNumer, AnimationState), string> animationMap;
 
         // Хэши анимаций для CrossFade
-        private Dictionary<(StageNumber, AnimationState), int> animationHashMap;
+        private Dictionary<(StageWizardNumer, AnimationState), int> animationHashMap;
 
         // Внутренные значения (локальные, чтение/реакция)
-        private StageNumber currentStage = StageNumber.First;
+        private StageWizardNumer currentStage = StageWizardNumer.First;
         private AnimationState currentState = AnimationState.Idle;
 
         // События для внешних подписчиков
-        public Action<StageNumber> OnStageChanged { get; set; }
+        public Action<StageWizardNumer> OnStageChanged { get; set; }
         public Action<AnimationState> OnStateChanged { get; set; }
         public Action<string> OnAnimationPlayed { get; set; }
 
@@ -109,29 +110,33 @@ namespace Wizards.Animations
 
         private void InitializeAnimationMap()
         {
-            animationMap = new Dictionary<(StageNumber, AnimationState), string>
+            animationMap = new Dictionary<(StageWizardNumer, AnimationState), string>
             {
-                { (StageNumber.Intro, AnimationState.Intro), "Intro" },
+                // Вступление
+                { (StageWizardNumer.Intro, AnimationState.Intro), "Intro" },
+                // Победа рыцаря
+                { (StageWizardNumer.Lose, AnimationState.Defeat), "WizardDeath" },
+                
                 // Стадия 1
-                { (StageNumber.First, AnimationState.Idle), "1_IdleWizardStageFirst" },
-                { (StageNumber.First, AnimationState.Blink), "1_BlinkWizardStageFirst" },
-                { (StageNumber.First, AnimationState.Mouth), "1_MouthWizardStageFirst" },
+                { (StageWizardNumer.First, AnimationState.Idle), "1_IdleWizardStageFirst" },
+                { (StageWizardNumer.First, AnimationState.Blink), "1_BlinkWizardStageFirst" },
+                { (StageWizardNumer.First, AnimationState.Mouth), "1_MouthWizardStageFirst" },
 
                 // Стадия 2
-                { (StageNumber.Second, AnimationState.Idle), "2_IdleWizardStageSecond" },
-                { (StageNumber.Second, AnimationState.Blink), "2_BlinkWizardStageSecond" },
-                { (StageNumber.Second, AnimationState.Mouth), "2_MouthWizardStageSecond" },
+                { (StageWizardNumer.Second, AnimationState.Idle), "2_IdleWizardStageSecond" },
+                { (StageWizardNumer.Second, AnimationState.Blink), "2_BlinkWizardStageSecond" },
+                { (StageWizardNumer.Second, AnimationState.Mouth), "2_MouthWizardStageSecond" },
 
                 // Стадия 3
-                { (StageNumber.Third, AnimationState.Idle), "3_IdleWizardThreeStage" },
-                { (StageNumber.Third, AnimationState.Blink), "3_BlinkWizardThreeStage" },
-                { (StageNumber.Third, AnimationState.Mouth), "3_MouthWizardThreeStage" }
+                { (StageWizardNumer.Third, AnimationState.Idle), "3_IdleWizardThreeStage" },
+                { (StageWizardNumer.Third, AnimationState.Blink), "3_BlinkWizardThreeStage" },
+                { (StageWizardNumer.Third, AnimationState.Mouth), "3_MouthWizardThreeStage" }
             };
         }
 
         private void InitializeHashMap()
         {
-            animationHashMap = new Dictionary<(StageNumber, AnimationState), int>(animationMap.Count);
+            animationHashMap = new Dictionary<(StageWizardNumer, AnimationState), int>(animationMap.Count);
             foreach (var kv in animationMap)
             {
                 animationHashMap[kv.Key] = Animator.StringToHash(kv.Value);
@@ -144,13 +149,13 @@ namespace Wizards.Animations
         {
             var newStage = stage switch
             {
-                StageWizard.None => StageNumber.None,
-                StageWizard.Intro => StageNumber.Intro,
-                StageWizard.FirstStage => StageNumber.First,
-                StageWizard.SecondStage => StageNumber.Second,
-                StageWizard.ThirdStage => StageNumber.Third,
-                StageWizard.Win => StageNumber.Win,
-                StageWizard.Lose => StageNumber.Lose,
+                StageWizard.None => StageWizardNumer.None,
+                StageWizard.Intro => StageWizardNumer.Intro,
+                StageWizard.FirstStage => StageWizardNumer.First,
+                StageWizard.SecondStage => StageWizardNumer.Second,
+                StageWizard.ThirdStage => StageWizardNumer.Third,
+                StageWizard.Win => StageWizardNumer.Win,
+                StageWizard.Lose => StageWizardNumer.Lose,
                 _ => currentStage
             };
 
@@ -196,14 +201,14 @@ namespace Wizards.Animations
 
         private void PlayAnimationByCurrent()
         {
-            PlayAnimationSilentByStageState(StageNumber.Intro, AnimationState.Intro);
+            PlayAnimationSilentByStageState(StageWizardNumer.Intro, AnimationState.Intro);
         }
 
         /// <summary>
         /// Проиграть animation для указанной стадии и состояния, НЕ генерируя события OnStateChanged/OnStageChanged.
         /// Использует CrossFade.
         /// </summary>
-        private void PlayAnimationSilentByStageState(StageNumber stage, AnimationState state)
+        private void PlayAnimationSilentByStageState(StageWizardNumer stage, AnimationState state)
         {
             if (animator == null)
             {
@@ -246,13 +251,17 @@ namespace Wizards.Animations
             PlayAnimationSilentByStageState(currentStage, AnimationState.Intro);
             musicService.Play("Sound_EnemyLaugh_Intro");
         }
-
+        
+        public void LoseStage()
+        {
+            PlayAnimationSilentByStageState(currentStage, AnimationState.Defeat);
+        }
 
         // Получатели состояния
-        public StageNumber GetCurrentStage() => currentStage;
+        public StageWizardNumer GetCurrentStage() => currentStage;
         public AnimationState GetCurrentState() => currentState;
 
-        public string GetAnimationName(StageNumber stage, AnimationState state)
+        public string GetAnimationName(StageWizardNumer stage, AnimationState state)
         {
             return animationMap.TryGetValue((stage, state), out var name) ? name : null;
         }
@@ -265,6 +274,7 @@ namespace Wizards.Animations
 
         IEnumerator WaitTime(float timeWait)
         {
+            MusicService.Instance.Play("Sound_IntroFists");
             yield return new WaitForSeconds(timeWait);
             _fists.SetActive(false);
             _hands.SetActive(true);

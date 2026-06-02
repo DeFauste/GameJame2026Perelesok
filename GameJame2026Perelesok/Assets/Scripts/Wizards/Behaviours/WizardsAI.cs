@@ -2,14 +2,16 @@
 using Commons;
 using UnityEngine;
 using Wizards.Behaviours.Intro;
+using Wizards.Behaviours.Win;
 
 namespace Wizards.Behaviours
 {
     public sealed class WizardsAI : SingletonMonoBehaviour<WizardsAI>
     {
-        private WizardStateController _wizardStateController;
+        public WizardStateController _wizardStateController;
         public WizardIntroStage _introStageController;
         public WizardFirstStage firstStageController;
+        public LoseStage loseStageController;
 
         private void Awake()
         {
@@ -24,18 +26,21 @@ namespace Wizards.Behaviours
         /// </summary>
         private void OnStageChanged(StageWizard stage)
         {
-            Debug.Log($"Стадия волшебника изменилась на: {stage} в WizardsAI");
             if (stage == StageWizard.Intro)
             {
+                // Действия для интро
                 _introStageController.StartStage();
             }
             else if (stage == StageWizard.FirstStage)
             {
+                // Действия для первой стадии
                 firstStageController.StartStage();
+                _introStageController.EndStage();
             }
             else if (stage == StageWizard.SecondStage)
             {
                 // Действия для второй стадии
+                firstStageController.EndStage();
             }
             else if (stage == StageWizard.ThirdStage)
             {
@@ -48,6 +53,7 @@ namespace Wizards.Behaviours
             else if (stage == StageWizard.Lose)
             {
                 // Действия для смерти
+                loseStageController?.StartStage(); 
             }
         }
 
@@ -55,6 +61,15 @@ namespace Wizards.Behaviours
         {
             if (_wizardStateController != null)
                 _wizardStateController.ActionStage -= OnStageChanged;
+        }
+
+        public void StopAllStage()
+        {
+            _wizardStateController.ChangeStage(StageWizard.None);
+            _wizardStateController.ChangeCompressedDirection(CompressedDirection.Static);
+            _introStageController.EndStage();
+            firstStageController.EndStage();
+             // Остановить другие стадии, если необходимо
         }
     }
 }

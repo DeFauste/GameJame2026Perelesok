@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Wizards;
+using Wizards.Behaviours;
 
 namespace MainMenu
 {
@@ -16,7 +17,11 @@ namespace MainMenu
         private void OnEnable()
         {
             resumeButton?.onClick.AddListener(() => StartGame());
-            menuGameButton?.onClick.AddListener(() => SceneManager.LoadScene("MainMenu", LoadSceneMode.Single));
+            menuGameButton?.onClick.AddListener(() =>
+            {
+                WizardsAI.Instance.StopAllStage();
+                SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+            });
             exitGameButton?.onClick.AddListener(() => Application.Quit());
         }
         
