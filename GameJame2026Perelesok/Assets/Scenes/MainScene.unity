@@ -213,6 +213,8 @@ MonoBehaviour:
   onButton: {fileID: 21300000, guid: ba75ae56d0a82f242aa3ddcaf612ce8a, type: 3}
   SoundHover: UI_hover
   SoundClick: UI_buttonPressed
+  hoverScaleFactor: 1.1
+  scaleDuration: 0.12
 --- !u!1001 &619082879
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -635,6 +637,8 @@ MonoBehaviour:
   onButton: {fileID: 21300000, guid: ba75ae56d0a82f242aa3ddcaf612ce8a, type: 3}
   SoundHover: UI_hover
   SoundClick: UI_buttonPressed
+  hoverScaleFactor: 1.1
+  scaleDuration: 0.12
 --- !u!114 &914494551 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5527202996969450970, guid: 5e96473b279be6a4abdbd5af80ea7782, type: 3}
@@ -657,6 +661,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -738,6 +743,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d466a0eee7664c1faa114c097fcc9bf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraEffects.CameraShake
 --- !u!1001 &995419479
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -904,6 +921,126 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae3c20e34aabfe147b70c1368e02551d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WalkingZoneScaler
+--- !u!1001 &1905682232
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.41893
+      objectReference: {fileID: 0}
+    - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139049608976223866, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+      propertyPath: _introStageController
+      value: 
+      objectReference: {fileID: 1905682238}
+    - target: {fileID: 6494605823974619795, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+      propertyPath: _cameraShake
+      value: 
+      objectReference: {fileID: 963194229}
+    - target: {fileID: 6494605823974619795, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+      propertyPath: timeWaitFists
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7783262939728060127, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+      propertyPath: m_Name
+      value: Wizard
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7194836305894753642, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1905682238}
+  m_SourcePrefab: {fileID: 100100000, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+--- !u!212 &1905682233 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5831717742100571301, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+  m_PrefabInstance: {fileID: 1905682232}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1905682234 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6420548289017049666, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+  m_PrefabInstance: {fileID: 1905682232}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1905682235 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4549629942407281379, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+  m_PrefabInstance: {fileID: 1905682232}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1905682236 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7037294486923218584, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+  m_PrefabInstance: {fileID: 1905682232}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1905682237 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7194836305894753642, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+  m_PrefabInstance: {fileID: 1905682232}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1905682238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905682237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3253771a3b9c4d4b814673a58bcc5897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Wizards.Behaviours.Intro.WizardIntroStage
+  NameMusicStage: 
+  leftHand: {fileID: 1905682236}
+  rightHand: {fileID: 1905682235}
+  targetCompress: {fileID: 1980885929}
+  delayTimeCompression: 3
+  timeFullCompression: 5
+  percentTimeExpansion: 0.2
+  percentTimeExpansionDome: 0.4
+  minimalDistanceForTargetPercent: 0.7
+  spriteDomeToCompress: {fileID: 1905682234}
+  spriteCycleToCompress: {fileID: 1905682233}
 --- !u!1 &1948103638
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,6 +1091,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1980885929 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1729957758528070522, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+  m_PrefabInstance: {fileID: 1905682232}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -967,3 +1109,4 @@ SceneRoots:
   - {fileID: 552309548}
   - {fileID: 619082879}
   - {fileID: 995419479}
+  - {fileID: 1905682232}

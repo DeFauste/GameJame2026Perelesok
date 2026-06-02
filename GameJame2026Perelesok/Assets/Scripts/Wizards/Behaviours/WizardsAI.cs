@@ -1,25 +1,35 @@
-﻿using UnityEngine;
+﻿using System;
+using Commons;
+using UnityEngine;
+using Wizards.Behaviours.Intro;
 
 namespace Wizards.Behaviours
 {
-    public sealed class WizardsAI : MonoBehaviour
+    public sealed class WizardsAI : SingletonMonoBehaviour<WizardsAI>
     {
         private WizardStateController _wizardStateController;
-        [SerializeField]
-        private WizardStage firstStageController;
-        
-        private void Start()
+        public WizardIntroStage _introStageController;
+        public WizardFirstStage firstStageController;
+
+        private void Awake()
         {
             _wizardStateController = WizardStateController.Instance;
-            _wizardStateController.ActionStage += OnHealthChanged;
+            _wizardStateController.ActionStage += OnStageChanged;
+            Debug.Log($"Подписался на ActionStage в WizardsAI");
         }
+
 
         /// <summary>
         /// Метод для проверки состояния здоровья волшебника и выполнения действий в зависимости от текущего уровня здоровья.
         /// </summary>
-        private void OnHealthChanged(StageWizard stage)
+        private void OnStageChanged(StageWizard stage)
         {
-            if (stage == StageWizard.FirstStage) 
+            Debug.Log($"Стадия волшебника изменилась на: {stage} в WizardsAI");
+            if (stage == StageWizard.Intro)
+            {
+                _introStageController.StartStage();
+            }
+            else if (stage == StageWizard.FirstStage)
             {
                 firstStageController.StartStage();
             }
@@ -43,7 +53,8 @@ namespace Wizards.Behaviours
 
         private void OnDestroy()
         {
-            _wizardStateController.ActionStage -= OnHealthChanged;
+            if (_wizardStateController != null)
+                _wizardStateController.ActionStage -= OnStageChanged;
         }
     }
 }

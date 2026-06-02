@@ -8,12 +8,12 @@ namespace Wizards
     public sealed class WizardStateController : SingletonMonoBehaviour<WizardStateController>
     {
         public int CurrentHealth { get; private set; } = 3; // Текущее значение здоровья волшебника
-        
-        [SerializeField]
-        private CompressedDirection _currentDirectionCompress = CompressedDirection.Static; // Текущее направление сжатия/расширения
+
+        private CompressedDirection
+            _currentDirectionCompress = CompressedDirection.Static; // Текущее направление сжатия/расширения
+
         public CompressedDirection CurrentDirectionCompress => _currentDirectionCompress;
 
-        [SerializeField]
         private StageWizard _currentStage = StageWizard.None; // Текущая стадия поведения волшебника
         public StageWizard CurrentStage => _currentStage; // Текущая стадия поведения волшебника
 
@@ -23,12 +23,14 @@ namespace Wizards
         }
 
         // Методы для взаимодействия со стадиями волшебника
+
         #region Stage Direction
+
         /// <summary>
         /// Делегат оповещения изменения стадии волшебника
         /// </summary>
-        public Action<StageWizard> ActionStage { get; set; } 
-        
+        public Action<StageWizard> ActionStage { get; set; }
+
         /// <summary>
         /// Метод для изменения текущей стадии поведения волшебника
         /// </summary>
@@ -36,14 +38,18 @@ namespace Wizards
         {
             if (CurrentStage != stage)
             {
+
                 ActionStage?.Invoke(stage);
                 _currentStage = stage;
+                Debug.Log($"Текущая стадия волшебника: {CurrentStage}");
             }
         }
+
         /// <summary>
         /// Делегат оповещения изменения направления сжатия/расширения волшебника
         /// </summary>
-        public Action<CompressedDirection> ActionCompressedDirection { get; set; } 
+        public Action<CompressedDirection> ActionCompressedDirection { get; set; }
+
         /// <summary>
         /// Метод для изменения текущего направления сжатия/расширения волшебника
         /// </summary>
@@ -55,32 +61,36 @@ namespace Wizards
                 _currentDirectionCompress = direction;
             }
         }
+
         #endregion Stage
-        
+
         // Методы для взаимодействия со здоровьем волшебника
+
         #region Health
+
         /// <summary>
         /// Метод для изменения текущего здоровья волшебника
         /// </summary>
         public event Action<int> ChangeHealth;
-        
+
         /// <summary>
         /// Записать получения урона волшебнику
         /// </summary>
         public int TakeDamage(int damage)
         {
             // Убедиться, что урон положительный, от греха подальше
-            damage = Mathf.Abs(damage); 
+            damage = Mathf.Abs(damage);
             CurrentHealth -= damage;
-            
+
             // уведомляем, всех подписчиков, что здоровье изменилось
             ChangeHealth?.Invoke(CurrentHealth);
-            
+
             return CurrentHealth;
         }
+
         #endregion Health
     }
-    
+
     public enum CompressedDirection
     {
         Static, // Статичная область

@@ -23,9 +23,11 @@ namespace Wizards.Animations
         [SerializeField] private Animator animator;
         [SerializeField] private bool dontDestroyOnLoad = true;
 
+        private MusicService  musicService;
+        
         [Tooltip("Длительность перехода CrossFade (сек.)")]
         [SerializeField] private float crossFadeDuration = 0.12f;
-
+        
         // Перечисление состояний анимации
         public enum AnimationState
         {
@@ -78,6 +80,12 @@ namespace Wizards.Animations
                 Debug.LogError("WizardAnimationService: Animator не найден!");
             else
                 InitializeHashMap();
+        }
+
+
+        private void Start()
+        {
+            musicService = MusicService.Instance;
         }
 
         private void OnEnable()
@@ -236,6 +244,7 @@ namespace Wizards.Animations
         public void Intro()
         {
             PlayAnimationSilentByStageState(currentStage, AnimationState.Intro);
+            musicService.Play("Sound_EnemyLaugh_Intro");
         }
 
 

@@ -149,7 +149,7 @@ namespace Wizards.Behaviours
         {
             stageActive = true;
             compressionProgress = 0f; // Начинаем с полного расширения
-            _wizardStateController.ChangeCompressedDirection(CompressedDirection.Compress);
+            _wizardStateController?.ChangeCompressedDirection(CompressedDirection.Compress);
 
             coroutines.Add(StartCoroutine(CompressionController()));
 
