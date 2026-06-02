@@ -26,12 +26,14 @@ namespace MainMenu
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 _pauseMenu?.SetActive(true);
+                Time.timeScale = 0;
             }
         }
 
         private void StartGame()
         {
-            WizardStateController.Instance.ChangeStage(StageWizard.FirstStage);
+            // продолжить игру
+            Time.timeScale = 1;
         }
     }
 }

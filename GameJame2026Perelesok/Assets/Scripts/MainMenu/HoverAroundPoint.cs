@@ -34,7 +34,7 @@ namespace MainMenu
 
         void Start()
         {
-            // Определяем центр парения
+            // Определяем начальный центр парения (используется только для инициализации)
             if (centerPoint != null)
                 centerPos = centerPoint.position;
             else if (useStartPositionAsCenter)
@@ -55,6 +55,12 @@ namespace MainMenu
             if (!isActive)
             {
                 return;
+            }
+
+            // Обновляем центр в каждом кадре, если centerPoint назначен и движется
+            if (centerPoint != null)
+            {
+                centerPos = centerPoint.position;
             }
 
             // Прогрессия угла или времени
