@@ -1,68 +1,58 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Laser : MonoBehaviour
+public class Laser : SpikeCast
 {
-    [SerializeField] private Vector2 _colliderSize = Vector2.one;
-    [SerializeField] private Vector2 _colliderCenter = Vector2.down;
-    [SerializeField] private List<Sprite> _laser;
-    [SerializeField] private float _castTime = 1;
-    [SerializeField] private float _castDelay = 1;
-
-    private SpriteRenderer _spikeRender;
-    private int _state = 0;
-    private bool _isHit = false;
-
-    public bool IsHit {  get { return _isHit; } }
+    private Animator _animator;
 
     private void Awake()
     {
-        _spikeRender = GetComponentInChildren<SpriteRenderer>();
-        DrawCollider(_castTime + _castDelay);
-        StartCoroutine(CastCorutine(1));
+        _animator = GetComponent<Animator>();
     }
 
-    public IEnumerator CastCorutine(float multypyer)
+    override public IEnumerator CastCorutine(float multypyer)
     {
-        for (float i = 0; i < _castDelay; i += Time.deltaTime)
+        _animator.speed = 1;
+        for (int i = 0; i < 3; i++)
         {
-
+            _animator.Play("ShowLaser");
+            yield return new WaitForSecondsRealtime(_castDelay * multypyer / 3 / 2);
+            _animator.Play("RemoveLaser");
+            yield return new WaitForSecondsRealtime(_castDelay * multypyer / 3 / 2);
         }
 
-        for (float i = 0; i < _castTime; i += Time.deltaTime)
-        {
-            if (CheckForCollision())
-                _isHit = true;
+        _animator.Play("ShowLaser");
 
-            yield return new WaitForSeconds(Time.deltaTime);
+        for (float i = 0; i < _castTime * multypyer; i += Time.deltaTime)
+        {
+            DrawCollider(Time.deltaTime * 2);
+
+            if (CheckForCollision())
+            {
+                _isHit = true;
+                break;
+            }
+
+            yield return new WaitForSecondsRealtime(Time.deltaTime);
         }
 
         if (!_isHit)
         {
-            _spikeRender.sprite = _laser[-1];
+            _animator.Play("RemoveLaser");
         }
-
-        yield return null;
     }
 
-    private bool CheckForCollision()
+    public void Pose(Vector2 eye)
     {
-        PlayerController player = FindAnyObjectByType(typeof(PlayerController)).GetComponent<PlayerController>();
-        if (player.CollisionDetection(_colliderSize, _colliderCenter + new Vector2(transform.position.x, transform.position.y)))
-            return true;
-        else
-            return false;
-    }
-
-    private void DrawCollider(float duration)
-    {
-        Debug.DrawLine(transform.position + Vector3.right * _colliderSize.x + Vector3.up * _colliderSize.y + (Vector3)_colliderCenter,
-                       transform.position - Vector3.right * _colliderSize.x - Vector3.up * _colliderSize.y + (Vector3)_colliderCenter,
-                       Color.blue, duration);
-        Debug.DrawLine(transform.position + Vector3.right * _colliderSize.x - Vector3.up * _colliderSize.y + (Vector3)_colliderCenter,
-                       transform.position - Vector3.right * _colliderSize.x + Vector3.up * _colliderSize.y + (Vector3)_colliderCenter,
-                       Color.blue, duration);
+        Debug.Log(transform.position);
+        Vector2 place = new Vector2(transform.position.x, transform.position.y);
+        Vector2 buf = (place + eye) / 2;
+        float angle = Mathf.Atan2(buf.y, buf.x);
+        if (place.x > 0)
+        {
+            angle *= -1;
+        }
+        transform.position = buf;
+        transform.rotation *= Quaternion.Euler(angle, 0, 0);
     }
 }

@@ -138,8 +138,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e65499f2c0b5e7e44b647c0d6233a729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
-  _horizontalSpeed: 0.04
-  _verticalSpeed: 0.06
+  _horizontalSpeed: 1
+  _verticalSpeed: 1
   _hight: 2
   _wight: 6
 --- !u!114 &5905754377068640614
@@ -158,6 +158,7 @@ MonoBehaviour:
   _zone: {fileID: 0}
   _colliderSize: {x: 1, y: 1}
   _colliderCenter: {x: 0, y: -1}
+  _zoneCenter: {x: 0, y: 0}
 --- !u!114 &8590546477310373720
 MonoBehaviour:
   m_ObjectHideFlags: 0
