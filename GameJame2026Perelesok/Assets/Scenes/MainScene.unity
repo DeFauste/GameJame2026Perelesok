@@ -809,7 +809,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.08235294, g: 0.07058824, b: 0.09019608, a: 0}
+  m_BackGroundColor: {r: 0.08235294, g: 0.07058824, b: 0.09411766, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -834,7 +834,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7.8691106
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -859,7 +859,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0.15, y: 3.38, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1069,19 +1069,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.064135
+      value: 3.9325888
       objectReference: {fileID: 0}
     - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.8350061
+      value: 3.6351256
       objectReference: {fileID: 0}
     - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.4
+      value: 0.7478
       objectReference: {fileID: 0}
     - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.22
+      value: 3.8
       objectReference: {fileID: 0}
     - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
       propertyPath: m_LocalPosition.z
