@@ -2,6 +2,7 @@
 using Commons;
 using UnityEngine;
 using Wizards.Behaviours.Intro;
+using Wizards.Behaviours.Lose;
 
 namespace Wizards.Behaviours
 {
@@ -10,6 +11,7 @@ namespace Wizards.Behaviours
         public WizardStateController _wizardStateController;
         public WizardIntroStage _introStageController;
         public WizardFirstStage firstStageController;
+        public LoseStage _loseStageController;
 
         private void Awake()
         {
@@ -48,6 +50,7 @@ namespace Wizards.Behaviours
             else if (stage == StageWizard.Lose)
             {
                 // Действия для смерти
+                _loseStageController.StartStage();
             }
         }
 

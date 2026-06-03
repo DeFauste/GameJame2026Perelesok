@@ -176,6 +176,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 239d257730120924a930d4d3b138edb8, type: 3}
+--- !u!1 &314674580 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4236006987340794316, guid: 239d257730120924a930d4d3b138edb8, type: 3}
+  m_PrefabInstance: {fileID: 37574329}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &494258136 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3419191215218641312, guid: 5e96473b279be6a4abdbd5af80ea7782, type: 3}
@@ -1049,6 +1054,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8629e481ad30bf5448d0d0b0b122b1d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+--- !u!212 &1840991649 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2041280109186774292, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+  m_PrefabInstance: {fileID: 1905682232}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1905682232
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1106,6 +1116,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2139049608976223866, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+      propertyPath: _loseStageController
+      value: 
+      objectReference: {fileID: 1905682247}
+    - target: {fileID: 2139049608976223866, guid: f30083136430a6c4e99c2efb76847846, type: 3}
       propertyPath: _introStageController
       value: 
       objectReference: {fileID: 1905682238}
@@ -1123,7 +1137,7 @@ PrefabInstance:
       objectReference: {fileID: 1833432472}
     - target: {fileID: 5486295611801366254, guid: f30083136430a6c4e99c2efb76847846, type: 3}
       propertyPath: timeFullCompression
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6494605823974619795, guid: f30083136430a6c4e99c2efb76847846, type: 3}
       propertyPath: _cameraShake
@@ -1144,6 +1158,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7194836305894753642, guid: f30083136430a6c4e99c2efb76847846, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1905682238}
+    - targetCorrespondingSourceObject: {fileID: 7194836305894753642, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1905682247}
   m_SourcePrefab: {fileID: 100100000, guid: f30083136430a6c4e99c2efb76847846, type: 3}
 --- !u!212 &1905682233 stripped
 SpriteRenderer:
@@ -1188,12 +1205,45 @@ MonoBehaviour:
   rightHand: {fileID: 1905682235}
   targetCompress: {fileID: 1980885929}
   delayTimeCompression: 3
-  timeFullCompression: 5
+  timeFullCompression: 10
   percentTimeExpansion: 0.2
   percentTimeExpansionDome: 0.4
   minimalDistanceForTargetPercent: 0.1
   spriteDomeToCompress: {fileID: 1905682234}
   spriteCycleToCompress: {fileID: 1905682233}
+--- !u!114 &1905682247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905682237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e55d334d36b4cb5b785ae82dfaa9d52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Wizards.Behaviours.Lose.LoseStage
+  playerController: {fileID: 1833432472}
+  NameMusicStage: 
+  leftHand: {fileID: 1905682236}
+  rightHand: {fileID: 1905682235}
+  targetCompress: {fileID: 1980885929}
+  delayTimeCompression: 3
+  timeFullCompression: 10
+  percentTimeExpansion: 0.2
+  percentTimeExpansionDome: 0.2
+  minimalDistanceForTargetPercent: 0.5
+  spriteDomeToCompress: {fileID: 1905682234}
+  spriteCycleToCompress: {fileID: 1905682233}
+  _symbolSystem: {fileID: 314674580}
+  dissolveDuration: 1.5
+  tryUseCutoffShader: 1
+  cutoffPropertyName: _Cutoff
+  includeChildrenRenderers: 1
+  targetSpriteRenderer: {fileID: 1840991649}
+  targetSprite: {fileID: 21300000, guid: cabf198c9700ece41b559bb8d41e0c5f, type: 3}
+  disableOnComplete: 1
+  completeDelay: 0
 --- !u!1 &1948103638
 GameObject:
   m_ObjectHideFlags: 0

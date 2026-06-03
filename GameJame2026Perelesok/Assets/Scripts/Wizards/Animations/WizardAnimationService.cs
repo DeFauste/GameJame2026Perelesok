@@ -34,7 +34,8 @@ namespace Wizards.Animations
             Intro,
             Idle,
             Blink,
-            Mouth
+            Mouth,
+            Death
         }
 
         // Перечисление стадий
@@ -111,6 +112,8 @@ namespace Wizards.Animations
         {
             animationMap = new Dictionary<(StageNumber, AnimationState), string>
             {
+                { (StageNumber.Lose, AnimationState.Death), "WizardDeath" },
+                { (StageNumber.First, AnimationState.Death), "WinStage" },
                 { (StageNumber.Intro, AnimationState.Intro), "Intro" },
                 // Стадия 1
                 { (StageNumber.First, AnimationState.Idle), "1_IdleWizardStageFirst" },
@@ -245,6 +248,11 @@ namespace Wizards.Animations
         {
             PlayAnimationSilentByStageState(currentStage, AnimationState.Intro);
             musicService.Play("Sound_EnemyLaugh_Intro");
+        }
+
+        public void LoseStage()
+        {
+            PlayAnimationSilentByStageState(currentStage, AnimationState.Death);
         }
 
 

@@ -20,6 +20,10 @@ namespace Wizards
         private void Start()
         {
             ChangeStage(StageWizard.Intro);
+            SymbolSystem.OnAttackSuccess += () =>
+            {
+                TakeDamage(1);
+            };
         }
 
         // Методы для взаимодействия со стадиями волшебника
@@ -84,7 +88,11 @@ namespace Wizards
 
             // уведомляем, всех подписчиков, что здоровье изменилось
             ChangeHealth?.Invoke(CurrentHealth);
-
+            if(CurrentHealth <= 0)
+            {
+                Debug.Log("Здоровье волшебника достигло нуля. Стадия Lose началась.");
+                ChangeStage(StageWizard.Lose);
+            }
             return CurrentHealth;
         }
 
