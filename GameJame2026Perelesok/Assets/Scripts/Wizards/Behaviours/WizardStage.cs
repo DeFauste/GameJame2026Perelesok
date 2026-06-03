@@ -145,11 +145,9 @@ namespace Wizards.Behaviours
             spriteCycleToCompress.transform.localScale = targetScaleCycle;
             if (targetScale.x >= 0.95f)
             {
-                Debug.Log("Получили событие об успешной защите! Запускаем расширение.");
                 _wizardStateController?.ChangeCompressedDirection(CompressedDirection.Compress);
             }
             playerController?.ChangeWalkingZone(targetScale.x); // Предполагая, что размер зоны пропорционален размеру спрайта
-            Debug.Log($"Updated sprite scale: {targetScale.x}");
         }
 
         private void LateUpdate()
