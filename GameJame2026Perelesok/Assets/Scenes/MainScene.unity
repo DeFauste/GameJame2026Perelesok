@@ -213,6 +213,8 @@ MonoBehaviour:
   onButton: {fileID: 21300000, guid: ba75ae56d0a82f242aa3ddcaf612ce8a, type: 3}
   SoundHover: UI_hover
   SoundClick: UI_buttonPressed
+  hoverScaleFactor: 1.1
+  scaleDuration: 0.12
 --- !u!1001 &619082879
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -221,6 +223,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1968845733011487157, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5905754377068640614, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
       propertyPath: _zone
       value: 
@@ -635,6 +641,8 @@ MonoBehaviour:
   onButton: {fileID: 21300000, guid: ba75ae56d0a82f242aa3ddcaf612ce8a, type: 3}
   SoundHover: UI_hover
   SoundClick: UI_buttonPressed
+  hoverScaleFactor: 1.1
+  scaleDuration: 0.12
 --- !u!114 &914494551 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5527202996969450970, guid: 5e96473b279be6a4abdbd5af80ea7782, type: 3}
@@ -801,7 +809,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7228325960157920083, guid: e3edc739dcfadd348a02cb20017096fc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1548891542}
   m_SourcePrefab: {fileID: 100100000, guid: e3edc739dcfadd348a02cb20017096fc, type: 3}
 --- !u!114 &1022080938 stripped
 MonoBehaviour:
@@ -814,6 +825,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1100982069 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7228325960157920083, guid: e3edc739dcfadd348a02cb20017096fc, type: 3}
+  m_PrefabInstance: {fileID: 995419479}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1396000251
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,12 +914,28 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 805230544698206303, guid: e3edc739dcfadd348a02cb20017096fc, type: 3}
   m_PrefabInstance: {fileID: 995419479}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1100982069}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae3c20e34aabfe147b70c1368e02551d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WalkingZoneScaler
+--- !u!114 &1548891542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100982069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ab49c024650d414b9b266d99c00c25f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpikeController
+  _small_spike: {fileID: 3838066170625569933, guid: 3ff73ea6b5aaa374b9a01b3608c842e6, type: 3}
+  _big_spike: {fileID: 6939523394660455322, guid: df9d8609db96c5d40835eba0a94b28f7, type: 3}
+  _laser: {fileID: 632511322520256563, guid: d4471e0d2f1e22e4c9eaafbb44ef2d63, type: 3}
+  _calculateElipce: {fileID: 0}
 --- !u!1 &1948103638
 GameObject:
   m_ObjectHideFlags: 0

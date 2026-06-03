@@ -5,11 +5,8 @@ using UnityEngine;
 
 public class Laser : SpikeCast
 {
-    [SerializeField] private Vector2 _colliderSize = Vector2.one;
-    [SerializeField] private Vector2 _colliderCenter = Vector2.down;
     [SerializeField] private List<Sprite> _laser;
-    [SerializeField] private float _castTime = 1;
-    [SerializeField] private float _castDelay = 1;
+
 
     private SpriteRenderer _spikeRender;
     private bool _isHit = false;

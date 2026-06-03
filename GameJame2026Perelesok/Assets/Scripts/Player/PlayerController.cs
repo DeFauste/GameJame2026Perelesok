@@ -26,13 +26,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private WalkingZoneScaler _zone;
     [SerializeField] private Vector2 _colliderSize = Vector2.one;
     [SerializeField] private Vector2 _colliderCenter = Vector2.down;
-    
+    [SerializeField] private Vector2 _zoneCenter;
+
     private Movement _playerMove;
     private Animation _playerAnim;
-    private bool _isGameRunning = true;
     private float _inputTimer;
 
-    public bool IsGameRunning { set { _isGameRunning = value; } }
 
     void Awake()
     {
@@ -41,12 +40,9 @@ public class PlayerController : MonoBehaviour
         ChangeWalkingZone(1);
     }
 
-    void Update()
+    private void Update()
     {
-        if (_isGameRunning)
-        {
-            Tick();
-        }
+        Tick();
     }
 
     public bool CollisionDetection(Vector2 size, Vector2 center)
@@ -60,7 +56,7 @@ public class PlayerController : MonoBehaviour
     public void Tick()
     {
         Vector2 move = MovementInput();
-        _playerMove.Move(move);
+        _playerMove.Move(move * Time.deltaTime);
         _playerMove.LayerCalculation();
         _playerMove.Scaler();
         _playerAnim.PlayAnimation(move);
@@ -124,7 +120,10 @@ public class PlayerController : MonoBehaviour
 
     private bool Collisin_X(float halfSize, float center)
     {
-        if (transform.position.x + _colliderSize.x + _colliderCenter.x > center - halfSize || transform.position.x - _colliderSize.x + _colliderCenter.x < center + halfSize)
+        // <summary>
+        // if player.x collider pos + right limit > 
+        // </summary>
+        if (transform.position.x + _colliderSize.x + _colliderCenter.x > center - halfSize && transform.position.x - _colliderSize.x + _colliderCenter.x < center + halfSize)
             return true;
         else
             return false;
@@ -132,7 +131,7 @@ public class PlayerController : MonoBehaviour
 
     private bool Collisin_Y(float halfSize, float center)
     {
-        if (transform.position.y + _colliderSize.y + _colliderCenter.y > center - halfSize || transform.position.y - _colliderSize.y + _colliderCenter.y < center + halfSize)
+        if (transform.position.y + _colliderSize.y + _colliderCenter.y > center - halfSize && transform.position.y - _colliderSize.y + _colliderCenter.y < center + halfSize)
             return true;
         else
             return false;

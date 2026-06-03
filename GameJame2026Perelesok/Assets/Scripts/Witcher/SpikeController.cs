@@ -24,22 +24,29 @@ public class SpikeController : MonoBehaviour
     {
         if (Input.GetKeyDown("h"))
         {
-            RandomSpawnDamagers(2, 0, 0, 1, 1, 1);
+            RandomSpawnSmallPeaks(2, 1);
+            RandomSpawnBigPeaks(1, 1);
         }
     }
 
-    public void RandomSpawnDamagers(int smallSpike, int bigSpike, int laser, float smallSpikeDuration, float bigSpikeDuration, float laserDuration)
+    public void RandomSpawnSmallPeaks(int smallSpike, float smallSpikeDuration)
     {
         for (int i = 0; i < smallSpike; i++)
         {
             SpawnSpike(GetRandomPosition(), _small_spike, smallSpikeDuration);
         }
+    }
 
+    public void RandomSpawnBigPeaks(int bigSpike, int bigSpikeDuration)
+    {
         for (int i = 0; i < bigSpike; i++)
         {
             SpawnSpike(GetRandomPosition(), _big_spike, bigSpikeDuration);
         }
+    }
 
+    public void RandomSpawnLaser(int laser, float laserDuration)
+    {
         for (int i = 0; i < laser; i++)
         {
             SpawnSpike(GetRandomPosition(), _laser, laserDuration);
@@ -56,8 +63,8 @@ public class SpikeController : MonoBehaviour
 
     private Vector2 GetRandomPosition()
     {
-        float rand_Y = Random.value * (_calculateElipce.GetScales().y * 2) - _calculateElipce.GetScales().y;
-        float rand_X = Random.value * (_calculateElipce.CalculateElipce_X(rand_Y) * 2) - _calculateElipce.CalculateElipce_X(rand_Y);
+        float rand_Y = (Random.value * (_calculateElipce.GetScales().y * 2)) - _calculateElipce.GetScales().y;
+        float rand_X = (Random.value * (_calculateElipce.CalculateElipce_X(rand_Y) * 2)) - _calculateElipce.CalculateElipce_X(rand_Y);
         return new Vector2(rand_X, rand_Y);
     }
 }
