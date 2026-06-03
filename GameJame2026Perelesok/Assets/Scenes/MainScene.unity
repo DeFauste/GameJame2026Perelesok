@@ -227,21 +227,25 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2895518397207853268, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
+      propertyPath: _horizontalSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5905754377068640614, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
       propertyPath: _zone
       value: 
       objectReference: {fileID: 1548891541}
     - target: {fileID: 5905754377068640614, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
       propertyPath: _colliderSize.x
-      value: 0.5
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 5905754377068640614, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
       propertyPath: _colliderSize.y
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5905754377068640614, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
       propertyPath: _colliderCenter.y
-      value: -0.3
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5977712526657036015, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
       propertyPath: m_LocalPosition.x
@@ -758,6 +762,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 3.3
       objectReference: {fileID: 0}
+    - target: {fileID: 2798672077755484031, guid: e3edc739dcfadd348a02cb20017096fc, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4126198048798585360, guid: e3edc739dcfadd348a02cb20017096fc, type: 3}
       propertyPath: m_LocalScale.y
       value: 1
@@ -825,6 +833,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1072030338 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2895518397207853268, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
+  m_PrefabInstance: {fileID: 619082879}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65499f2c0b5e7e44b647c0d6233a729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Movement
 --- !u!1 &1100982069 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7228325960157920083, guid: e3edc739dcfadd348a02cb20017096fc, type: 3}
@@ -935,7 +954,7 @@ MonoBehaviour:
   _small_spike: {fileID: 3838066170625569933, guid: 3ff73ea6b5aaa374b9a01b3608c842e6, type: 3}
   _big_spike: {fileID: 6939523394660455322, guid: df9d8609db96c5d40835eba0a94b28f7, type: 3}
   _laser: {fileID: 632511322520256563, guid: d4471e0d2f1e22e4c9eaafbb44ef2d63, type: 3}
-  _calculateElipce: {fileID: 0}
+  _calculateElipce: {fileID: 1072030338}
 --- !u!1 &1948103638
 GameObject:
   m_ObjectHideFlags: 0

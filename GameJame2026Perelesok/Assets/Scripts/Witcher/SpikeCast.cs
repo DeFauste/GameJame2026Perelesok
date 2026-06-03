@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,25 +8,24 @@ public class SpikeCast : MonoBehaviour
     [SerializeField] protected Vector2 _colliderCenter = Vector2.down;
     [SerializeField] protected float _castTime = 1;
     [SerializeField] protected float _castDelay = 1;
-    [SerializeField] private List<Sprite> _spike;
 
     private Animator _animator;
+    protected bool _isHit = false;
 
-    private SpriteRenderer _spikeRender;
-    private bool _isHit = false;
+    public bool IsHit { get { Destroy(gameObject); return _isHit; } }
 
     private void Awake()
     {
-        _spikeRender = GetComponentInChildren<SpriteRenderer>();
         _animator = GetComponent<Animator>();
     }
 
     virtual public IEnumerator CastCorutine(float multypyer)
     {
         _animator.speed = multypyer;
-        _animator.Play("AttackAnimation");
-
+        _animator.Play("SpikeShow");
         yield return new WaitForSecondsRealtime(_castDelay * multypyer);
+
+        _animator.Play("AttackAinmation");
 
         for (float i = 0; i < _castTime; i += Time.deltaTime)
         {
@@ -36,7 +34,6 @@ public class SpikeCast : MonoBehaviour
             if (CheckForCollision())
             {
                 _isHit = true;
-                Debug.Log("hitted");
             }
 
             yield return new WaitForSecondsRealtime(Time.deltaTime);
@@ -49,12 +46,6 @@ public class SpikeCast : MonoBehaviour
             yield return new WaitForSecondsRealtime(_castDelay * multypyer);
         }
 
-        if (_isHit)
-        {
-            yield break;
-        }
-
-        Destroy(gameObject);
         yield return null;
     }
 
@@ -65,22 +56,6 @@ public class SpikeCast : MonoBehaviour
             return true;
         else
             return false;
-    }
-
-    private void SpikeAnimationCicle(float time)
-    {
-        for (float i = 0; i < time; i += Time.deltaTime)
-        {
-            _spikeRender.sprite = _spike[(int)(i / time * _spike.Count)];
-        }
-    }
-
-    private void ReverseSpikeAnimationCicle(float time)
-    {
-        for (float i = time * (-1); i < 0; i += Time.deltaTime)
-        {
-            _spikeRender.sprite = _spike[(int)(i / time * (_spike.Count - 1)) * (-1)];
-        }
     }
 
     protected void DrawCollider(float duration)

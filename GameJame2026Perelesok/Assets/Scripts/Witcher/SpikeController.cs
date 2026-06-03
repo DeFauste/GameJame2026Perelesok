@@ -26,39 +26,43 @@ public class SpikeController : MonoBehaviour
         {
             RandomSpawnSmallPeaks(2, 1);
             RandomSpawnBigPeaks(1, 1);
+            RandomSpawnLaser(1, 1, new Vector2(5, 0));
         }
     }
 
-    public void RandomSpawnSmallPeaks(int smallSpike, float smallSpikeDuration)
+    public void RandomSpawnSmallPeaks(int smallSpikeAmount, float smallSpikeDuration)
     {
-        for (int i = 0; i < smallSpike; i++)
+        for (int i = 0; i < smallSpikeAmount; i++)
         {
             SpawnSpike(GetRandomPosition(), _small_spike, smallSpikeDuration);
         }
     }
 
-    public void RandomSpawnBigPeaks(int bigSpike, int bigSpikeDuration)
+    public void RandomSpawnBigPeaks(int bigSpikeAmount, int bigSpikeDuration)
     {
-        for (int i = 0; i < bigSpike; i++)
+        for (int i = 0; i < bigSpikeAmount; i++)
         {
             SpawnSpike(GetRandomPosition(), _big_spike, bigSpikeDuration);
         }
     }
 
-    public void RandomSpawnLaser(int laser, float laserDuration)
+    public void RandomSpawnLaser(int laserAmount, float laserDuration, Vector2 eyePosition)
     {
-        for (int i = 0; i < laser; i++)
+        for (int i = 0; i < laserAmount; i++)
         {
-            SpawnSpike(GetRandomPosition(), _laser, laserDuration);
+            Laser laser = SpawnSpike(GetRandomPosition(), _laser, laserDuration).GetComponent<Laser>();
+            laser.Pose(eyePosition);
         }
     }
 
-    private void SpawnSpike(Vector2 position, GameObject damager, float durationMultypyer)
+    private GameObject SpawnSpike(Vector2 position, GameObject damager, float durationMultypyer)
     {
         GameObject spike = Instantiate(damager);
 
         spike.transform.position = new Vector3(position.x, position.y, position.y);
         StartCoroutine(spike.GetComponent<SpikeCast>().CastCorutine(durationMultypyer));
+
+        return spike;
     }
 
     private Vector2 GetRandomPosition()

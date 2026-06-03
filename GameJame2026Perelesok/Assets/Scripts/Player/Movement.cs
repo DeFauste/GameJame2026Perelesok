@@ -24,14 +24,14 @@ public class Movement : MonoBehaviour
     {
         Vector3 velocity = new Vector3(move.x * _horizontalSpeed, move.y * _verticalSpeed, 0);
         Vector3 new_pos = new Vector3((_player.position + velocity).x, (_player.position + velocity).y, 0);
-        float distance = ElipceFormula(new_pos - _zero);
+        float distance = ElipceFormula(new_pos - _zero - new Vector3(0, _hight * _elipseMultyplyer, 0));
         if (distance < 1)
         {
             _player.position = new_pos;
         }
         else if (distance >= 1)
         {
-            _player.position += (_zero - _player.position) * _horizontalSpeed * _verticalSpeed;
+            _player.position += (_zero - _player.position + new Vector3(0, _hight * _elipseMultyplyer)) * 0.01f;
         }
         DrawElipce(.1f);
     }
@@ -66,10 +66,10 @@ public class Movement : MonoBehaviour
 
     private void DrawElipce(float duration)
     {
-        Debug.DrawLine(new Vector3(0, CalculateElipce_Y(0), _player.position.z) + _zero,
-                       new Vector3(0, CalculateElipce_Y(0) * (-1), _player.position.z) + _zero, Color.red, duration);
-        Debug.DrawLine(new Vector3(CalculateElipce_X(0), 0, _player.position.z) + _zero,
-                       new Vector3(CalculateElipce_X(0) * (-1), 0, _player.position.z) + _zero, Color.red, duration);
+        Debug.DrawLine(new Vector3(0, CalculateElipce_Y(0), _player.position.z) + _zero + new Vector3(0, _hight * _elipseMultyplyer, 0),
+                       new Vector3(0, CalculateElipce_Y(0) * (-1), _player.position.z) + _zero + new Vector3(0, _hight * _elipseMultyplyer, 0), Color.red, duration);
+        Debug.DrawLine(new Vector3(CalculateElipce_X(0), 0, _player.position.z) + _zero + new Vector3(0, _hight * _elipseMultyplyer, 0),
+                       new Vector3(CalculateElipce_X(0) * (-1), 0, _player.position.z) + _zero + new Vector3(0, _hight * _elipseMultyplyer, 0), Color.red, duration);
     }
 
     public float CalculateElipce_X(float y)

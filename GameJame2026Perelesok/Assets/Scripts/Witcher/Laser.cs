@@ -1,68 +1,58 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Laser : SpikeCast
 {
-    [SerializeField] private List<Sprite> _laser;
-
-
-    private SpriteRenderer _spikeRender;
-    private bool _isHit = false;
-
-    public bool IsHit {  get { return _isHit; } }
+    private Animator _animator;
 
     private void Awake()
     {
-        _spikeRender = GetComponentInChildren<SpriteRenderer>();
-        DrawCollider(_castTime + _castDelay);
+        _animator = GetComponent<Animator>();
     }
 
     override public IEnumerator CastCorutine(float multypyer)
     {
+        _animator.speed = 1;
         for (int i = 0; i < 3; i++)
         {
-            LaserAnimationCicle(_castDelay * multypyer / 3);
+            _animator.Play("ShowLaser");
+            yield return new WaitForSecondsRealtime(_castDelay * multypyer / 3 / 2);
+            _animator.Play("RemoveLaser");
+            yield return new WaitForSecondsRealtime(_castDelay * multypyer / 3 / 2);
         }
 
-        for (float i = 0; i < _castTime; i += Time.deltaTime)
+        _animator.Play("ShowLaser");
+
+        for (float i = 0; i < _castTime * multypyer; i += Time.deltaTime)
         {
-            _spikeRender.sprite = _laser[(int)(Mathf.Min(i * 4 / _castTime, 1) * 5)];
+            DrawCollider(Time.deltaTime * 2);
 
             if (CheckForCollision())
+            {
                 _isHit = true;
+                break;
+            }
 
-            yield return new WaitForSeconds(Time.deltaTime);
+            yield return new WaitForSecondsRealtime(Time.deltaTime);
         }
 
         if (!_isHit)
         {
-            for (float i = 0; i < 0.1 * multypyer; i += Time.deltaTime)
-            {
-                _spikeRender.sprite = _laser[(int)(i / 0.1f * (_laser.Count - 5)) + 5];
-            }
+            _animator.Play("RemoveLaser");
         }
-
-        if (_isHit)
-        {
-            yield break;
-        }
-
-        Destroy(gameObject);
-        yield return null;
     }
 
-    public void Pose(Vector2 place, Vector2 eyea)
+    public void Pose(Vector2 eye)
     {
-        Vector2 buf = (place + eyea) / 2;
-    }
-
-    private void LaserAnimationCicle(float time)
-    {
-        for (float i = 0; i < time; i += Time.deltaTime)
+        Debug.Log(transform.position);
+        Vector2 place = new Vector2(transform.position.x, transform.position.y);
+        Vector2 buf = (place + eye) / 2;
+        float angle = Mathf.Atan2(buf.y, buf.x);
+        if (place.x > 0)
         {
-            _spikeRender.sprite = _laser[(int)((i/time) * _laser.Count)];
+            angle *= -1;
         }
+        transform.position = buf;
+        transform.rotation *= Quaternion.Euler(angle, 0, 0);
     }
 }
