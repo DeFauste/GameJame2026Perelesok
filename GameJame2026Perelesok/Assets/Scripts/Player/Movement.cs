@@ -35,7 +35,7 @@ public class Movement : MonoBehaviour
         }
         else if (distance >= 1)
         {
-            _player.position += (_zero - _player.position + new Vector3(0, (_hight + _hightCorrection) * _elipseMultyplyer)) * 0.01f;
+            _player.position += (_zero - _player.position + new Vector3(0, (_hight + _hightCorrection) * _elipseMultyplyer)) * (distance - 1);
         }
         DrawElipce(.1f);
     }
