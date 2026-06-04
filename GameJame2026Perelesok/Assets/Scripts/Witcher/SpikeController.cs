@@ -1,6 +1,7 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class SpikeController : MonoBehaviour
 {
@@ -85,4 +86,18 @@ public class SpikeController : MonoBehaviour
         Debug.Log(halfRange * 2 + " | " + rand_Y);
         return new Vector2(rand_X, rand_Y);
     }
+
+    //private Vector2 GetRandomPosition()
+    //{
+    //    Vector2 playerPosition = (Vector2)_calculateElipce.CurrentPosition;
+    //    float halfRange = 0.5f;
+    //    playerPosition.x += UnityEngine.Random.value * halfRange * 2 - halfRange;
+    //    playerPosition.y += UnityEngine.Random.value * halfRange - halfRange;
+    //    float distace = _calculateElipce.ElipceFormula(playerPosition) - 1;
+    //    if (distace > 0)
+    //    {
+    //        playerPosition += ((Vector2)_calculateElipce.Zero - playerPosition + new Vector2(0, halfRange)) * distace;
+    //    }
+    //    return playerPosition;
+    //}
 }
