@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private const string _right = "d";
     private const string _forward = "w";
     private const string _backward = "s";
+    private const string _attack = "space";
 
     [SerializeField] private float _multyplayer = 1.1f;
     [SerializeField] private WalkingZoneScaler _zone;
@@ -16,14 +17,19 @@ public class PlayerController : MonoBehaviour
 
     private Movement _playerMove;
     private Animation _playerAnim;
-    private float _inputTimer;
-
+    private bool _isDead = false;
 
     void Awake()
     {
         _playerMove = GetComponent<Movement>();
         _playerAnim = GetComponentInChildren<Animation>();
         ChangeWalkingZone(1);
+        SpikeController.ActionHitPlayer += DeathAnimation;
+    }
+
+    private void OnDestroy()
+    {
+        SpikeController.ActionHitPlayer -= DeathAnimation;
     }
 
     private void Update()
@@ -45,7 +51,7 @@ public class PlayerController : MonoBehaviour
         _playerMove.Move(move * Time.deltaTime);
         _playerMove.LayerCalculation();
         _playerMove.Scaler();
-        _playerAnim.PlayAnimation(move);
+        _playerAnim.PlayAnimation(move, Input.GetKey(_attack), _isDead);
 
         ChangeWalkingZone(1 - Time.timeSinceLevelLoad/100);
         DrawCollider(Time.deltaTime * 2);
@@ -72,6 +78,11 @@ public class PlayerController : MonoBehaviour
         }
 
         return move;
+    }
+
+    private void DeathAnimation()
+    {
+        _isDead = true;
     }
 
     public void ChangeWalkingZone(float zoneMultiplyer)

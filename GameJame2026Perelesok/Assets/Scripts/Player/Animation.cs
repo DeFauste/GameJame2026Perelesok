@@ -3,58 +3,52 @@ using System.Collections.Generic;
 
 public class Animation : MonoBehaviour
 {
-    [SerializeField] private List<Sprite> _idle;
-    [SerializeField] private List<Sprite> _walk_right;
-    [SerializeField] private List<Sprite> _walk_left;
-    [SerializeField] private List<Sprite> _walk_forward;
-    [SerializeField] private List<Sprite> _walk_backward;
-    [SerializeField] private List<Sprite> _attack;
-    [SerializeField] private List<Sprite> _death;
-    private SpriteRenderer _player;
-    private int _state = 0;
-    private float _timeDelay = 0;
+    [SerializeField] private float _attackTime = .5f;
+
+    private Animator _animator;
+    private float _attackTimer;
 
     private void Awake()
     {
-        _player = GetComponentInChildren<SpriteRenderer>();
+        _animator = GetComponentInChildren<Animator>();
     }
 
     public void PlayAnimation(Vector2 inputs, bool attack, bool death)
     {
         if (death)
         {
-
+            _animator.Play("Death");
         }
-        else if(attack)
+        else if (attack || _attackTimer > 0)
         {
-
+            _animator.Play("Attack");
         }
-        else if(inputs == Vector2.zero)
+        else if (inputs == Vector2.zero)
         {
-            _player.sprite = _idle[_state % _idle.Count];
+            _animator.Play("Idle");
         }
         else if (inputs.y != 0)
         {
-            if (inputs.y > 0)
-                _player.sprite = _walk_backward[_state % _walk_backward.Count];
+            if (inputs.y < 0)
+                _animator.Play("Forward");
             else
-                _player.sprite = _walk_forward[_state % _walk_forward.Count];
+                _animator.Play("Backward");
         }
         else if (inputs.x != 0)
         {
             if (inputs.x > 0)
-                _player.sprite = _walk_right[_state % _walk_right.Count];
+                _animator.Play("Right");
             else
-                _player.sprite = _walk_left[_state % _walk_left.Count];
+                _animator.Play("Left");
         }
 
-
-        if (_timeDelay >= 0.2)
+        if (attack)
         {
-            _state = (_state + 1) % 6;
-            _timeDelay = 0;
+            _attackTimer = _attackTime;
         }
-
-        _timeDelay += Time.deltaTime;
+        if (_attackTimer > 0)
+        {
+            _attackTimer -= Time.deltaTime;
+        }
     }
 }
