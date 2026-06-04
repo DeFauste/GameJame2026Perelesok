@@ -1,83 +1,50 @@
 ﻿using UnityEngine;
 
-namespace Commons
+/// <summary>
+/// Базовый Singleton для MonoBehaviour.
+/// </summary>
+/// <typeparam name="T">Тип класса-одиночки (должен наследовать MonoBehaviour).</typeparam>
+public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
 {
-    public class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
+    private static T _instance;
+
+    /// <summary>
+    /// Глобальный доступ к единственному экземпляру.
+    /// Если экземпляр отсутствует, он будет создан автоматически.
+    /// </summary>
+    public static T Instance
     {
-        private static T _instance;
-        private static readonly object _lock = new object();
-        private static bool _applicationIsQuitting = false;
-
-        public static T Instance
-        {
-            get
-            {
-                if (_applicationIsQuitting)
-                {
-                    Debug.LogWarning("[Singleton] Instance '" + typeof(T) +
-                                     "' already destroyed on application quit." +
-                                     " Won't create again - returning null.");
-                    return null;
-                }
-
-                lock (_lock)
-                {
-                    if (_instance == null)
-                    {
-                        _instance = (T)FindObjectOfType(typeof(T));
-
-                        if (FindObjectsOfType(typeof(T)).Length > 1)
-                        {
-                            Debug.LogError("[Singleton] Something went really wrong " +
-                                           " - there should never be more than 1 singleton!" +
-                                           " Reopening the scene might fix it.");
-                            return _instance;
-                        }
-
-                        if (_instance == null)
-                        {
-                            GameObject singleton = new GameObject();
-                            _instance = singleton.AddComponent<T>();
-                            singleton.name = "(singleton) " + typeof(T).ToString();
-
-                            Debug.Log("[Singleton] An instance of " + typeof(T) +
-                                      " is needed in the scene, so '" + singleton +
-                                      "' was created with DontDestroyOnLoad.");
-                        }
-                        else
-                        {
-                            Debug.Log("[Singleton] Using instance already created: " +
-                                      _instance.gameObject.name);
-                        }
-                    }
-
-                    return _instance;
-                }
-            }
-        }
-
-        protected virtual void Awake()
+        get
         {
             if (_instance == null)
             {
-                _instance = this as T;
-                DontDestroyOnLoad(gameObject);
-            }
-            else if (_instance != this)
-            {
-                Destroy(gameObject);
-            }
-        }
+                // Пытаемся найти существующий объект в сцене
+                _instance = FindObjectOfType<T>();
 
-        protected virtual void OnApplicationQuit()
-        {
-            _applicationIsQuitting = true;
+                // Если не найден – создаём новый GameObject с нужным компонентом
+                if (_instance == null)
+                {
+                    GameObject singletonGO = new GameObject(typeof(T).Name + " (Singleton)");
+                    _instance = singletonGO.AddComponent<T>();
+                }
+            }
+            return _instance;
         }
+    }
 
-        protected virtual void OnDestroy()
+    /// <summary>
+    /// При активации проверяем, нет ли уже другого экземпляра.
+    /// При необходимости делаем объект неразрушаемым между сценами.
+    /// </summary>
+    protected virtual void Awake()
+    {
+        if (_instance == null)
         {
-            _applicationIsQuitting = true;
-            Destroy(gameObject);
+            _instance = this as T;
+        }
+        else if (_instance != this)
+        {
+            Destroy(gameObject); // уничтожаем дубликат
         }
     }
 }

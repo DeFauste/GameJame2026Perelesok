@@ -1,5 +1,4 @@
 ﻿using System;
-using Commons;
 using UnityEngine;
 using Wizards.Behaviours;
 
@@ -17,7 +16,7 @@ namespace Wizards
         [SerializeField]
         private StageWizard _currentStage = StageWizard.None; // Текущая стадия поведения волшебника
         public StageWizard CurrentStage => _currentStage; // Текущая стадия поведения волшебника
-
+        
         private void Start()
         {
             ChangeStage(StageWizard.Intro);

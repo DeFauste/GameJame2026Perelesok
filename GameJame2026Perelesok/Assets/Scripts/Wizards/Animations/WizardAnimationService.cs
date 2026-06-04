@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using CameraEffects;
-using Commons;
 using UnityEngine;
 
 namespace Wizards.Animations
