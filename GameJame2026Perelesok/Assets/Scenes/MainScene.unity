@@ -212,6 +212,56 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4236006987340794316, guid: 239d257730120924a930d4d3b138edb8, type: 3}
   m_PrefabInstance: {fileID: 37574329}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &314677061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 314677062}
+  - component: {fileID: 314677063}
+  m_Layer: 0
+  m_Name: SpawnShine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &314677062
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314677061}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.09863, y: 3.02336, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &314677063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314677061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df17eeb0be75471c8bf5a1f3d1e92a19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player.SpawnShine
+  spawnPoint: {fileID: 619082880}
+  _prefabMiniShine: {fileID: 1221529270147121795, guid: 398c738806109b143a6b925d8491079d, type: 3}
+  _prefabBigShine: {fileID: 1221529270147121795, guid: 398c738806109b143a6b925d8491079d, type: 3}
+  _useWorldSpace: 1
+  _matchRotation: 1
+  _matchScale: 0
 --- !u!1 &494258136 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3419191215218641312, guid: 5e96473b279be6a4abdbd5af80ea7782, type: 3}
@@ -324,18 +374,6 @@ PrefabInstance:
       propertyPath: _zone
       value: 
       objectReference: {fileID: 1548891541}
-    - target: {fileID: 5905754377068640614, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
-      propertyPath: _colliderSize.x
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5905754377068640614, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
-      propertyPath: _colliderSize.y
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5905754377068640614, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
-      propertyPath: _colliderCenter.y
-      value: -0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 5977712526657036015, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -380,15 +418,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6826655141860528179, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
+--- !u!4 &619082880 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 123804493693871995, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
+  m_PrefabInstance: {fileID: 619082879}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2013,9 +2052,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4830499938686370960, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: isBigSpawning
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830499938686370960, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
       propertyPath: _lazerSpawnPont
       value: 
       objectReference: {fileID: 96521435}
+    - target: {fileID: 4830499938686370960, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: isLaserSpawning
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4830499938686370960, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
       propertyPath: isSmallSpawning
       value: 1
@@ -2257,3 +2304,4 @@ SceneRoots:
   - {fileID: 37574329}
   - {fileID: 497457872099904276}
   - {fileID: 2085784439}
+  - {fileID: 314677062}
