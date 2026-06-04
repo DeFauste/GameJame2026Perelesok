@@ -28,7 +28,7 @@ namespace Wizards.Behaviours
         {
             if (stage == StageWizard.Intro)
             {
-                _introStageController.StartStage();
+                _introStageController?.StartStage();
             }
             else if (stage == StageWizard.FirstStage)
             {

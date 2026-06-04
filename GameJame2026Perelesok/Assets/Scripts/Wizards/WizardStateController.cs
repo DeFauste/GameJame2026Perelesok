@@ -14,6 +14,7 @@ namespace Wizards
 
         public CompressedDirection CurrentDirectionCompress => _currentDirectionCompress;
 
+        [SerializeField]
         private StageWizard _currentStage = StageWizard.None; // Текущая стадия поведения волшебника
         public StageWizard CurrentStage => _currentStage; // Текущая стадия поведения волшебника
 
@@ -46,10 +47,8 @@ namespace Wizards
         {
             if (CurrentStage != stage)
             {
-
                 ActionStage?.Invoke(stage);
                 _currentStage = stage;
-                Debug.Log($"Текущая стадия волшебника: {CurrentStage}");
             }
         }
 

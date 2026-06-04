@@ -15,7 +15,7 @@ namespace DefaultNamespace
 
         public void StartGame()
         {
-            wizardStateController.ChangeStage(StageWizard.FirstStage);
+            // wizardStateController.ChangeStage(StageWizard.FirstStage);
         }
     }
 }

@@ -499,54 +499,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &786792727
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 786792728}
-  - component: {fileID: 786792729}
-  m_Layer: 0
-  m_Name: SpikeController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &786792728
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 786792727}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1095509053}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &786792729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 786792727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ab49c024650d414b9b266d99c00c25f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpikeController
-  _small_spike: {fileID: 3838066170625569933, guid: 3ff73ea6b5aaa374b9a01b3608c842e6, type: 3}
-  _big_spike: {fileID: 6939523394660455322, guid: df9d8609db96c5d40835eba0a94b28f7, type: 3}
-  _laser: {fileID: 632511322520256563, guid: d4471e0d2f1e22e4c9eaafbb44ef2d63, type: 3}
-  _calculateElipce: {fileID: 0}
 --- !u!1001 &914494547
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1001,11 +953,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1095509053 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-  m_PrefabInstance: {fileID: 1905682232}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1396000251
 GameObject:
   m_ObjectHideFlags: 0
@@ -1107,251 +1054,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8629e481ad30bf5448d0d0b0b122b1d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
---- !u!212 &1840991649 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 2041280109186774292, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-  m_PrefabInstance: {fileID: 1905682232}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &1905682232
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3.9325888
-      objectReference: {fileID: 0}
-    - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3.6351256
-      objectReference: {fileID: 0}
-    - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.7478
-      objectReference: {fileID: 0}
-    - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5.44
-      objectReference: {fileID: 0}
-    - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2139049608976223866, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: _winStageController
-      value: 
-      objectReference: {fileID: 1905682252}
-    - target: {fileID: 2139049608976223866, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: _loseStageController
-      value: 
-      objectReference: {fileID: 1905682247}
-    - target: {fileID: 2139049608976223866, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: _introStageController
-      value: 
-      objectReference: {fileID: 1905682238}
-    - target: {fileID: 2139049608976223866, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: _wizardStateController
-      value: 
-      objectReference: {fileID: 1905682251}
-    - target: {fileID: 5486295611801366254, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5486295611801366254, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: NameMusicStage
-      value: Music_Battle
-      objectReference: {fileID: 0}
-    - target: {fileID: 5486295611801366254, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: _spikeTimeSpawn
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5486295611801366254, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: playerController
-      value: 
-      objectReference: {fileID: 1833432472}
-    - target: {fileID: 5486295611801366254, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: timeFullCompression
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6494605823974619795, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: _cameraShake
-      value: 
-      objectReference: {fileID: 963194229}
-    - target: {fileID: 6494605823974619795, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: timeWaitFists
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7783262939728060127, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      propertyPath: m_Name
-      value: Wizard
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 44419971802758058, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 786792728}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7194836305894753642, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1905682238}
-    - targetCorrespondingSourceObject: {fileID: 7194836305894753642, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1905682247}
-    - targetCorrespondingSourceObject: {fileID: 7194836305894753642, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1905682252}
-  m_SourcePrefab: {fileID: 100100000, guid: f30083136430a6c4e99c2efb76847846, type: 3}
---- !u!212 &1905682233 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 5831717742100571301, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-  m_PrefabInstance: {fileID: 1905682232}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &1905682234 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 6420548289017049666, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-  m_PrefabInstance: {fileID: 1905682232}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1905682235 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4549629942407281379, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-  m_PrefabInstance: {fileID: 1905682232}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1905682236 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7037294486923218584, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-  m_PrefabInstance: {fileID: 1905682232}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1905682237 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7194836305894753642, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-  m_PrefabInstance: {fileID: 1905682232}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1905682238
+--- !u!114 &1833432475 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 2895518397207853268, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
+  m_PrefabInstance: {fileID: 619082879}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1905682237}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3253771a3b9c4d4b814673a58bcc5897, type: 3}
+  m_Script: {fileID: 11500000, guid: e65499f2c0b5e7e44b647c0d6233a729, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Wizards.Behaviours.Intro.WizardIntroStage
-  playerController: {fileID: 1833432472}
-  NameMusicStage: 
-  leftHand: {fileID: 1905682236}
-  rightHand: {fileID: 1905682235}
-  targetCompress: {fileID: 1980885929}
-  delayTimeCompression: 3
-  timeFullCompression: 10
-  percentTimeExpansion: 0.2
-  percentTimeExpansionDome: 0.4
-  minimalDistanceForTargetPercent: 0.1
-  spriteDomeToCompress: {fileID: 1905682234}
-  spriteCycleToCompress: {fileID: 1905682233}
---- !u!114 &1905682247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1905682237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e55d334d36b4cb5b785ae82dfaa9d52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Wizards.Behaviours.Lose.LoseStage
-  playerController: {fileID: 1833432472}
-  NameMusicStage: 
-  leftHand: {fileID: 1905682236}
-  rightHand: {fileID: 1905682235}
-  targetCompress: {fileID: 1980885929}
-  delayTimeCompression: 3
-  timeFullCompression: 10
-  percentTimeExpansion: 0.2
-  percentTimeExpansionDome: 0.2
-  minimalDistanceForTargetPercent: 0.5
-  spriteDomeToCompress: {fileID: 1905682234}
-  spriteCycleToCompress: {fileID: 1905682233}
-  _symbolSystem: {fileID: 314674580}
-  dissolveDuration: 1.5
-  tryUseCutoffShader: 1
-  cutoffPropertyName: _Cutoff
-  includeChildrenRenderers: 1
-  targetSpriteRenderer: {fileID: 1840991649}
-  targetSprite: {fileID: 21300000, guid: cabf198c9700ece41b559bb8d41e0c5f, type: 3}
-  disableOnComplete: 1
-  completeDelay: 0
---- !u!114 &1905682251 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3284348914494083746, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-  m_PrefabInstance: {fileID: 1905682232}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1905682237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8118387e5114281bc72f55dc3cb06de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Wizards.WizardStateController
---- !u!114 &1905682252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1905682237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66227a84baef49f5af1db1559df39cd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Wizards.Behaviours.Intro.WizardWinStage
-  playerController: {fileID: 1833432472}
-  NameMusicStage: 
-  leftHand: {fileID: 1905682236}
-  rightHand: {fileID: 1905682235}
-  targetCompress: {fileID: 1980885929}
-  delayTimeCompression: 3
-  timeFullCompression: 3
-  percentTimeExpansion: 0.2
-  percentTimeExpansionDome: 0.2
-  minimalDistanceForTargetPercent: 0.5
-  spriteDomeToCompress: {fileID: 1905682234}
-  spriteCycleToCompress: {fileID: 1905682233}
-  fadeDuration: 2
-  blinkSpeed: 3
+  m_EditorClassIdentifier: Assembly-CSharp::Movement
 --- !u!1 &1948103638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1402,11 +1115,207 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1980885929 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1729957758528070522, guid: f30083136430a6c4e99c2efb76847846, type: 3}
-  m_PrefabInstance: {fileID: 1905682232}
+--- !u!1001 &3064749633195312547
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 582993840614961851, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: m_Name
+      value: Wizard
+      objectReference: {fileID: 0}
+    - target: {fileID: 924839521065343054, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4535274072546672069, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830499938686370960, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830499938686370960, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1833432472}
+    - target: {fileID: 4870597298884145980, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.7478
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870597298884145980, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870597298884145980, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870597298884145980, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870597298884145980, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870597298884145980, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870597298884145980, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870597298884145980, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870597298884145980, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870597298884145980, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907524782951796974, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907524782951796974, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: _symbolSystem
+      value: 
+      objectReference: {fileID: 314674580}
+    - target: {fileID: 4907524782951796974, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1833432472}
+    - target: {fileID: 4907524782951796974, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: minimalDistanceForTargetPercent
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5637907026328670790, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5637907026328670790, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: NameMusicStage
+      value: 02
+      objectReference: {fileID: 0}
+    - target: {fileID: 5637907026328670790, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1833432472}
+    - target: {fileID: 5637907026328670790, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: minimalDistanceForTargetPercent
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6066199317341460308, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: _cameraShake
+      value: 
+      objectReference: {fileID: 963194229}
+    - target: {fileID: 6066199317341460308, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: timeWaitFists
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6066199317341460308, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: crossFadeDuration
+      value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7025000312612745930, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7025000312612745930, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: _winStageController
+      value: 
+      objectReference: {fileID: 3064749633195312551}
+    - target: {fileID: 7025000312612745930, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: _loseStageController
+      value: 
+      objectReference: {fileID: 3064749633195312549}
+    - target: {fileID: 7025000312612745930, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: firstStageController
+      value: 
+      objectReference: {fileID: 3064749633195312550}
+    - target: {fileID: 7025000312612745930, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: _introStageController
+      value: 
+      objectReference: {fileID: 3064749633195312548}
+    - target: {fileID: 7822325743139564391, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: _calculateElipce
+      value: 
+      objectReference: {fileID: 1833432475}
+    - target: {fileID: 9139278729220186331, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9139278729220186331, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: _symbolSystem
+      value: 
+      objectReference: {fileID: 314674580}
+    - target: {fileID: 9139278729220186331, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1833432472}
+    - target: {fileID: 9139278729220186331, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: minimalDistanceForTargetPercent
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+--- !u!114 &3064749633195312548 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5637907026328670790, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+  m_PrefabInstance: {fileID: 3064749633195312547}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3253771a3b9c4d4b814673a58bcc5897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Wizards.Behaviours.Intro.WizardIntroStage
+--- !u!114 &3064749633195312549 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4907524782951796974, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+  m_PrefabInstance: {fileID: 3064749633195312547}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e55d334d36b4cb5b785ae82dfaa9d52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Wizards.Behaviours.Lose.LoseStage
+--- !u!114 &3064749633195312550 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4830499938686370960, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+  m_PrefabInstance: {fileID: 3064749633195312547}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e78147e7471f4448a8ad3e9a9029d6a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Wizards.WizardFirstStage
+--- !u!114 &3064749633195312551 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9139278729220186331, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+  m_PrefabInstance: {fileID: 3064749633195312547}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66227a84baef49f5af1db1559df39cd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Wizards.Behaviours.Intro.WizardWinStage
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1420,5 +1329,5 @@ SceneRoots:
   - {fileID: 552309548}
   - {fileID: 619082879}
   - {fileID: 995419479}
-  - {fileID: 1905682232}
+  - {fileID: 3064749633195312547}
   - {fileID: 37574329}

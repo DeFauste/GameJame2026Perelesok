@@ -23,11 +23,11 @@ namespace Wizards.Animations
         [SerializeField] private Animator animator;
         [SerializeField] private bool dontDestroyOnLoad = true;
 
-        private MusicService  musicService;
-        
-        [Tooltip("Длительность перехода CrossFade (сек.)")]
-        [SerializeField] private float crossFadeDuration = 0.12f;
-        
+        private MusicService musicService;
+
+        [Tooltip("Длительность перехода CrossFade (сек.)")] [SerializeField]
+        private float crossFadeDuration = 0.12f;
+
         // Перечисление состояний анимации
         public enum AnimationState
         {
@@ -57,22 +57,21 @@ namespace Wizards.Animations
         private Dictionary<(StageNumber, AnimationState), int> animationHashMap;
 
         // Внутренные значения (локальные, чтение/реакция)
-        private StageNumber currentStage = StageNumber.First;
+        private StageNumber currentStage = StageNumber.None;
         private AnimationState currentState = AnimationState.Idle;
-
-        // События для внешних подписчиков
-        public Action<StageNumber> OnStageChanged { get; set; }
-        public Action<AnimationState> OnStateChanged { get; set; }
+        
         public Action<string> OnAnimationPlayed { get; set; }
 
         protected override void Awake()
         {
-            base.Awake();
+            InitializeAnimationMap();
+            
+            WizardStateController.Instance.ActionStage += HandleExternalStageChanged;
+            WizardStateController.Instance.ActionCompressedDirection += HandleCompressedDirectionChanged;            base.Awake();
 
             if (dontDestroyOnLoad)
                 DontDestroyOnLoad(gameObject);
 
-            InitializeAnimationMap();
 
             if (animator == null)
                 animator = GetComponent<Animator>();
@@ -89,23 +88,10 @@ namespace Wizards.Animations
             musicService = MusicService.Instance;
         }
 
-        private void OnEnable()
-        {
-            // Подписываемся на изменения стадии/состояния контроллера (реагируем, но не меняем контроллер)
-            if (WizardStateController.Instance != null)
-            {
-                WizardStateController.Instance.ActionStage += HandleExternalStageChanged;
-                WizardStateController.Instance.ActionCompressedDirection += HandleCompressedDirectionChanged;
-            }
-        }
-
         private void OnDisable()
         {
-            if (WizardStateController.Instance != null)
-            {
-                WizardStateController.Instance.ActionStage -= HandleExternalStageChanged;
-                WizardStateController.Instance.ActionCompressedDirection -= HandleCompressedDirectionChanged;
-            }
+            WizardStateController.Instance.ActionStage -= HandleExternalStageChanged;
+            WizardStateController.Instance.ActionCompressedDirection -= HandleCompressedDirectionChanged;
         }
 
         private void InitializeAnimationMap()
@@ -145,28 +131,11 @@ namespace Wizards.Animations
         // РЕАКЦИЯ: обновить internal currentStage и тихо перейти в Idle (без вызова OnStageChanged/OnStateChanged)
         private void HandleExternalStageChanged(StageWizard stage)
         {
-            var newStage = stage switch
-            {
-                StageWizard.None => StageNumber.None,
-                StageWizard.Intro => StageNumber.Intro,
-                StageWizard.FirstStage => StageNumber.First,
-                StageWizard.SecondStage => StageNumber.Second,
-                StageWizard.ThirdStage => StageNumber.Third,
-                StageWizard.Win => StageNumber.Win,
-                StageWizard.Lose => StageNumber.Lose,
-                _ => currentStage
-            };
+            var newStage = MapStage(stage);
 
             if (newStage == currentStage) return;
 
             currentStage = newStage;
-
-            // Переходим тихо в Idle (не дергаем OnStateChanged/OnStageChanged обратно в контроллер)
-            PlayAnimationSilentByStageState(currentStage, AnimationState.Idle);
-
-            // Уведомляем локальных подписчиков, что у сервиса изменилась стадия (опционально)
-            // ВАЖНО: это событие относится к сервису — оно НЕ меняет Stage в WizardStateController.
-            OnStageChanged?.Invoke(currentStage);
         }
 
         // Пример реакции на изменение "state" контроллера — здесь используем CompressedDirection как "state".
@@ -183,18 +152,6 @@ namespace Wizards.Animations
             {
                 PlayIdle();
             }
-        }
-
-        /// <summary>
-        /// Явно изменить состояние анимации и оповестить слушателей (генерирует OnStateChanged)
-        /// </summary>
-        public void ChangeAnimationState(AnimationState state)
-        {
-            if (currentState == state) return;
-
-            currentState = state;
-            PlayAnimationByCurrent();
-            OnStateChanged?.Invoke(currentState);
         }
 
         private void PlayAnimationByCurrent()
@@ -243,10 +200,11 @@ namespace Wizards.Animations
         {
             PlayAnimationSilentByStageState(currentStage, AnimationState.Idle);
         }
-        
+
         public void Intro()
         {
-            PlayAnimationSilentByStageState(currentStage, AnimationState.Intro);
+            var currentStageLocal = MapStage(WizardStateController.Instance.CurrentStage);
+            animator.CrossFade("Intro", crossFadeDuration);
             musicService.Play("Sound_EnemyLaugh_Intro");
         }
 
@@ -281,5 +239,17 @@ namespace Wizards.Animations
             yield return new WaitForSeconds(timeWait);
             WizardStateController.Instance.ChangeStage(StageWizard.FirstStage);
         }
+        
+        private StageNumber MapStage(StageWizard stage) => stage switch
+        {
+            StageWizard.None => StageNumber.None,
+            StageWizard.Intro => StageNumber.Intro,
+            StageWizard.FirstStage => StageNumber.First,
+            StageWizard.SecondStage => StageNumber.Second,
+            StageWizard.ThirdStage => StageNumber.Third,
+            StageWizard.Win => StageNumber.Win,
+            StageWizard.Lose => StageNumber.Lose,
+            _ => currentStage
+        };
     }
 }

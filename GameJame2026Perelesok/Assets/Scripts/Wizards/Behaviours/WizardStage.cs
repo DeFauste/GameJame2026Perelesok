@@ -65,6 +65,8 @@ namespace Wizards.Behaviours
 
         protected virtual void Start()
         {
+            _wizardStateController = WizardStateController.Instance;
+            
             if (targetCompress.transform == null)
             {
                 Debug.LogError("PointCompress не назначен в инспекторе!");
@@ -165,11 +167,9 @@ namespace Wizards.Behaviours
 
         public virtual void StartStage()
         {
-            _wizardStateController = WizardStateController.Instance;
             stageActive = true;
             compressionProgress = 0f; // Начинаем с полного расширения
             _wizardStateController.ChangeCompressedDirection(CompressedDirection.Compress);
-
             coroutines.Add(StartCoroutine(CompressionController()));
             Debug.Log($"Запущена стадия {_wizardStateController.CurrentStage}");
 
