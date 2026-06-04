@@ -21,8 +21,9 @@ namespace Player
 
         private void Start()
         {
-            SymbolSystem.OnAttackSuccess += () => Spawn(true, spawnPoint);
-            SymbolSystem.OnDefenceSuccess += () => Spawn(false, spawnPoint);
+            spawnPoint = GameObject.Find("PointSpawenShine").GetComponent<Transform>();
+            SymbolSystem.OnDefenceSuccess += () => Spawn(true, spawnPoint);
+            SymbolSystem.OnAttackSuccess += () => Spawn(false, spawnPoint);
         }
 
         private void OnValidate()
