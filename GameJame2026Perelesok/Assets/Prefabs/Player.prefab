@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2923028791133809140}
   - component: {fileID: 1968845733011487157}
+  - component: {fileID: 6062279433505997430}
   m_Layer: 0
   m_Name: knight1_idle front 1
   m_TagString: Untagged
@@ -91,6 +92,28 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!95 &6062279433505997430
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4544126613636399605}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 426784723c970784f8dc33d8fa865e33, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6826655141860528179
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,6 +126,7 @@ GameObject:
   - component: {fileID: 2895518397207853268}
   - component: {fileID: 5905754377068640614}
   - component: {fileID: 8590546477310373720}
+  - component: {fileID: 7009965539555547088}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -201,3 +225,72 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a1512f18416b43c4693aa6cf1a102de3, type: 3}
   - {fileID: 21300000, guid: 179c2c625abadab46a57128a57068252, type: 3}
   - {fileID: 21300000, guid: 15bf8faa5f613094391a2608dd4440ed, type: 3}
+  _attack:
+  - {fileID: 21300000, guid: fea49ba7dadcb824f9c9448990102d66, type: 3}
+  - {fileID: 21300000, guid: 92b4ae44fe9a1d945851179e8b669673, type: 3}
+  - {fileID: 21300000, guid: 2a0f18011ac1acd4cacacf271b58246e, type: 3}
+  - {fileID: 21300000, guid: 47a373d5ee5643e469a25115bbe2c3b3, type: 3}
+  _death:
+  - {fileID: 21300000, guid: ca51946228c320a4eb3ab58766bdf4ee, type: 3}
+  - {fileID: 21300000, guid: 9a686d705f1744d4184e19d9feb1549b, type: 3}
+  - {fileID: 21300000, guid: f19fbc041fb7cc946ba26ce81b0e06f3, type: 3}
+  - {fileID: 21300000, guid: 47a1862f1d3d0e9428656f5b0f2f9b1a, type: 3}
+--- !u!212 &7009965539555547088
+SpriteRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6826655141860528179}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 21300000, guid: ae2f0c787e616ac49abaef723dde8af2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.64, y: 0.64}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0

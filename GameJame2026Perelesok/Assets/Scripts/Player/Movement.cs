@@ -16,6 +16,7 @@ public class Movement : MonoBehaviour
     private float _elipseMultyplyer = 1;
 
     public Vector3 Zero { get { return _zero + new Vector3(0, _hight); } }
+    public Vector3 CurrentPosition { get { return transform.position; } }
 
     private void Awake()
     {
@@ -35,7 +36,7 @@ public class Movement : MonoBehaviour
         }
         else if (distance >= 1)
         {
-            _player.position += (_zero - _player.position + new Vector3(0, (_hight + _hightCorrection) * _elipseMultyplyer)) * 0.01f;
+            _player.position += (_zero - _player.position + new Vector3(0, (_hight + _hightCorrection) * _elipseMultyplyer)) * (distance - 1);
         }
         DrawElipce(.1f);
     }
@@ -63,7 +64,7 @@ public class Movement : MonoBehaviour
     }
 
     // x^2/a^2 + y^2/b^2 = 1; a - length of halth diameter, b - lenth of whight half diameter
-    private float ElipceFormula(Vector3 pos)
+    public float ElipceFormula(Vector3 pos)
     {
         return pos.x * pos.x / (_wight * _wight * _elipseMultyplyer * _elipseMultyplyer) + pos.y * pos.y / (_hight * _hight * _elipseMultyplyer * _elipseMultyplyer);
     }

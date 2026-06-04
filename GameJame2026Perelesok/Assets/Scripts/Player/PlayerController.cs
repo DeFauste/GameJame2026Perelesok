@@ -16,14 +16,22 @@ public class PlayerController : MonoBehaviour
 
     private Movement _playerMove;
     private Animation _playerAnim;
-    private float _inputTimer;
-
+    private bool _isDead = false;
+    private bool _isAttacking = false;
 
     void Awake()
     {
         _playerMove = GetComponent<Movement>();
         _playerAnim = GetComponentInChildren<Animation>();
         ChangeWalkingZone(1);
+        SpikeController.ActionHitPlayer += DeathAnimation;
+        SymbolSystem.OnAttackSuccess += AttackAinmation;
+    }
+
+    private void OnDestroy()
+    {
+        SpikeController.ActionHitPlayer -= DeathAnimation;
+        SymbolSystem.OnAttackSuccess -= AttackAinmation;
     }
 
     private void Update()
@@ -45,7 +53,10 @@ public class PlayerController : MonoBehaviour
         _playerMove.Move(move * Time.deltaTime);
         _playerMove.LayerCalculation();
         _playerMove.Scaler();
-        // _playerAnim.PlayAnimation(move);
+        _playerAnim.PlayAnimation(move, _isAttacking, _isDead);
+
+        if (_isAttacking)
+            _isAttacking = false;
 
         ChangeWalkingZone(1 - Time.timeSinceLevelLoad/100);
         DrawCollider(Time.deltaTime * 2);
@@ -72,6 +83,16 @@ public class PlayerController : MonoBehaviour
         }
 
         return move;
+    }
+
+    private void DeathAnimation()
+    {
+        _isDead = true;
+    }
+
+    private void AttackAinmation()
+    {
+        _isAttacking = true;
     }
 
     public void ChangeWalkingZone(float zoneMultiplyer)
