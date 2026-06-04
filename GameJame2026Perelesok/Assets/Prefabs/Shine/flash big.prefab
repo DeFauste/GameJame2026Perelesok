@@ -127,5 +127,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a24b6e39ed0f47ba977c9035616bc3aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.DestroyTime
-  _destroyDelay: 1
-  _destroyOnStart: 0
+  _destroyDelay: 0.6
+  _destroyOnStart: 1

@@ -258,7 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player.SpawnShine
   spawnPoint: {fileID: 619082880}
   _prefabMiniShine: {fileID: 1221529270147121795, guid: 398c738806109b143a6b925d8491079d, type: 3}
-  _prefabBigShine: {fileID: 1221529270147121795, guid: 398c738806109b143a6b925d8491079d, type: 3}
+  _prefabBigShine: {fileID: 2759501142245317402, guid: 0a4ee564df15e1344a7c0bccff4fc369, type: 3}
   _useWorldSpace: 1
   _matchRotation: 1
   _matchScale: 0
@@ -370,6 +370,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 123804493693871995, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3690255893598284404, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 5905754377068640614, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
       propertyPath: _zone
       value: 
@@ -2123,6 +2131,10 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1833432472}
+    - target: {fileID: 4907524782951796974, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: disableOnComplete
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6066199317341460308, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
       propertyPath: _cameraShake
       value: 

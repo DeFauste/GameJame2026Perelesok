@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Wizards.Animations;
 
 namespace Wizards.Behaviours.Lose
@@ -173,6 +174,8 @@ namespace Wizards.Behaviours.Lose
                 gameObject.SetActive(false);
 
             _isDissolving = false;
+            
+            SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
         }
     }
 }
