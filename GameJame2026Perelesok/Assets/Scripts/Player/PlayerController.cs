@@ -1,14 +1,6 @@
 using UnityEngine;
 
 
-public enum Inputs{
-    None = 0,
-    left = 1,
-    right = 2,
-    up = 3,
-    down = 4
-}
-
 [RequireComponent(typeof(Movement))]
 public class PlayerController : MonoBehaviour
 {
@@ -16,17 +8,11 @@ public class PlayerController : MonoBehaviour
     private const string _right = "d";
     private const string _forward = "w";
     private const string _backward = "s";
-    private const string _attack = "space";
-    private const string _deffence_1 = "left";
-    private const string _deffence_2 = "right";
-    private const string _deffence_3 = "up";
-    private const string _deffence_4 = "down";
 
     [SerializeField] private float _multyplayer = 1.1f;
     [SerializeField] private WalkingZoneScaler _zone;
     [SerializeField] private Vector2 _colliderSize = Vector2.one;
     [SerializeField] private Vector2 _colliderCenter = Vector2.down;
-    [SerializeField] private Vector2 _zoneCenter;
 
     private Movement _playerMove;
     private Animation _playerAnim;
@@ -60,8 +46,6 @@ public class PlayerController : MonoBehaviour
         _playerMove.LayerCalculation();
         _playerMove.Scaler();
         _playerAnim.PlayAnimation(move);
-        if (_inputTimer > 0)
-            ChooseDeffence();
 
         ChangeWalkingZone(1 - Time.timeSinceLevelLoad/100);
         DrawCollider(Time.deltaTime * 2);
@@ -96,33 +80,8 @@ public class PlayerController : MonoBehaviour
         _zone.ChangeScalesConst(new Vector3(zoneMultiplyer, _playerMove.GetScales().y * zoneMultiplyer / _playerMove.GetScales().x, 1));
     }
 
-    private int ChooseDeffence()
-    {
-        float rand = Random.Range(0f, 1f);
-
-        if (rand < .25f)
-        {
-            return 1;
-        }
-        if (rand < .5f)
-        {
-            return 2;
-        }
-        if (rand < .75f)
-        {
-            return 3;
-        }
-        else
-        {
-            return 4;
-        }
-    }
-
     private bool Collisin_X(float halfSize, float center)
     {
-        // <summary>
-        // if player.x collider pos + right limit > 
-        // </summary>
         if (transform.position.x + _colliderSize.x + _colliderCenter.x > center - halfSize && transform.position.x - _colliderSize.x + _colliderCenter.x < center + halfSize)
             return true;
         else

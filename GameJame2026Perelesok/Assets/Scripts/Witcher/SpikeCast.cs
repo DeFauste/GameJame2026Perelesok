@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class SpikeCast : MonoBehaviour
     private Animator _animator;
     protected bool _isHit = false;
     public bool IsHit { get { Destroy(gameObject); return _isHit; } }
+    
+    public static event Action IsHitAction;
 
     private void Awake()
     {
@@ -46,7 +49,17 @@ public class SpikeCast : MonoBehaviour
             yield return new WaitForSecondsRealtime(_castDelay * multypyer);
         }
 
+        if (_isHit)
+        {
+            InvokeDeath();
+        }
+
         yield return null;
+    }
+
+    protected void InvokeDeath()
+    {
+        IsHitAction.Invoke();
     }
 
     protected bool CheckForCollision()
