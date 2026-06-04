@@ -45,6 +45,8 @@ public class Laser : SpikeCast
         {
             InvokeDeath();
         }
+
+        Destroy(gameObject);
     }
 
     public void Pose(Vector2 eye)

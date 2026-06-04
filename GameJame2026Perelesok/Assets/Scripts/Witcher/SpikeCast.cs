@@ -12,7 +12,7 @@ public class SpikeCast : MonoBehaviour
 
     private Animator _animator;
     protected bool _isHit = false;
-    public bool IsHit { get { Destroy(gameObject); return _isHit; } }
+    public bool IsHit { get { return _isHit; } }
     
     public static event Action IsHitAction;
 
@@ -53,7 +53,7 @@ public class SpikeCast : MonoBehaviour
             InvokeDeath();
         }
 
-        yield return null;
+        Destroy(gameObject);
     }
 
     protected void InvokeDeath()
