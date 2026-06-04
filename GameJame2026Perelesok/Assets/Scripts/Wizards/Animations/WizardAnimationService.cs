@@ -63,7 +63,6 @@ namespace Wizards.Animations
 
         protected override void Awake()
         {
-
             InitializeAnimationMap();
 
 
@@ -190,17 +189,53 @@ namespace Wizards.Animations
         // Публичные простые вызовы: НЕ генерируют OnStateChanged/OnStageChanged, только проигрывают анимацию.
         public void PlayBlink()
         {
-            PlayAnimationSilentByStageState(currentStage, AnimationState.Blink);
-        }
+            var currentStageLocal = MapStage(WizardStateController.Instance.CurrentStage);
+            if (currentStageLocal == StageNumber.First)
+            {
+                animator.CrossFade("1_BlinkWizardStageFirst", crossFadeDuration);
+            }
+            else if (currentStageLocal == StageNumber.Second)
+            {
+                animator.CrossFade("2_BlinkWizardStageSecond", crossFadeDuration);
+            }
+            else if (currentStageLocal == StageNumber.Third)
+            {
+                animator.CrossFade("3_BlinkWizardThreeStage", crossFadeDuration);
+            }        }
 
         public void PlayMouth()
         {
-            PlayAnimationSilentByStageState(currentStage, AnimationState.Mouth);
+            var currentStageLocal = MapStage(WizardStateController.Instance.CurrentStage);
+            if (currentStageLocal == StageNumber.First)
+            {
+                animator.CrossFade("1_MouthWizardStageFirst", crossFadeDuration);
+            }
+            else if (currentStageLocal == StageNumber.Second)
+            {
+                animator.CrossFade("2_MouthWizardStageSecond", crossFadeDuration);
+            }
+            else if (currentStageLocal == StageNumber.Third)
+            {
+                animator.CrossFade("3_MouthWizardThreeStage", crossFadeDuration);
+            }
         }
 
         public void PlayIdle()
         {
-            PlayAnimationSilentByStageState(currentStage, AnimationState.Idle);
+            var currentStageLocal = MapStage(WizardStateController.Instance.CurrentStage);
+            if (currentStageLocal == StageNumber.First)
+            {
+                animator.CrossFade("1_IdleWizardStageFirst", crossFadeDuration);
+            }
+            else if (currentStageLocal == StageNumber.Second)
+            {
+                animator.CrossFade("2_IdleWizardStageSecond", crossFadeDuration);
+            }
+            else if (currentStageLocal == StageNumber.Third)
+            {
+                animator.CrossFade("3_IdleWizardThreeStage", crossFadeDuration);
+            }
+            // PlayAnimationSilentByStageState(currentStage, AnimationState.Idle);
         }
 
         public void Intro()

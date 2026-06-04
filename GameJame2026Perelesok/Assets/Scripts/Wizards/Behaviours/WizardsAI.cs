@@ -10,8 +10,11 @@ namespace Wizards.Behaviours
         public WizardStateController _wizardStateController;
         public WizardIntroStage _introStageController;
         public WizardFirstStage firstStageController;
+        public WizardFirstStage secondStageController;
+        public WizardFirstStage threeStageController;
         public LoseStage _loseStageController;
         public WizardWinStage _winStageController;
+
         private void Awake()
         {
             _wizardStateController = WizardStateController.Instance;
@@ -34,16 +37,20 @@ namespace Wizards.Behaviours
             }
             else if (stage == StageWizard.FirstStage)
             {
-                firstStageController.StartStage();
                 _introStageController.EndStage();
+                firstStageController.StartStage();
             }
             else if (stage == StageWizard.SecondStage)
             {
                 // Действия для второй стадии
+                firstStageController.EndStage();
+                secondStageController.StartStage();
             }
             else if (stage == StageWizard.ThirdStage)
             {
                 // Действия для третьей стадии
+                secondStageController.EndStage();
+                threeStageController.StartStage();
             }
             else if (stage == StageWizard.Win)
             {
@@ -71,7 +78,7 @@ namespace Wizards.Behaviours
             _introStageController?.EndStage();
             firstStageController?.EndStage();
             MusicService.Instance.StopAll();
-             // Остановить другие стадии, если необходимо
+            // Остановить другие стадии, если необходимо
         }
     }
 }

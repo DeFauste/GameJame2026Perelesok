@@ -22,6 +22,7 @@ namespace Wizards
             ChangeStage(StageWizard.Intro);
             SymbolSystem.OnAttackSuccess += () =>
             {
+                MusicService.Instance.Play("Sound_Hit");
                 TakeDamage(1);
             };
             SpikeController.ActionHitPlayer += () =>
@@ -94,6 +95,18 @@ namespace Wizards
             {
                 Debug.Log("Здоровье волшебника достигло нуля. Стадия Lose началась.");
                 ChangeStage(StageWizard.Lose);
+            }
+
+            if (CurrentHealth == 2)
+            {
+                Debug.Log("Здоровье волшебника достигло 2. Стадия SecondStage началась.");
+               ChangeStage(StageWizard.SecondStage);
+            }
+            
+            if (CurrentHealth == 1)
+            {
+                Debug.Log("Здоровье волшебника достигло 1. Стадия ThirdStage началась.");
+                ChangeStage(StageWizard.ThirdStage);
             }
             return CurrentHealth;
         }
