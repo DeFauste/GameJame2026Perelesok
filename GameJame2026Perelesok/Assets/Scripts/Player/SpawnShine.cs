@@ -9,12 +9,15 @@ namespace Player
     public class SpawnShine : MonoBehaviour
     {
         public Transform spawnPoint;
-        [Header("Prefab Settings")]
-        [SerializeField] private GameObject _prefabMiniShine;
+
+        [Header("Prefab Settings")] [SerializeField]
+        private GameObject _prefabMiniShine;
+
         [SerializeField] private GameObject _prefabBigShine;
-        
-        [Header("Spawn Settings")]
-        [SerializeField] private bool _useWorldSpace = true;
+
+        [Header("Spawn Settings")] [SerializeField]
+        private bool _useWorldSpace = true;
+
         [SerializeField] private bool _matchRotation = true;
         [SerializeField] private bool _matchScale = false;
 
@@ -43,8 +46,7 @@ namespace Player
         {
             if (targetTransform == null)
             {
-                Debug.LogError("[SpawnShine] targetTransform равен null!", gameObject);
-                return null;
+                spawnPoint = GameObject.Find("PointSpawenShine").GetComponent<Transform>();
             }
 
             return SpawnAt(isMini, targetTransform.position, targetTransform.rotation, targetTransform.lossyScale);
@@ -66,7 +68,7 @@ namespace Player
         /// <param name="position">Позиция спавна</param>
         /// <param name="rotation">Ротация спавна</param>
         /// <returns>Созданный объект, или null если префаб не установлен</returns>
-        public GameObject SpawnAt(bool isMini,Vector3 position, Quaternion rotation)
+        public GameObject SpawnAt(bool isMini, Vector3 position, Quaternion rotation)
         {
             return SpawnAt(isMini, position, rotation, Vector3.one);
         }
@@ -86,14 +88,15 @@ namespace Player
                 return null;
             }
 
-            GameObject spawnedObject = Instantiate( isMini ? _prefabMiniShine : _prefabBigShine, position, rotation);
+            GameObject spawnedObject = Instantiate(isMini ? _prefabMiniShine : _prefabBigShine, position, rotation);
 
             if (_matchScale)
             {
                 spawnedObject.transform.localScale = scale;
             }
 
-            Debug.Log($"[SpawnShine] Объект '{spawnedObject.name}' успешно спавнен в позиции {position}", spawnedObject);
+            Debug.Log($"[SpawnShine] Объект '{spawnedObject.name}' успешно спавнен в позиции {position}",
+                spawnedObject);
             return spawnedObject;
         }
     }

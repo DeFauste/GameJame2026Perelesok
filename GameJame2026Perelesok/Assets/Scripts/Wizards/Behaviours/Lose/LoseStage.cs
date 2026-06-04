@@ -175,7 +175,7 @@ namespace Wizards.Behaviours.Lose
 
             _isDissolving = false;
             
-            SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
+            SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
         }
     }
 }
