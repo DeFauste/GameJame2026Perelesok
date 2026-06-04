@@ -8,14 +8,24 @@ namespace Wizards.Behaviours
 {
     public sealed class WizardFirstStage : WizardStage
     {
+        [SerializeField] private SpikeController _spikeController;
         private WizardAnimationService _wizardAnimationService;
         private Coroutine _randomAnimCoroutine;
         private Coroutine _spikeSpawnCoroutine;
         [SerializeField] private float timeChangeAnimation = 5f; // время через которое будет меняться анимация
 
+        [SerializeField] private float _spikeTimeSpawn = 3f; // частота спавна
+        [SerializeField] private int _spikeCountFowSpawn = 1; // количество за один тик
+        [SerializeField] private float _spikeDuration = 3f;
         private void Awake()
         {
             _wizardAnimationService = WizardAnimationService.Instance;
+        }
+
+        protected override void Start()
+        {
+            base.Start();
+            _spikeController = FindObjectOfType<SpikeController>();
         }
 
         private void FixedUpdate()
@@ -29,6 +39,12 @@ namespace Wizards.Behaviours
                 {
                     _randomAnimCoroutine = StartCoroutine(RandomAnimationRoutine());
                 }
+                
+                // Запускаем спавн шипов по таймеру
+                if (_spikeSpawnCoroutine == null)
+                {
+                    _spikeSpawnCoroutine = StartCoroutine(SpanSmallSpike());
+                }
             }
             else
             {
@@ -36,6 +52,19 @@ namespace Wizards.Behaviours
                 StopRandomAnimations();
             }
         }
+
+        IEnumerator SpanSmallSpike()
+        {
+            while (stageActive)
+            {
+                yield return new WaitForSeconds(timeChangeAnimation);
+                _spikeController.RandomSpawnSmallPeaks(_spikeCountFowSpawn, _spikeDuration);
+                MusicService.Instance.Play("Sound_EarthFracture");
+                yield return new WaitForSeconds(_spikeDuration);
+                MusicService.Instance.Play("Sound_SpikeSmall");
+            }
+        }
+        
 
         private IEnumerator RandomAnimationRoutine()
         {

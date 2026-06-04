@@ -11,7 +11,6 @@ public class SpikeCast : MonoBehaviour
 
     private Animator _animator;
     protected bool _isHit = false;
-
     public bool IsHit { get { Destroy(gameObject); return _isHit; } }
 
     private void Awake()
@@ -34,6 +33,7 @@ public class SpikeCast : MonoBehaviour
             if (CheckForCollision())
             {
                 _isHit = true;
+                SpikeController.ActionHitPlayer?.Invoke();
             }
 
             yield return new WaitForSecondsRealtime(Time.deltaTime);

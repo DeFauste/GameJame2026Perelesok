@@ -24,6 +24,10 @@ namespace Wizards
             {
                 TakeDamage(1);
             };
+            SpikeController.ActionHitPlayer += () =>
+            {
+                ChangeStage(StageWizard.Win);
+            };
         }
 
         // Методы для взаимодействия со стадиями волшебника

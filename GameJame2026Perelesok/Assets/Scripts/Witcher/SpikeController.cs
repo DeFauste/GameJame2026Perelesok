@@ -1,4 +1,7 @@
+using System;
+using Commons;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SpikeController : MonoBehaviour
 {
@@ -6,7 +9,7 @@ public class SpikeController : MonoBehaviour
     [SerializeField] private GameObject _big_spike;
     [SerializeField] private GameObject _laser;
     [SerializeField] private Movement _calculateElipce;
-
+    public static Action ActionHitPlayer; 
     private void Awake()
     {
         if (_calculateElipce == null)

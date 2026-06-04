@@ -12,7 +12,7 @@ namespace Wizards.Behaviours
         public WizardIntroStage _introStageController;
         public WizardFirstStage firstStageController;
         public LoseStage _loseStageController;
-
+        public WizardWinStage _winStageController;
         private void Awake()
         {
             _wizardStateController = WizardStateController.Instance;
@@ -45,11 +45,14 @@ namespace Wizards.Behaviours
             }
             else if (stage == StageWizard.Win)
             {
-                // Действия для победы
+                firstStageController.EndStage();
+                // Действия для победы волшебника
+                Debug.Log("Волшебник победил!");
+                _winStageController.StartStage();
             }
             else if (stage == StageWizard.Lose)
             {
-                // Действия для смерти
+                // Действия для смерти волшебника
                 _loseStageController.StartStage();
             }
         }
