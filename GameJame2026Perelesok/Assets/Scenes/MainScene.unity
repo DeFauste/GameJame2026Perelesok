@@ -1169,6 +1169,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2139049608976223866, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+      propertyPath: _winStageController
+      value: 
+      objectReference: {fileID: 1905682252}
+    - target: {fileID: 2139049608976223866, guid: f30083136430a6c4e99c2efb76847846, type: 3}
       propertyPath: _loseStageController
       value: 
       objectReference: {fileID: 1905682247}
@@ -1225,6 +1229,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7194836305894753642, guid: f30083136430a6c4e99c2efb76847846, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1905682247}
+    - targetCorrespondingSourceObject: {fileID: 7194836305894753642, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1905682252}
   m_SourcePrefab: {fileID: 100100000, guid: f30083136430a6c4e99c2efb76847846, type: 3}
 --- !u!212 &1905682233 stripped
 SpriteRenderer:
@@ -1319,6 +1326,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8118387e5114281bc72f55dc3cb06de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Wizards.WizardStateController
+--- !u!114 &1905682252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905682237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66227a84baef49f5af1db1559df39cd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Wizards.Behaviours.Intro.WizardWinStage
+  playerController: {fileID: 1833432472}
+  NameMusicStage: 
+  leftHand: {fileID: 1905682236}
+  rightHand: {fileID: 1905682235}
+  targetCompress: {fileID: 1980885929}
+  delayTimeCompression: 3
+  timeFullCompression: 3
+  percentTimeExpansion: 0.2
+  percentTimeExpansionDome: 0.2
+  minimalDistanceForTargetPercent: 0.5
+  spriteDomeToCompress: {fileID: 1905682234}
+  spriteCycleToCompress: {fileID: 1905682233}
+  fadeDuration: 2
+  blinkSpeed: 3
 --- !u!1 &1948103638
 GameObject:
   m_ObjectHideFlags: 0

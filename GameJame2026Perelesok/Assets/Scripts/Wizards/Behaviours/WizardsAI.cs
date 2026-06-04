@@ -47,7 +47,6 @@ namespace Wizards.Behaviours
             {
                 firstStageController.EndStage();
                 // Действия для победы волшебника
-                Debug.Log("Волшебник победил!");
                 _winStageController.StartStage();
             }
             else if (stage == StageWizard.Lose)
