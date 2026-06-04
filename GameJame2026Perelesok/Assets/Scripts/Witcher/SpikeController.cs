@@ -71,33 +71,34 @@ public class SpikeController : MonoBehaviour
     {
         GameObject spike = Instantiate(damager);
 
-        spike.transform.position = new Vector3(position.x, position.y, position.y) + _calculateElipce.Zero;
+        spike.transform.position = new Vector3(position.x, position.y, position.y);
         StartCoroutine(spike.GetComponent<SpikeCast>().CastCorutine(durationMultypyer));
 
         return spike;
     }
 
-    private Vector2 GetRandomPosition()
-    {
-        float halfRange = _calculateElipce.GetScales().x;
-        float rand_X = (UnityEngine.Random.value * halfRange * 2) - halfRange;
-        halfRange = _calculateElipce.CalculateElipce_Y(rand_X);
-        float rand_Y = (UnityEngine.Random.value * halfRange * 2) - halfRange;
-        Debug.Log(halfRange * 2 + " | " + rand_Y);
-        return new Vector2(rand_X, rand_Y);
-    }
-
     //private Vector2 GetRandomPosition()
     //{
-    //    Vector2 playerPosition = (Vector2)_calculateElipce.CurrentPosition;
-    //    float halfRange = 0.5f;
-    //    playerPosition.x += UnityEngine.Random.value * halfRange * 2 - halfRange;
-    //    playerPosition.y += UnityEngine.Random.value * halfRange - halfRange;
-    //    float distace = _calculateElipce.ElipceFormula(playerPosition) - 1;
-    //    if (distace > 0)
-    //    {
-    //        playerPosition += ((Vector2)_calculateElipce.Zero - playerPosition + new Vector2(0, halfRange)) * distace;
-    //    }
-    //    return playerPosition;
+    //    float halfRange = _calculateElipce.GetScales().x;
+    //    float rand_X = (UnityEngine.Random.value * halfRange * 2) - halfRange;
+    //    halfRange = _calculateElipce.CalculateElipce_Y(rand_X);
+    //    float rand_Y = (UnityEngine.Random.value * halfRange * 2) - halfRange;
+    //    Debug.Log(halfRange * 2 + " | " + rand_Y);
+    //    return new Vector2(rand_X, rand_Y);
     //}
+
+    private Vector2 GetRandomPosition()
+    {
+        Vector2 playerPosition = (Vector2)_calculateElipce.CurrentPosition;
+        float halfRange = 0.5f;
+        playerPosition.x += UnityEngine.Random.value * halfRange * 2 - halfRange;
+        playerPosition.y += UnityEngine.Random.value * halfRange - halfRange;
+        float distace = _calculateElipce.ElipceFormula(playerPosition) - 1;
+        Debug.Log(distace + " " + playerPosition);
+        if (distace > 0)
+        {
+            playerPosition += ((Vector2)_calculateElipce.Zero - playerPosition + new Vector2(0, halfRange)) * distace;
+        }
+        return playerPosition;
+    }
 }
