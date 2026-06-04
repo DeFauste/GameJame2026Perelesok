@@ -36,7 +36,6 @@ public class SpikeCast : MonoBehaviour
             if (CheckForCollision())
             {
                 _isHit = true;
-                SpikeController.ActionHitPlayer?.Invoke();
             }
 
             yield return new WaitForSecondsRealtime(Time.deltaTime);
@@ -59,7 +58,7 @@ public class SpikeCast : MonoBehaviour
 
     protected void InvokeDeath()
     {
-        IsHitAction.Invoke();
+        IsHitAction?.Invoke();
     }
 
     protected bool CheckForCollision()

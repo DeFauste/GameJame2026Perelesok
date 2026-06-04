@@ -9,6 +9,8 @@ public class SpikeController : MonoBehaviour
     [SerializeField] private GameObject _laser;
     [SerializeField] private Movement _calculateElipce;
 
+    public static Action ActionHitPlayer;
+
     private void Awake()
     {
         if (_calculateElipce == null)
@@ -20,6 +22,8 @@ public class SpikeController : MonoBehaviour
             Debug.LogError("no big spike prefab");
         if (_laser == null)
             Debug.LogError("no laser prefab");
+
+        SpikeCast.IsHitAction += HitDetection;
     }
 
     private void Update()
@@ -57,9 +61,9 @@ public class SpikeController : MonoBehaviour
         }
     }
 
-    public void Subscribe(Action subscriber)
+    public void HitDetection()
     {
-        SpikeCast.IsHitAction += subscriber;
+        ActionHitPlayer?.Invoke();
     }
 
     private GameObject SpawnSpike(Vector2 position, GameObject damager, float durationMultypyer)
@@ -75,9 +79,9 @@ public class SpikeController : MonoBehaviour
     private Vector2 GetRandomPosition()
     {
         float halfRange = _calculateElipce.GetScales().x;
-        float rand_X = (Random.value * halfRange * 2) - halfRange;
+        float rand_X = (UnityEngine.Random.value * halfRange * 2) - halfRange;
         halfRange = _calculateElipce.CalculateElipce_Y(rand_X);
-        float rand_Y = (Random.value * halfRange * 2);
+        float rand_Y = (UnityEngine.Random.value * halfRange * 2);
         return new Vector2(rand_X, rand_Y);
     }
 }
