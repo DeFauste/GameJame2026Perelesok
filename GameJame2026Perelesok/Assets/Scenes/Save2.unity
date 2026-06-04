@@ -1027,6 +1027,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1539165714 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3284348914494083746, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+  m_PrefabInstance: {fileID: 1905682232}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905682237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8118387e5114281bc72f55dc3cb06de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Wizards.WizardStateController
 --- !u!114 &1548891541 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 805230544698206303, guid: e3edc739dcfadd348a02cb20017096fc, type: 3}
@@ -1109,6 +1120,10 @@ PrefabInstance:
       propertyPath: _introStageController
       value: 
       objectReference: {fileID: 1905682238}
+    - target: {fileID: 2139049608976223866, guid: f30083136430a6c4e99c2efb76847846, type: 3}
+      propertyPath: _wizardStateController
+      value: 
+      objectReference: {fileID: 1539165714}
     - target: {fileID: 5486295611801366254, guid: f30083136430a6c4e99c2efb76847846, type: 3}
       propertyPath: m_Enabled
       value: 1

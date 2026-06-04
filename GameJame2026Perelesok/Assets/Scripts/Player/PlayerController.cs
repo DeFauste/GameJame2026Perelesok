@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
         _playerMove.Move(move * Time.deltaTime);
         _playerMove.LayerCalculation();
         _playerMove.Scaler();
-        _playerAnim.PlayAnimation(move);
+        // _playerAnim.PlayAnimation(move);
 
         ChangeWalkingZone(1 - Time.timeSinceLevelLoad/100);
         DrawCollider(Time.deltaTime * 2);
