@@ -4,48 +4,52 @@ using UnityEngine;
 
 public class SpikeCast : MonoBehaviour
 {
-    [SerializeField] private Vector2 _colliderSize = Vector2.one;
-    [SerializeField] private Vector2 _colliderCenter = Vector2.down;
-    [SerializeField] private Sprite _preCast;
-    [SerializeField] private Sprite _spike;
-    [SerializeField] private float _castTime = 1;
-    [SerializeField] private float _castDelay = 1;
+    [SerializeField] protected Vector2 _colliderSize = Vector2.one;
+    [SerializeField] protected Vector2 _colliderCenter = Vector2.down;
+    [SerializeField] protected float _castTime = 1;
+    [SerializeField] protected float _castDelay = 1;
 
-    private SpriteRenderer _spikeRender;
-    private bool _isHit = false;
+    private Animator _animator;
+    protected bool _isHit = false;
+
+    public bool IsHit { get { Destroy(gameObject); return _isHit; } }
 
     private void Awake()
     {
-        _spikeRender = GetComponentInChildren<SpriteRenderer>();
-        DrawCollider(_castTime + _castDelay);
-        StartCoroutine(CastCorutine());
+        _animator = GetComponent<Animator>();
     }
 
-    public IEnumerator CastCorutine()
+    virtual public IEnumerator CastCorutine(float multypyer)
     {
-        _spikeRender.sprite = _preCast;
+        _animator.speed = multypyer;
+        _animator.Play("SpikeShow");
+        yield return new WaitForSecondsRealtime(_castDelay * multypyer);
 
-        yield return new WaitForSeconds(_castDelay);
+        _animator.Play("AttackAinmation");
 
-        _spikeRender.sprite = _spike;
         for (float i = 0; i < _castTime; i += Time.deltaTime)
         {
+            DrawCollider(Time.deltaTime * 2);
 
             if (CheckForCollision())
+            {
                 _isHit = true;
+            }
 
-            yield return new WaitForSeconds(Time.deltaTime);
+            yield return new WaitForSecondsRealtime(Time.deltaTime);
         }
-
+        
         if (!_isHit)
         {
-            _spikeRender.sprite = _preCast;
+            _animator.speed = multypyer;
+            _animator.Play("RemoveSpike");
+            yield return new WaitForSecondsRealtime(_castDelay * multypyer);
         }
 
         yield return null;
     }
 
-    private bool CheckForCollision()
+    protected bool CheckForCollision()
     {
         PlayerController player = FindAnyObjectByType(typeof(PlayerController)).GetComponent<PlayerController>();
         if (player.CollisionDetection(_colliderSize, _colliderCenter + new Vector2(transform.position.x, transform.position.y)))
@@ -54,7 +58,7 @@ public class SpikeCast : MonoBehaviour
             return false;
     }
 
-    private void DrawCollider(float duration)
+    protected void DrawCollider(float duration)
     {
         Debug.DrawLine(transform.position + Vector3.right * _colliderSize.x + Vector3.up * _colliderSize.y + (Vector3)_colliderCenter,
                        transform.position - Vector3.right * _colliderSize.x - Vector3.up * _colliderSize.y + (Vector3)_colliderCenter,
