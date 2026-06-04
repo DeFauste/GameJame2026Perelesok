@@ -8,6 +8,8 @@ public class Animation : MonoBehaviour
     [SerializeField] private List<Sprite> _walk_left;
     [SerializeField] private List<Sprite> _walk_forward;
     [SerializeField] private List<Sprite> _walk_backward;
+    [SerializeField] private List<Sprite> _attack;
+    [SerializeField] private List<Sprite> _death;
     private SpriteRenderer _player;
     private int _state = 0;
     private float _timeDelay = 0;
@@ -17,9 +19,17 @@ public class Animation : MonoBehaviour
         _player = GetComponentInChildren<SpriteRenderer>();
     }
 
-    public void PlayAnimation(Vector2 inputs)
+    public void PlayAnimation(Vector2 inputs, bool attack, bool death)
     {
-        if (inputs == Vector2.zero)
+        if (death)
+        {
+
+        }
+        else if(attack)
+        {
+
+        }
+        else if(inputs == Vector2.zero)
         {
             _player.sprite = _idle[_state % _idle.Count];
         }

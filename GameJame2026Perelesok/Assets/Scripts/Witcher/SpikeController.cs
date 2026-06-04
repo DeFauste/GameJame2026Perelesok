@@ -30,8 +30,8 @@ public class SpikeController : MonoBehaviour
     {
         if (Input.GetKeyDown("h"))
         {
-            //RandomSpawnSmallPeaks(2, 1);
-            //RandomSpawnBigPeaks(1, 1);
+            RandomSpawnSmallPeaks(2, 1);
+            RandomSpawnBigPeaks(1, 1);
             RandomSpawnLaser(1, 1, new Vector2(0.0006081462f, 7.933138f));
         }
     }
@@ -81,7 +81,8 @@ public class SpikeController : MonoBehaviour
         float halfRange = _calculateElipce.GetScales().x;
         float rand_X = (UnityEngine.Random.value * halfRange * 2) - halfRange;
         halfRange = _calculateElipce.CalculateElipce_Y(rand_X);
-        float rand_Y = (UnityEngine.Random.value * halfRange * 2);
+        float rand_Y = (UnityEngine.Random.value * halfRange * 2) - halfRange;
+        Debug.Log(halfRange * 2 + " | " + rand_Y);
         return new Vector2(rand_X, rand_Y);
     }
 }

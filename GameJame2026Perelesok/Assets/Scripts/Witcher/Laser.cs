@@ -56,7 +56,7 @@ public class Laser : SpikeCast
         {
             angle *= -1;
         }
-        Debug.Log(shotPosition + " " + midlePoint + " | " + angle);
+        // Debug.Log(shotPosition + " " + midlePoint + " | " + angle);
         _colliderCenter = (Vector2)transform.position - midlePoint;
         transform.position = midlePoint;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle * 180 / Mathf.PI));

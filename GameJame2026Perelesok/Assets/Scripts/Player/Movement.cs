@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour
     private Transform _player;
     private float _elipseMultyplyer = 1;
 
-    public Vector3 Zero { get { return _zero; } }
+    public Vector3 Zero { get { return _zero + new Vector3(0, _hight); } }
 
     private void Awake()
     {
