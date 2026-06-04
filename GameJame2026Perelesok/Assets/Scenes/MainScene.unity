@@ -326,11 +326,11 @@ PrefabInstance:
       objectReference: {fileID: 1548891541}
     - target: {fileID: 5905754377068640614, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
       propertyPath: _colliderSize.x
-      value: 0.5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5905754377068640614, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
       propertyPath: _colliderSize.y
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5905754377068640614, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
       propertyPath: _colliderCenter.y
