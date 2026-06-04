@@ -9,29 +9,33 @@ public class Movement : MonoBehaviour
     [Header("Íàñòðîéêà ïîëÿ")]
     [SerializeField] private float _hight = .5f;
     [SerializeField] private float _wight = 1f;
+    [SerializeField] private float _hightCorrection = .01f;
 
     private Vector3 _zero = Vector3.zero;
     private Transform _player;
     private float _elipseMultyplyer = 1;
 
+    public Vector3 Zero { get { return _zero; } }
+
     private void Awake()
     {
         _player = GetComponent<Transform>();
         _zero = _player.position;
+        _player.position += Vector3.up * _hight;
     }
 
     public void Move(Vector2 move)
     {
         Vector3 velocity = new Vector3(move.x * _horizontalSpeed, move.y * _verticalSpeed, 0);
         Vector3 new_pos = new Vector3((_player.position + velocity).x, (_player.position + velocity).y, 0);
-        float distance = ElipceFormula(new_pos - _zero - new Vector3(0, _hight * _elipseMultyplyer, 0));
+        float distance = ElipceFormula(new_pos - _zero - new Vector3(0, (_hight + _hightCorrection) * _elipseMultyplyer, 0));
         if (distance < 1)
         {
             _player.position = new_pos;
         }
         else if (distance >= 1)
         {
-            _player.position += (_zero - _player.position + new Vector3(0, _hight * _elipseMultyplyer)) * 0.01f;
+            _player.position += (_zero - _player.position + new Vector3(0, (_hight + _hightCorrection) * _elipseMultyplyer)) * 0.01f;
         }
         DrawElipce(.1f);
     }
@@ -66,10 +70,10 @@ public class Movement : MonoBehaviour
 
     private void DrawElipce(float duration)
     {
-        Debug.DrawLine(new Vector3(0, CalculateElipce_Y(0), _player.position.z) + _zero + new Vector3(0, _hight * _elipseMultyplyer, 0),
-                       new Vector3(0, CalculateElipce_Y(0) * (-1), _player.position.z) + _zero + new Vector3(0, _hight * _elipseMultyplyer, 0), Color.red, duration);
-        Debug.DrawLine(new Vector3(CalculateElipce_X(0), 0, _player.position.z) + _zero + new Vector3(0, _hight * _elipseMultyplyer, 0),
-                       new Vector3(CalculateElipce_X(0) * (-1), 0, _player.position.z) + _zero + new Vector3(0, _hight * _elipseMultyplyer, 0), Color.red, duration);
+        Debug.DrawLine(new Vector3(0, CalculateElipce_Y(0), _player.position.z) + _zero + new Vector3(0, (_hight + _hightCorrection) * _elipseMultyplyer, 0),
+                       new Vector3(0, CalculateElipce_Y(0) * (-1), _player.position.z) + _zero + new Vector3(0, (_hight + _hightCorrection) * _elipseMultyplyer, 0), Color.red, duration);
+        Debug.DrawLine(new Vector3(CalculateElipce_X(0), 0, _player.position.z) + _zero + new Vector3(0, (_hight + _hightCorrection) * _elipseMultyplyer, 0),
+                       new Vector3(CalculateElipce_X(0) * (-1), 0, _player.position.z) + _zero + new Vector3(0, (_hight + _hightCorrection) * _elipseMultyplyer, 0), Color.red, duration);
     }
 
     public float CalculateElipce_X(float y)
@@ -79,7 +83,7 @@ public class Movement : MonoBehaviour
         return (float)Math.Sqrt(Math.Abs(a * y_b + a));
     }
 
-    private float CalculateElipce_Y(float x)
+    public float CalculateElipce_Y(float x)
     {
         float b = (float)Math.Pow(_hight * _elipseMultyplyer, 2);
         float x_a = (float)(Math.Pow(x, 2) / Math.Pow(_wight * _elipseMultyplyer, 2));

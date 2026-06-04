@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpikeController : MonoBehaviour
@@ -24,9 +26,9 @@ public class SpikeController : MonoBehaviour
     {
         if (Input.GetKeyDown("h"))
         {
-            RandomSpawnSmallPeaks(2, 1);
-            RandomSpawnBigPeaks(1, 1);
-            RandomSpawnLaser(1, 1, new Vector2(5, 0));
+            //RandomSpawnSmallPeaks(2, 1);
+            //RandomSpawnBigPeaks(1, 1);
+            RandomSpawnLaser(1, 1, new Vector2(0.0006081462f, 7.933138f));
         }
     }
 
@@ -55,11 +57,16 @@ public class SpikeController : MonoBehaviour
         }
     }
 
+    public void Subscribe(Action subscriber)
+    {
+        SpikeCast.IsHitAction += subscriber;
+    }
+
     private GameObject SpawnSpike(Vector2 position, GameObject damager, float durationMultypyer)
     {
         GameObject spike = Instantiate(damager);
 
-        spike.transform.position = new Vector3(position.x, position.y, position.y);
+        spike.transform.position = new Vector3(position.x, position.y, position.y) + _calculateElipce.Zero;
         StartCoroutine(spike.GetComponent<SpikeCast>().CastCorutine(durationMultypyer));
 
         return spike;
@@ -67,8 +74,10 @@ public class SpikeController : MonoBehaviour
 
     private Vector2 GetRandomPosition()
     {
-        float rand_Y = (Random.value * (_calculateElipce.GetScales().y * 2)) - _calculateElipce.GetScales().y;
-        float rand_X = (Random.value * (_calculateElipce.CalculateElipce_X(rand_Y) * 2)) - _calculateElipce.CalculateElipce_X(rand_Y);
+        float halfRange = _calculateElipce.GetScales().x;
+        float rand_X = (Random.value * halfRange * 2) - halfRange;
+        halfRange = _calculateElipce.CalculateElipce_Y(rand_X);
+        float rand_Y = (Random.value * halfRange * 2);
         return new Vector2(rand_X, rand_Y);
     }
 }

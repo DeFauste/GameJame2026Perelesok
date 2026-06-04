@@ -40,19 +40,25 @@ public class Laser : SpikeCast
         {
             _animator.Play("RemoveLaser");
         }
+
+        if (_isHit)
+        {
+            InvokeDeath();
+        }
     }
 
     public void Pose(Vector2 eye)
     {
-        Debug.Log(transform.position);
-        Vector2 place = new Vector2(transform.position.x, transform.position.y);
-        Vector2 buf = (place + eye) / 2;
-        float angle = Mathf.Atan2(buf.y, buf.x);
-        if (place.x > 0)
+        Vector2 shotPosition = new Vector2(transform.position.x, transform.position.y);
+        Vector2 midlePoint = (shotPosition + eye) / 2;
+        float angle = Mathf.Atan(midlePoint.x/midlePoint.y);
+        if (shotPosition.x < 0)
         {
             angle *= -1;
         }
-        transform.position = buf;
-        transform.rotation *= Quaternion.Euler(angle, 0, 0);
+        Debug.Log(shotPosition + " " + midlePoint + " | " + angle);
+        _colliderCenter = (Vector2)transform.position - midlePoint;
+        transform.position = midlePoint;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle * 180 / Mathf.PI));
     }
 }
