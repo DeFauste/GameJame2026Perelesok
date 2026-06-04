@@ -65,18 +65,15 @@ namespace Wizards.Behaviours
             }
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
-            if (_wizardStateController != null)
-                _wizardStateController.ActionStage -= OnStageChanged;
+            _wizardStateController.ActionStage -= OnStageChanged;
         }
 
         public void StopAllStage()
         {
             _wizardStateController.ChangeStage(StageWizard.None);
             _wizardStateController.ChangeCompressedDirection(CompressedDirection.Static);
-            _introStageController?.EndStage();
-            firstStageController?.EndStage();
             MusicService.Instance.StopAll();
             // Остановить другие стадии, если необходимо
         }

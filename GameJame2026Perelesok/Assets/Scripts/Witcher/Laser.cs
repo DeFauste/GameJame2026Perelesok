@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Laser : SpikeCast
 {
-    private Animator _animator;
 
     private void Awake()
     {

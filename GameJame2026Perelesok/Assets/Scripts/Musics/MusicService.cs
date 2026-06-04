@@ -39,8 +39,6 @@ public class MusicService : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            if (dontDestroyOnLoad)
-                DontDestroyOnLoad(gameObject);
 
             poolRoot = new GameObject("[MusicService_Pool]").transform;
             poolRoot.SetParent(transform, false);

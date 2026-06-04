@@ -4,7 +4,7 @@ using Wizards.Behaviours;
 
 namespace Wizards
 {
-    public sealed class WizardStateController : SingletonMonoBehaviour<WizardStateController>
+    public class WizardStateController : SingletonMonoBehaviour<WizardStateController>
     {
         public int CurrentHealth { get; private set; } = 3; // Текущее значение здоровья волшебника
 

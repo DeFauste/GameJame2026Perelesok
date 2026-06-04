@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Базовый Singleton для MonoBehaviour.
@@ -28,6 +30,7 @@ public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBe
                     _instance = singletonGO.AddComponent<T>();
                 }
             }
+
             return _instance;
         }
     }
@@ -45,6 +48,14 @@ public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBe
         else if (_instance != this)
         {
             Destroy(gameObject); // уничтожаем дубликат
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (_instance != this)
+        {
+            Destroy(gameObject);
         }
     }
 }

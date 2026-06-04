@@ -10,7 +10,7 @@ public class SpikeCast : MonoBehaviour
     [SerializeField] protected float _castTime = 1;
     [SerializeField] protected float _castDelay = 1;
 
-    private Animator _animator;
+    protected Animator _animator;
     protected bool _isHit = false;
     public bool IsHit { get { return _isHit; } }
     

@@ -41,7 +41,7 @@ namespace Wizards.Behaviours
         private float leftHandInitialDistance;
         private float rightHandInitialDistance;
 
-        protected List<Coroutine> coroutines = new List<Coroutine>();
+        public List<Coroutine> coroutines = new List<Coroutine>();
 
         [SerializeField] protected SpriteRenderer spriteDomeToCompress; // Спрайт для сжатия
 

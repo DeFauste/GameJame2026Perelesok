@@ -99,5 +99,11 @@ namespace Player
                 spawnedObject);
             return spawnedObject;
         }
+
+        private void OnDestroy()
+        {
+            SymbolSystem.OnDefenceSuccess += () => Spawn(true, spawnPoint);
+            SymbolSystem.OnAttackSuccess += () => Spawn(false, spawnPoint);
+        }
     }
 }

@@ -1,0 +1,273 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5488789647862468202
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7935040912168174157}
+  - component: {fileID: 9081840714355469281}
+  - component: {fileID: 2415188539000153326}
+  - component: {fileID: 1064106458599605346}
+  - component: {fileID: 283950696859570868}
+  - component: {fileID: 352035549541566154}
+  - component: {fileID: 4480118643585939199}
+  - component: {fileID: 576964347344489354}
+  - component: {fileID: 3908533791125492542}
+  m_Layer: 0
+  m_Name: WizardAI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7935040912168174157
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5488789647862468202}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9081840714355469281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5488789647862468202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8118387e5114281bc72f55dc3cb06de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Wizards.WizardStateController
+  _currentStage: 0
+--- !u!114 &2415188539000153326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5488789647862468202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 890cf04a72bf45d2b92067506d4e5683, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Wizards.WizardsAI
+  _wizardStateController: {fileID: 9081840714355469281}
+  _introStageController: {fileID: 1064106458599605346}
+  firstStageController: {fileID: 283950696859570868}
+  secondStageController: {fileID: 576964347344489354}
+  threeStageController: {fileID: 3908533791125492542}
+  _loseStageController: {fileID: 352035549541566154}
+  _winStageController: {fileID: 4480118643585939199}
+--- !u!114 &1064106458599605346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5488789647862468202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3253771a3b9c4d4b814673a58bcc5897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Wizards.Behaviours.Intro.WizardIntroStage
+  playerController: {fileID: 0}
+  NameMusicStage: 02
+  leftHand: {fileID: 0}
+  rightHand: {fileID: 0}
+  targetCompress: {fileID: 0}
+  delayTimeCompression: 3
+  timeFullCompression: 10
+  percentTimeExpansion: 0.2
+  percentTimeExpansionDome: 0.4
+  minimalDistanceForTargetPercent: 0.7
+  spriteDomeToCompress: {fileID: 0}
+  spriteCycleToCompress: {fileID: 0}
+--- !u!114 &283950696859570868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5488789647862468202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e78147e7471f4448a8ad3e9a9029d6a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Wizards.WizardFirstStage
+  playerController: {fileID: 0}
+  NameMusicStage: Music_Battle
+  leftHand: {fileID: 0}
+  rightHand: {fileID: 0}
+  targetCompress: {fileID: 0}
+  delayTimeCompression: 3
+  timeFullCompression: 10
+  percentTimeExpansion: 0.2
+  percentTimeExpansionDome: 0.4
+  minimalDistanceForTargetPercent: 0.7
+  spriteDomeToCompress: {fileID: 0}
+  spriteCycleToCompress: {fileID: 0}
+  NumberStage: 1
+  _spikeController: {fileID: 0}
+  timeChangeAnimation: 5
+  _spikeTimeSpawn: 1
+  isSmallSpawning: 1
+  _spikeSmallCountFowSpawn: 3
+  _spikeSmallDuration: 2
+  isBigSpawning: 0
+  _spikeBiggCountFowSpawn: 3
+  _spikeBiggDuration: 3
+  isLaserSpawning: 0
+  _lazerBiggCountFowSpawn: 2
+  _lazerBiggDuration: 5
+  _lazerSpawnPont: {fileID: 0}
+--- !u!114 &352035549541566154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5488789647862468202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e55d334d36b4cb5b785ae82dfaa9d52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Wizards.Behaviours.Lose.LoseStage
+  playerController: {fileID: 0}
+  NameMusicStage: 
+  leftHand: {fileID: 0}
+  rightHand: {fileID: 0}
+  targetCompress: {fileID: 0}
+  delayTimeCompression: 3
+  timeFullCompression: 10
+  percentTimeExpansion: 0.2
+  percentTimeExpansionDome: 0.2
+  minimalDistanceForTargetPercent: 1
+  spriteDomeToCompress: {fileID: 0}
+  spriteCycleToCompress: {fileID: 0}
+  _symbolSystem: {fileID: 0}
+  dissolveDuration: 1.5
+  tryUseCutoffShader: 1
+  cutoffPropertyName: _Cutoff
+  includeChildrenRenderers: 1
+  targetSpriteRenderer: {fileID: 0}
+  targetSprite: {fileID: 21300000, guid: cabf198c9700ece41b559bb8d41e0c5f, type: 3}
+  disableOnComplete: 0
+  completeDelay: 0
+--- !u!114 &4480118643585939199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5488789647862468202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66227a84baef49f5af1db1559df39cd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Wizards.Behaviours.Intro.WizardWinStage
+  playerController: {fileID: 0}
+  NameMusicStage: 012
+  leftHand: {fileID: 0}
+  rightHand: {fileID: 0}
+  targetCompress: {fileID: 0}
+  delayTimeCompression: 3
+  timeFullCompression: 3
+  percentTimeExpansion: 0.2
+  percentTimeExpansionDome: 0.2
+  minimalDistanceForTargetPercent: 1
+  spriteDomeToCompress: {fileID: 0}
+  spriteCycleToCompress: {fileID: 0}
+  FailureDesk: {fileID: 0}
+  FailureMenu: {fileID: 0}
+  fadeDuration: 2
+  blinkSpeed: 3
+  _symbolSystem: {fileID: 0}
+--- !u!114 &576964347344489354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5488789647862468202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e78147e7471f4448a8ad3e9a9029d6a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Wizards.WizardFirstStage
+  playerController: {fileID: 0}
+  NameMusicStage: Music_Battle
+  leftHand: {fileID: 0}
+  rightHand: {fileID: 0}
+  targetCompress: {fileID: 0}
+  delayTimeCompression: 3
+  timeFullCompression: 10
+  percentTimeExpansion: 0.2
+  percentTimeExpansionDome: 0.4
+  minimalDistanceForTargetPercent: 0.7
+  spriteDomeToCompress: {fileID: 0}
+  spriteCycleToCompress: {fileID: 0}
+  NumberStage: 2
+  _spikeController: {fileID: 0}
+  timeChangeAnimation: 5
+  _spikeTimeSpawn: 1
+  isSmallSpawning: 1
+  _spikeSmallCountFowSpawn: 4
+  _spikeSmallDuration: 1
+  isBigSpawning: 1
+  _spikeBiggCountFowSpawn: 3
+  _spikeBiggDuration: 2
+  isLaserSpawning: 0
+  _lazerBiggCountFowSpawn: 2
+  _lazerBiggDuration: 5
+  _lazerSpawnPont: {fileID: 0}
+--- !u!114 &3908533791125492542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5488789647862468202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e78147e7471f4448a8ad3e9a9029d6a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Wizards.WizardFirstStage
+  playerController: {fileID: 0}
+  NameMusicStage: Music_Battle
+  leftHand: {fileID: 0}
+  rightHand: {fileID: 0}
+  targetCompress: {fileID: 0}
+  delayTimeCompression: 3
+  timeFullCompression: 10
+  percentTimeExpansion: 0.2
+  percentTimeExpansionDome: 0.4
+  minimalDistanceForTargetPercent: 0.7
+  spriteDomeToCompress: {fileID: 0}
+  spriteCycleToCompress: {fileID: 0}
+  NumberStage: 3
+  _spikeController: {fileID: 0}
+  timeChangeAnimation: 5
+  _spikeTimeSpawn: 1
+  isSmallSpawning: 1
+  _spikeSmallCountFowSpawn: 3
+  _spikeSmallDuration: 2
+  isBigSpawning: 1
+  _spikeBiggCountFowSpawn: 3
+  _spikeBiggDuration: 3
+  isLaserSpawning: 1
+  _lazerBiggCountFowSpawn: 2
+  _lazerBiggDuration: 5
+  _lazerSpawnPont: {fileID: 0}

@@ -68,9 +68,6 @@ namespace Wizards.Animations
 
             base.Awake();
 
-            if (dontDestroyOnLoad)
-                DontDestroyOnLoad(gameObject);
-
 
             if (animator == null)
                 animator = GetComponent<Animator>();
