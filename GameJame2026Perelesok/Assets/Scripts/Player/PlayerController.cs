@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
         return move;
     }
 
-    private void ChangeWalkingZone(float zoneMultiplyer)
+    public void ChangeWalkingZone(float zoneMultiplyer)
     {
         _playerMove.ChangeZoneSize(zoneMultiplyer);
         _zone.ChangeScalesConst(new Vector3(zoneMultiplyer, _playerMove.GetScales().y * zoneMultiplyer / _playerMove.GetScales().x, 1));

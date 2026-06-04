@@ -10,6 +10,7 @@ namespace Wizards.Behaviours
     {
         private WizardAnimationService _wizardAnimationService;
         private Coroutine _randomAnimCoroutine;
+        private Coroutine _spikeSpawnCoroutine;
         [SerializeField] private float timeChangeAnimation = 5f; // время через которое будет меняться анимация
 
         private void Awake()
