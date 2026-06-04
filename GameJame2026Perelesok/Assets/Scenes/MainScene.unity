@@ -502,6 +502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 532177d754d34a84baa9153d42208e4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu.MenuPause
+  _wizardStateController: {fileID: 0}
   _pauseMenu: {fileID: 494258136}
   resumeButton: {fileID: 1022080938}
   menuGameButton: {fileID: 914494551}
@@ -533,7 +534,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 532177d754d34a84baa9153d42208e4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu.MenuPause
-  _pauseMenu: {fileID: 1498314081}
+  _wizardStateController: {fileID: 0}
+  _pauseMenu: {fileID: 0}
   resumeButton: {fileID: 0}
   menuGameButton: {fileID: 2113739090}
   exitGameButton: {fileID: 1536691981}

@@ -50,12 +50,4 @@ public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBe
             Destroy(gameObject); // уничтожаем дубликат
         }
     }
-
-    private void OnDestroy()
-    {
-        if (_instance != this)
-        {
-            Destroy(gameObject);
-        }
-    }
 }
