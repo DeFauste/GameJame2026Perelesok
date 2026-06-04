@@ -247,7 +247,7 @@ namespace Wizards.Animations
 
         public void LoseStage()
         {
-            PlayAnimationSilentByStageState(currentStage, AnimationState.Death);
+            animator.CrossFade("WizardDeath", crossFadeDuration);
         }
 
 
