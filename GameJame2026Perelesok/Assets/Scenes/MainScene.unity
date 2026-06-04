@@ -349,6 +349,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6826655141860528179, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1054,17 +1058,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8629e481ad30bf5448d0d0b0b122b1d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
---- !u!114 &1833432475 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2895518397207853268, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
-  m_PrefabInstance: {fileID: 619082879}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e65499f2c0b5e7e44b647c0d6233a729, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Movement
 --- !u!1 &1948103638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1210,7 +1203,7 @@ PrefabInstance:
     - target: {fileID: 5637907026328670790, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
       propertyPath: playerController
       value: 
-      objectReference: {fileID: 1833432472}
+      objectReference: {fileID: 0}
     - target: {fileID: 5637907026328670790, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
       propertyPath: minimalDistanceForTargetPercent
       value: 0.7
@@ -1250,7 +1243,7 @@ PrefabInstance:
     - target: {fileID: 7822325743139564391, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
       propertyPath: _calculateElipce
       value: 
-      objectReference: {fileID: 1833432475}
+      objectReference: {fileID: 0}
     - target: {fileID: 9139278729220186331, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
       propertyPath: m_Enabled
       value: 1

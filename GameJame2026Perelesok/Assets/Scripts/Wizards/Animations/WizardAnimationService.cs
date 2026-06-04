@@ -205,7 +205,7 @@ namespace Wizards.Animations
         {
             var currentStageLocal = MapStage(WizardStateController.Instance.CurrentStage);
             animator.CrossFade("Intro", crossFadeDuration);
-            musicService.Play("Sound_EnemyLaugh_Intro");
+            MusicService.Instance.Play("Sound_EnemyLaugh_Intro");
         }
 
         public void LoseStage()

@@ -14,9 +14,8 @@ namespace Wizards.Behaviours.Intro
         }
         public override void StartStage()
         {
-            _wizardAnimationService.Intro();
-            
             base.StartStage();
+            WizardAnimationService.Instance.Intro();
             stageActive = false; // Стадия интро не требует активного обновления, так как анимация управляет всем процессом
         }
     }

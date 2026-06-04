@@ -65,6 +65,8 @@ namespace Wizards.Behaviours
 
         protected virtual void Start()
         {
+            
+            playerController = FindAnyObjectByType<PlayerController>();
             _wizardStateController = WizardStateController.Instance;
             
             if (targetCompress.transform == null)
