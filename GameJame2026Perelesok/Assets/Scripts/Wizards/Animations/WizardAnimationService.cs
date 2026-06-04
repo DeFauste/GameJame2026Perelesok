@@ -59,15 +59,16 @@ namespace Wizards.Animations
         // Внутренные значения (локальные, чтение/реакция)
         private StageNumber currentStage = StageNumber.None;
         private AnimationState currentState = AnimationState.Idle;
-        
+
         public Action<string> OnAnimationPlayed { get; set; }
 
         protected override void Awake()
         {
+
             InitializeAnimationMap();
-            
-            WizardStateController.Instance.ActionStage += HandleExternalStageChanged;
-            WizardStateController.Instance.ActionCompressedDirection += HandleCompressedDirectionChanged;            base.Awake();
+
+
+            base.Awake();
 
             if (dontDestroyOnLoad)
                 DontDestroyOnLoad(gameObject);
@@ -85,6 +86,8 @@ namespace Wizards.Animations
 
         private void Start()
         {
+            WizardStateController.Instance.ActionStage += HandleExternalStageChanged;
+            WizardStateController.Instance.ActionCompressedDirection += HandleCompressedDirectionChanged;
             musicService = MusicService.Instance;
         }
 
@@ -239,7 +242,7 @@ namespace Wizards.Animations
             yield return new WaitForSeconds(timeWait);
             WizardStateController.Instance.ChangeStage(StageWizard.FirstStage);
         }
-        
+
         private StageNumber MapStage(StageWizard stage) => stage switch
         {
             StageWizard.None => StageNumber.None,

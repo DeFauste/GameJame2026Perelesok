@@ -77,6 +77,7 @@ namespace Commons
         protected virtual void OnDestroy()
         {
             _applicationIsQuitting = true;
+            Destroy(gameObject);
         }
     }
 }

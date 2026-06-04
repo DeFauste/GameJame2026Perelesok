@@ -16,10 +16,13 @@ namespace Wizards.Behaviours
         private void Awake()
         {
             _wizardStateController = WizardStateController.Instance;
-            _wizardStateController.ActionStage += OnStageChanged;
             Debug.Log($"Подписался на ActionStage в WizardsAI");
         }
 
+        private void Start()
+        {
+            WizardStateController.Instance.ActionStage += OnStageChanged;
+        }
 
         /// <summary>
         /// Метод для проверки состояния здоровья волшебника и выполнения действий в зависимости от текущего уровня здоровья.
@@ -66,8 +69,9 @@ namespace Wizards.Behaviours
         {
             _wizardStateController.ChangeStage(StageWizard.None);
             _wizardStateController.ChangeCompressedDirection(CompressedDirection.Static);
-            _introStageController.EndStage();
-            firstStageController.EndStage();
+            _introStageController?.EndStage();
+            firstStageController?.EndStage();
+            MusicService.Instance.StopAll();
              // Остановить другие стадии, если необходимо
         }
     }

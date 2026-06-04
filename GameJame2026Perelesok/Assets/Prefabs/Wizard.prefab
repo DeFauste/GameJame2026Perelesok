@@ -173,7 +173,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3379744900722545769
 Transform:
   m_ObjectHideFlags: 0
@@ -196,11 +196,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924839521065343054}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8118387e5114281bc72f55dc3cb06de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Wizards.WizardStateController
+  _currentStage: 0
 --- !u!114 &7025000312612745930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,7 +209,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924839521065343054}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 890cf04a72bf45d2b92067506d4e5683, type: 3}
   m_Name: 
@@ -225,13 +226,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924839521065343054}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3253771a3b9c4d4b814673a58bcc5897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Wizards.Behaviours.Intro.WizardIntroStage
   playerController: {fileID: 0}
-  NameMusicStage: 
+  NameMusicStage: 02
   leftHand: {fileID: 4612042813659503454}
   rightHand: {fileID: 2351050528459863434}
   targetCompress: {fileID: 8830900182234110392}
@@ -239,7 +240,7 @@ MonoBehaviour:
   timeFullCompression: 10
   percentTimeExpansion: 0.2
   percentTimeExpansionDome: 0.4
-  minimalDistanceForTargetPercent: 0.2
+  minimalDistanceForTargetPercent: 0.7
   spriteDomeToCompress: {fileID: 330140021881475952}
   spriteCycleToCompress: {fileID: 8999779404603671420}
 --- !u!114 &4830499938686370960
@@ -249,7 +250,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924839521065343054}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e78147e7471f4448a8ad3e9a9029d6a9, type: 3}
   m_Name: 
@@ -278,7 +279,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924839521065343054}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e55d334d36b4cb5b785ae82dfaa9d52, type: 3}
   m_Name: 
@@ -292,7 +293,7 @@ MonoBehaviour:
   timeFullCompression: 10
   percentTimeExpansion: 0.2
   percentTimeExpansionDome: 0.2
-  minimalDistanceForTargetPercent: 0.5
+  minimalDistanceForTargetPercent: 1
   spriteDomeToCompress: {fileID: 330140021881475952}
   spriteCycleToCompress: {fileID: 8999779404603671420}
   _symbolSystem: {fileID: 0}
@@ -311,13 +312,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924839521065343054}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66227a84baef49f5af1db1559df39cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Wizards.Behaviours.Intro.WizardWinStage
   playerController: {fileID: 0}
-  NameMusicStage: 
+  NameMusicStage: 012
   leftHand: {fileID: 4612042813659503454}
   rightHand: {fileID: 2351050528459863434}
   targetCompress: {fileID: 8830900182234110392}
@@ -325,9 +326,11 @@ MonoBehaviour:
   timeFullCompression: 3
   percentTimeExpansion: 0.2
   percentTimeExpansionDome: 0.2
-  minimalDistanceForTargetPercent: 0.5
+  minimalDistanceForTargetPercent: 1
   spriteDomeToCompress: {fileID: 330140021881475952}
   spriteCycleToCompress: {fileID: 8999779404603671420}
+  FailureDesk: {fileID: 0}
+  FailureMenu: {fileID: 0}
   fadeDuration: 2
   blinkSpeed: 3
   _symbolSystem: {fileID: 0}
@@ -669,7 +672,7 @@ MonoBehaviour:
   _cameraShake: {fileID: 0}
   _hands: {fileID: 1318019307662977748}
   _fists: {fileID: 1440031782493061518}
-  timeWaitFists: 3
+  timeWaitFists: 2
   animator: {fileID: 8376189165835966679}
   dontDestroyOnLoad: 1
   crossFadeDuration: 0.12

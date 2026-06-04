@@ -6,6 +6,8 @@ namespace Wizards.Behaviours.Intro
 {
     public class WizardWinStage : WizardStage
     {
+        public GameObject FailureDesk;
+        public GameObject FailureMenu;
         [SerializeField] protected float fadeDuration = 2f; // Длительность эффекта растворения в секундах
         [SerializeField] protected float blinkSpeed = 3f; // Скорость мигания (циклы в секунду)
         public GameObject _symbolSystem;
@@ -72,6 +74,8 @@ namespace Wizards.Behaviours.Intro
             // Отключаем объект после завершения анимации
             gameObject.SetActive(false);
             Debug.Log("Объект волшебника отключен после растворения");
+            FailureDesk.SetActive(true);   
+            FailureMenu.SetActive(true);
         }
 
         /// <summary>

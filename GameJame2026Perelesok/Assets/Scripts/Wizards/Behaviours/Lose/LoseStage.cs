@@ -7,7 +7,6 @@ namespace Wizards.Behaviours.Lose
 {
     public class LoseStage : WizardStage
     {
-        public GameObject FailureDesk;
         public GameObject _symbolSystem;
 
         [Header("Dissolve settings")]
