@@ -87,16 +87,16 @@ public class SpikeController : MonoBehaviour
 
     private Vector2 GetRandomPosition()
     {
-        Vector2 playerPosition = (Vector2)_calculateElipce.CurrentPosition;    
-        float halfRange = 0.5f;    
-        playerPosition.x += UnityEngine.Random.value * halfRange * 2 - halfRange;    
-        playerPosition.y += UnityEngine.Random.value * halfRange - halfRange;    
-        float distace = _calculateElipce.ElipceFormula(playerPosition) - 1;    
-        Debug.Log(distace + " " + playerPosition);    
-        if (distace > 0)    
-        {    
-            playerPosition += ((Vector2)_calculateElipce.Zero - playerPosition + new Vector2(0, halfRange)) * distace;    
-        }    
-        return playerPosition;    
+        Vector2 _spikePosition = (Vector2)_calculateElipce.CurrentPosition;
+        float halfRange = 0.5f;
+        _spikePosition.x += UnityEngine.Random.value * halfRange * 2 - halfRange;
+        _spikePosition.y += UnityEngine.Random.value * halfRange * 2 - halfRange;
+        float distace = _calculateElipce.ElipceFormula(_spikePosition) - 1;
+        Debug.Log(distace + " " + _spikePosition);
+        if (distace > 0)
+        {
+            _spikePosition += ((Vector2)_calculateElipce.Zero - _spikePosition + new Vector2(0, halfRange)) * distace;
+        }
+        return _spikePosition;
     }
 }

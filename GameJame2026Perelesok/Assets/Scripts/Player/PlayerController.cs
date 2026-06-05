@@ -27,12 +27,14 @@ public class PlayerController : MonoBehaviour
         ChangeWalkingZone(1);
         SpikeController.ActionHitPlayer += DeathAnimation;
         SymbolSystem.OnAttackSuccess += AttackAinmation;
+        SymbolSystem.OnDefenceSuccess += AttackAinmation;
     }
 
     private void OnDestroy()
     {
         SpikeController.ActionHitPlayer -= DeathAnimation;
         SymbolSystem.OnAttackSuccess -= AttackAinmation;
+        SymbolSystem.OnDefenceSuccess -= AttackAinmation;
     }
 
     private void Update()

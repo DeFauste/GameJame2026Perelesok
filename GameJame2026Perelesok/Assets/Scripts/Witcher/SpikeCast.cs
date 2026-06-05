@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class SpikeCast : MonoBehaviour
     [SerializeField] protected Vector2 _colliderCenter = Vector2.down;
     [SerializeField] protected float _castTime = 1;
     [SerializeField] protected float _castDelay = 1;
+    [ReadOnly] public Vector2 _spikePosition;
 
     protected Animator _animator;
     protected bool _isHit = false;
@@ -23,6 +25,8 @@ public class SpikeCast : MonoBehaviour
 
     virtual public IEnumerator CastCorutine(float multypyer)
     {
+        _spikePosition = transform.position;
+
         _animator.speed = multypyer;
         _animator.Play("SpikeShow");
         yield return new WaitForSecondsRealtime(_castDelay * multypyer);
