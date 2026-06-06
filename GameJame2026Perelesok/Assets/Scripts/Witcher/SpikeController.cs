@@ -8,7 +8,10 @@ public class SpikeController : MonoBehaviour
     [SerializeField] private GameObject _laser;
     [SerializeField] private Movement _calculateElipce;
 
+    private float _enemysDistribution = 0.5f;
+
     public static Action ActionHitPlayer;
+    public float EnemysDistribution { get { return _enemysDistribution; } set { _enemysDistribution = value; } }
 
     private void Awake()
     {
@@ -43,7 +46,7 @@ public class SpikeController : MonoBehaviour
         }
     }
 
-    public void RandomSpawnBigPeaks(int bigSpikeAmount, int bigSpikeDuration)
+    public void RandomSpawnBigPeaks(int bigSpikeAmount, float bigSpikeDuration)
     {
         for (int i = 0; i < bigSpikeAmount; i++)
         {
@@ -88,14 +91,13 @@ public class SpikeController : MonoBehaviour
     private Vector2 GetRandomPosition()
     {
         Vector2 _spikePosition = (Vector2)_calculateElipce.CurrentPosition;
-        float halfRange = 0.5f;
-        _spikePosition.x += UnityEngine.Random.value * halfRange * 2 - halfRange;
-        _spikePosition.y += UnityEngine.Random.value * halfRange * 2 - halfRange;
+        _spikePosition.x += UnityEngine.Random.value * _enemysDistribution * 2 - _enemysDistribution;
+        _spikePosition.y += UnityEngine.Random.value * _enemysDistribution * 2 - _enemysDistribution;
         float distace = _calculateElipce.ElipceFormula(_spikePosition) - 1;
         Debug.Log(distace + " " + _spikePosition);
         if (distace > 0)
         {
-            _spikePosition += ((Vector2)_calculateElipce.Zero - _spikePosition + new Vector2(0, halfRange)) * distace;
+            _spikePosition += ((Vector2)_calculateElipce.Zero - _spikePosition + new Vector2(0, _enemysDistribution)) * distace;
         }
         return _spikePosition;
     }

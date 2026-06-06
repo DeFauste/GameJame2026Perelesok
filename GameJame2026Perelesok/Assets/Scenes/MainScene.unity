@@ -321,6 +321,14 @@ PrefabInstance:
       propertyPath: _zone
       value: 
       objectReference: {fileID: 1548891541}
+    - target: {fileID: 5905754377068640614, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
+      propertyPath: _colliderSize.y
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905754377068640614, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
+      propertyPath: _colliderCenter.y
+      value: -0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 5977712526657036015, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1159,6 +1167,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8629e481ad30bf5448d0d0b0b122b1d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+--- !u!114 &1833432475 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2895518397207853268, guid: a74de0430a11ea044b12542ee4a41b52, type: 3}
+  m_PrefabInstance: {fileID: 619082879}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65499f2c0b5e7e44b647c0d6233a729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Movement
 --- !u!1 &1948103638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1415,10 +1434,22 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1833432472}
+    - target: {fileID: 5800146797042153672, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.158
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800146797042153672, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.123
+      objectReference: {fileID: 0}
     - target: {fileID: 6066199317341460308, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
       propertyPath: _cameraShake
       value: 
       objectReference: {fileID: 963194229}
+    - target: {fileID: 7822325743139564391, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: _calculateElipce
+      value: 
+      objectReference: {fileID: 1833432475}
     - target: {fileID: 8558052569604015386, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
       propertyPath: playerController
       value: 

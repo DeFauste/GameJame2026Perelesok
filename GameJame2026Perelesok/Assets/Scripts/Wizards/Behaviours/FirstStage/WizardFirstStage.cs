@@ -97,7 +97,7 @@ namespace Wizards.Behaviours
             while (stageActive)
             {
                 yield return new WaitForSeconds(timeChangeAnimation);
-                _spikeController.RandomSpawnSmallPeaks(_spikeSmallCountFowSpawn, _spikeSmallDuration);
+                _spikeController.RandomSpawnBigPeaks(_spikeSmallCountFowSpawn, _spikeSmallDuration);
                 yield return new WaitForSeconds(_spikeSmallDuration);
                 MusicService.Instance.Play("Sound_SpikeBig");
             }
