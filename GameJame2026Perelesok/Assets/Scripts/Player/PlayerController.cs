@@ -61,7 +61,9 @@ public class PlayerController : MonoBehaviour
         if (_isAttacking)
             _isAttacking = false;
 
-        ChangeWalkingZone(1 - Time.timeSinceLevelLoad/100);
+
+        //ChangeWalkingZone(1 - Time.timeSinceLevelLoad/100);
+        //ChangeWalkingZone(1);
         DrawCollider(Time.deltaTime * 2);
     }
 
@@ -101,7 +103,8 @@ public class PlayerController : MonoBehaviour
     public void ChangeWalkingZone(float zoneMultiplyer)
     {
         _playerMove.ChangeZoneSize(zoneMultiplyer);
-        _zone.ChangeScalesConst(new Vector3(zoneMultiplyer, _playerMove.GetScales().y * zoneMultiplyer / _playerMove.GetScales().x, 1));
+        _zone.ChangeScalesConst(new Vector3(_playerMove.GetScales().x * zoneMultiplyer / _playerMove.GetScales().magnitude,
+                                            _playerMove.GetScales().y * zoneMultiplyer / _playerMove.GetScales().magnitude, 1));
     }
 
     private bool Collisin_X(float halfSize, float center)

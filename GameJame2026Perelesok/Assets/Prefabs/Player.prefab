@@ -58,7 +58,7 @@ Transform:
   m_GameObject: {fileID: 4544126613636399605}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0685, y: 0.2606, z: 0}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
   m_LocalScale: {x: 2.1428118, y: 2.3142, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -212,8 +212,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   _multyplayer: 1.1
   _zone: {fileID: 0}
-  _colliderSize: {x: 0.3, y: 0.3}
-  _colliderCenter: {x: 0, y: -0.3}
+  _colliderSize: {x: 0.2, y: -0.15}
+  _colliderCenter: {x: 0, y: -0.1}
 --- !u!114 &8590546477310373720
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -66,7 +66,9 @@ public class Movement : MonoBehaviour
     // x^2/a^2 + y^2/b^2 = 1; a - length of halth diameter, b - lenth of whight half diameter
     public float ElipceFormula(Vector3 pos)
     {
-        return pos.x * pos.x / (_wight * _wight * _elipseMultyplyer * _elipseMultyplyer) + pos.y * pos.y / (_hight * _hight * _elipseMultyplyer * _elipseMultyplyer);
+        float x = pos.x * pos.x / (_wight * _wight * _elipseMultyplyer * _elipseMultyplyer);
+        float y = pos.y * pos.y / (_hight * _hight * _elipseMultyplyer * _elipseMultyplyer);
+        return x + y;
     }
 
     private void DrawElipce(float duration)

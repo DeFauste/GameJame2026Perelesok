@@ -32,9 +32,9 @@ public class SpikeController : MonoBehaviour
     {
         if (Input.GetKeyDown("h"))
         {
-            RandomSpawnSmallPeaks(2, 1);
-            RandomSpawnBigPeaks(1, 1);
-            RandomSpawnLaser(1, 1, new Vector2(0.0006081462f, 7.933138f));
+            RandomSpawnSmallPeaks(1, 1);
+            //RandomSpawnBigPeaks(1, 1);
+            //RandomSpawnLaser(1, 1, new Vector2(0.0006081462f, 7.933138f));
         }
     }
 
@@ -91,13 +91,15 @@ public class SpikeController : MonoBehaviour
     private Vector2 GetRandomPosition()
     {
         Vector2 _spikePosition = (Vector2)_calculateElipce.CurrentPosition;
-        _spikePosition.x += UnityEngine.Random.value * _enemysDistribution * 2 - _enemysDistribution;
-        _spikePosition.y += UnityEngine.Random.value * _enemysDistribution * 2 - _enemysDistribution;
+        //Debug.Log(_spikePosition);
+        //_spikePosition.x += UnityEngine.Random.value * _enemysDistribution * 2 - _enemysDistribution;
+        //_spikePosition.y += UnityEngine.Random.value * _enemysDistribution * 2 - _enemysDistribution;
         float distace = _calculateElipce.ElipceFormula(_spikePosition) - 1;
-        Debug.Log(distace + " " + _spikePosition);
+        //Debug.Log(distace + " " + _spikePosition);
         if (distace > 0)
         {
             _spikePosition += ((Vector2)_calculateElipce.Zero - _spikePosition + new Vector2(0, _enemysDistribution)) * distace;
+            Debug.Log("Spike out of bunds");
         }
         return _spikePosition;
     }
