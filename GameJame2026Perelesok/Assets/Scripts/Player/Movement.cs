@@ -15,8 +15,9 @@ public class Movement : MonoBehaviour
     private Transform _player;
     private float _elipseMultyplyer = 1;
 
-    public Vector3 Zero { get { return _zero + new Vector3(0, _hight); } }
+    public Vector3 Zero { get { return (_zero + new Vector3(0, _hight)) * _elipseMultyplyer; } }
     public Vector3 CurrentPosition { get { return transform.position; } }
+    public Vector3 CurrentLocalPosition { get { return transform.position - _zero; } }
 
     private void Awake()
     {
@@ -66,8 +67,8 @@ public class Movement : MonoBehaviour
     // x^2/a^2 + y^2/b^2 = 1; a - length of halth diameter, b - lenth of whight half diameter
     public float ElipceFormula(Vector3 pos)
     {
-        float x = pos.x * pos.x / (_wight * _wight * _elipseMultyplyer * _elipseMultyplyer);
-        float y = pos.y * pos.y / (_hight * _hight * _elipseMultyplyer * _elipseMultyplyer);
+        float x = pos.x * pos.x / (float)Math.Pow(_wight * _elipseMultyplyer, 2);
+        float y = pos.y * pos.y / (float)Math.Pow(_hight * _elipseMultyplyer, 2);
         return x + y;
     }
 
