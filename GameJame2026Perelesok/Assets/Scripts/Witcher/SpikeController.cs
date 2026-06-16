@@ -42,7 +42,7 @@ public class SpikeController : MonoBehaviour
     {
         for (int i = 0; i < smallSpikeAmount; i++)
         {
-            SpawnSpike(GetRandomPosition(), _small_spike, smallSpikeDuration);
+            SpawnSpike(GetRandomPosition(.5f), _small_spike, smallSpikeDuration);
         }
     }
 
@@ -50,7 +50,7 @@ public class SpikeController : MonoBehaviour
     {
         for (int i = 0; i < bigSpikeAmount; i++)
         {
-            SpawnSpike(GetRandomPosition(), _big_spike, bigSpikeDuration);
+            SpawnSpike(GetRandomPosition(1), _big_spike, bigSpikeDuration);
         }
     }
 
@@ -58,7 +58,7 @@ public class SpikeController : MonoBehaviour
     {
         for (int i = 0; i < laserAmount; i++)
         {
-            Laser laser = SpawnSpike(GetRandomPosition(), _laser, laserDuration).GetComponent<Laser>();
+            Laser laser = SpawnSpike(GetRandomPosition(.7f), _laser, laserDuration).GetComponent<Laser>();
             laser.Pose(eyePosition);
         }
     }
@@ -88,13 +88,13 @@ public class SpikeController : MonoBehaviour
     //    return new Vector2(rand_X, rand_Y);
     //}
 
-    private Vector2 GetRandomPosition()
+    private Vector2 GetRandomPosition(float enemysDistribution)
     {
         float x_pos = _calculateElipce.CurrentLocalPosition.x;
         float y_pos = _calculateElipce.CurrentLocalPosition.y;
         Vector2 spikePosition =  new Vector2(x_pos, y_pos);
-        spikePosition.x += UnityEngine.Random.value * _enemysDistribution * 2 - _enemysDistribution;
-        spikePosition.y += UnityEngine.Random.value * _enemysDistribution * 2 - _enemysDistribution;
+        spikePosition.x += UnityEngine.Random.value * enemysDistribution * 2 - enemysDistribution;
+        spikePosition.y += UnityEngine.Random.value * enemysDistribution * 2 - enemysDistribution;
         float distace = _calculateElipce.ElipceFormula(spikePosition - new Vector2(0, _calculateElipce.GetScales().y));
         //Debug.Log(distace + " " + (1 / distace));
         //Debug.DrawLine(_calculateElipce.Zero, spikePosition, Color.azure, 3);

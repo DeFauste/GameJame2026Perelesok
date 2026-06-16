@@ -40,6 +40,8 @@ public class SpikeCast : MonoBehaviour
             if (CheckForCollision())
             {
                 _isHit = true;
+                InvokeDeath();
+                break;
             }
 
             yield return new WaitForSecondsRealtime(Time.deltaTime);
@@ -50,11 +52,6 @@ public class SpikeCast : MonoBehaviour
             _animator.speed = multypyer;
             _animator.Play("RemoveSpike");
             yield return new WaitForSecondsRealtime(_castDelay * multypyer);
-        }
-
-        if (_isHit)
-        {
-            InvokeDeath();
         }
 
         Destroy(gameObject);
