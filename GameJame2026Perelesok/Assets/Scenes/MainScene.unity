@@ -1318,7 +1318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1329469613802936747, guid: 23fc04372dbd92e40bb028737e01934a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6470125780405133124, guid: 23fc04372dbd92e40bb028737e01934a, type: 3}
       propertyPath: _duration
@@ -1491,6 +1491,10 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1833432472}
+    - target: {fileID: 8868114232998993693, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.686
+      objectReference: {fileID: 0}
     - target: {fileID: 9139278729220186331, guid: 40c4d330412fcce4280e50fcd7cb9ab6, type: 3}
       propertyPath: FailureDesk
       value: 
